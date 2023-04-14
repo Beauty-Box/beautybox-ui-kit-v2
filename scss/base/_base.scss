@@ -1,0 +1,113 @@
+html,
+body {
+    height: 100%;
+}
+
+html {
+    overflow-y: initial;
+    font-family: $font-family-base;
+}
+
+body {
+    width: 100%;
+    color: $color-text;
+    font-family: $font-family-base;
+    font-weight: 400;
+    line-height: $line-height-base;
+    text-rendering: optimizeLegibility;
+    //background-color: $color-bg;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-font-smoothing: antialiased;
+    -webkit-text-size-adjust: none;
+    @include smooth-font;
+} //body
+
+#app {
+    height: 100%;
+    min-height: 100%;
+    //background-color: $color-bg;
+}
+
+img {
+    display: block;
+    width: 100%;
+}
+
+ul,
+ol,
+li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+iframe {
+    border: 0;
+}
+
+input {
+    &:disabled {
+        -webkit-text-fill-color: $color-disabled-text;
+        opacity: 1; /* required on iOS */
+    }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+input[type='number'],
+input[type='tel'],
+input[type='time'],
+input[type='date'] {
+    -moz-appearance: textfield;
+    appearance: none;
+
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button,
+    &::-webkit-calendar-picker-indicator {
+        -webkit-appearance: none;
+        -moz-appearance: none;
+        display: none;
+        margin: 0;
+    }
+}
+
+.is-firefox {
+    input[type='number'],
+    input[type='tel'],
+    input[type='time'],
+    input[type='date'] {
+        -moz-appearance: textfield;
+
+        &::-webkit-outer-spin-button,
+        &::-webkit-inner-spin-button,
+        &::-webkit-calendar-picker-indicator {
+            -moz-appearance: none;
+        }
+    }
+}
+
+/*disable auto-zoom on iphone input field focus*/
+@media screen and (-webkit-min-device-pixel-ratio: 0) {
+    @include max(xs) {
+        select:focus,
+        textarea:focus,
+        input:focus {
+            font-size: 16px;
+        }
+    }
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+    margin: 0;
+    font-family: inherit;
+    line-height: 1.15;
+}

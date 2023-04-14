@@ -1,0 +1,81 @@
+$font-family-system-fonts: -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue,
+    Noto Sans Armenian, Noto Sans Bengali, Noto Sans Cherokee, Noto Sans Devanagari,
+    Noto Sans Ethiopic, Noto Sans Georgian, Noto Sans Hebrew, Noto Sans Kannada, Noto Sans Khmer,
+    Noto Sans Lao, Noto Sans Osmanya, Noto Sans Tamil, Noto Sans Telugu, Noto Sans Thai, sans-serif !default;
+$font-family-arial: Arial, Textbook New, sans-serif;
+$font-family-roboto: Roboto, sans-serif !default;
+
+$font-family-base: $font-family-roboto;
+$font-weight-base: 400;
+$line-height-base: 1.5;
+$font-size-base: 16px;
+
+$max-width: 1200px;
+$spacer: 4px;
+
+// Indent's
+$gutter: $spacer * 6;
+$base-indent: $spacer * 4;
+$half-indent: $spacer * 3;
+$large-indent: $spacer * 10;
+
+// colors
+$color-primary: #101928;
+$color-secondary: #67768c;
+$color-info: #0a84ff;
+$color-anchor: #4395fd;
+$color-success: #34c759;
+$color-error: #ff2d55;
+$color-gray: #a4adba;
+// Text colors
+$color-text: $color-primary;
+$color-text--light: $color-secondary;
+
+// background colors
+$color-bg--primary: #fff;
+
+// border radius
+$border-radius-half: 4px;
+$border-radius: 8px;
+
+// Shadow color's
+$box-shadow-base: 0 2px 5px 0 rgba($color-gray, 0.25);
+
+$box-shadow-button-colors: (
+    'white': rgba($color-gray, 0.25),
+    'primary': rgba($color-gray, 0.25),
+    'info': rgba($color-info, 0.25),
+);
+
+// Breakpoints
+$breakpoints: (
+    'i5': 320px,
+    'i7': 375px,
+    'i8': 414px,
+    'xs': 480px,
+    'sm': 768px,
+    'md': 1024px,
+    'mdX': 1280px,
+    'lg': 1366px,
+) !default;
+
+$breakpoints-min: (
+    'i5': 319px,
+    'i7': 374px,
+    'i8': 413px,
+    'xs': 479px,
+    'sm': 767px,
+    'md': 1023px,
+    'mdX': 1280px,
+    'lg': 1365px,
+) !default;
+
+// Z-index
+$z-index: (
+    'hidden': -1,
+    'default': 1,
+    'absolute': 5,
+    'fixed': 10,
+    'overlay': 1000,
+    'modal': 1010,
+) !default;
