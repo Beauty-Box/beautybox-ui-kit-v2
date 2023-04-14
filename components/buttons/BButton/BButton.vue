@@ -4,19 +4,15 @@
     </div>
 </template>
 
-<script lang="ts">
-// const props = defineProps<{
-//     color: string;
-// }>();
-import { defineComponent, PropType } from 'vue';
+<script setup lang="ts">
+import { PropsColors } from '../../../composables/ui/useColor';
 
-export default defineComponent({
-    props: {
-        color: {
-            type: String as PropType<string>,
-            default: 'primary',
-        },
-    },
+interface BButtonProps {
+    color: PropsColors['color'];
+}
+
+const props = withDefaults(defineProps<BButtonProps>(), {
+    color: 'primary',
 });
 </script>
 
