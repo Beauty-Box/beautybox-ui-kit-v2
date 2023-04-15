@@ -44,6 +44,7 @@
     "@storybook/addon-viewport": "^7.0.4",
     "@storybook/vue": "^7.0.4",
     "@storybook/vue-vite": "^7.0.4",
+    "storybook-vue-router": "^1.0.7",
     "@typescript-eslint/eslint-plugin": "^5.40.1",
     "@typescript-eslint/parser": "^5.40.1",
     "@vitejs/plugin-vue2": "^2.2.0",

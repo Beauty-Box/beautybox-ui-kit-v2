@@ -6,7 +6,7 @@ export const config: StorybookConfig =  {
     //addons: ['@storybook/addon-docs', '@storybook/addon-jest/register', '@storybook/addon-viewport/register',
     
 //],
-    addons: ['@storybook/addon-docs', '@storybook/addon-links', '@storybook/addon-essentials',  {
+    addons: ['@storybook/addon-links', '@storybook/addon-essentials',  {
         name: '@storybook/addon-storysource',
         options: {
             rule: {

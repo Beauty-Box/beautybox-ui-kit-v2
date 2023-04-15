@@ -15,7 +15,7 @@ import { PropsSize } from '../../../composables/ui/useSize';
 
 interface BButtonProps {
     block?: boolean;
-    color: PropsColors['color'];
+    color?: PropsColors['color'];
     disabled?: boolean;
     href?: PropsLink['href'];
     to?: PropsLink['to'];
@@ -83,9 +83,9 @@ const component = computed(() => {
 <style scoped lang="scss">
 .b-button {
     $self: &;
-
     -webkit-appearance: button;
     appearance: button;
+    box-sizing: border-box;
     display: inline-flex;
     border-radius: $border-radius;
     align-items: center;
@@ -119,19 +119,19 @@ const component = computed(() => {
     &--small {
         font-size: 16px;
         min-height: 28px; // TODO обсудить с дизайнером размеры кнопок
-        padding: $half-indent $base-indent;
+        padding: 0 $base-indent;
     }
 
     &--medium {
         font-size: 16px;
         min-height: 44px;
-        padding: $half-indent $base-indent;
+        padding: $half-indent - 1 $base-indent;
     }
 
     &--large {
         font-size: 16px;
         min-height: 56px;
-        padding: $half-indent $base-indent;
+        padding: $half-indent - 1 $base-indent;
     }
 
     &:not(&--white) {
@@ -146,13 +146,13 @@ const component = computed(() => {
         color: v-bind('colorVariant');
     }
 
-    &--outline {
+    &#{$self}--outline {
         border-color: currentColor;
         background-color: #fff;
         color: v-bind('colorVariant');
     }
 
-    &--text {
+    &#{$self}--text {
         color: v-bind('colorVariant');
         background-color: transparent;
         border-color: transparent;
