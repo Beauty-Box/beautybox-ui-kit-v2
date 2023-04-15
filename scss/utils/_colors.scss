@@ -1,0 +1,8 @@
+:root {
+    @each $name, $color in $colors {
+        --#{$name}: #{$color};
+    }
+    @each $name, $color in $colors-alpha {
+        --#{$name}: #{$color};
+    }
+}

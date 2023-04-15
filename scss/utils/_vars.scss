@@ -1,3 +1,5 @@
+@use 'sass:map';
+
 $font-family-system-fonts: -apple-system, BlinkMacSystemFont, Roboto, Open Sans, Helvetica Neue,
     Noto Sans Armenian, Noto Sans Bengali, Noto Sans Cherokee, Noto Sans Devanagari,
     Noto Sans Ethiopic, Noto Sans Georgian, Noto Sans Hebrew, Noto Sans Kannada, Noto Sans Khmer,
@@ -27,6 +29,29 @@ $color-anchor: #4395fd;
 $color-success: #34c759;
 $color-error: #ff2d55;
 $color-gray: #a4adba;
+
+$alpha-channel: 0.25;
+
+$colors: (
+    'primary': $color-primary,
+    'secondary': $color-secondary,
+    'info': $color-info,
+    'anchor': $color-anchor,
+    'success': $color-success,
+    'error': $color-error,
+    'gray': $color-gray,
+);
+
+$colors-alpha: (
+    'primary-alpha': rgba($color-primary, $alpha-channel),
+    'secondary-alpha': rgba($color-secondary, $alpha-channel),
+    'info-alpha': rgba($color-info, $alpha-channel),
+    'anchor-alpha': rgba($color-anchor, $alpha-channel),
+    'success-alpha': rgba($color-success, $alpha-channel),
+    'error-alpha': rgba($color-error, $alpha-channel),
+    'gray-alpha': rgba($color-gray, $alpha-channel),
+);
+
 // Text colors
 $color-text: $color-primary;
 $color-text--light: $color-secondary;

@@ -133,7 +133,8 @@
         "vue/no-unused-components": "off",
         "vue/no-confusing-v-for-v-if": "error",
         "vue/valid-v-on": "off",
-        "vue/valid-v-model": "off"
+        "vue/valid-v-model": "off",
+        "@typescript-eslint/ban-ts-comment": "off"
     },
     "parserOptions": {
         "parser": "@typescript-eslint/parser",
