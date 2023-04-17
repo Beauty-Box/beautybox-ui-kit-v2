@@ -143,13 +143,17 @@ const component = computed(() => {
     &--white {
         border-color: #fff;
         background-color: #fff;
-        color: v-bind('colorVariant');
+        color: map-get($colors, 'primary');
     }
 
     &#{$self}--outline {
         border-color: currentColor;
         background-color: #fff;
         color: v-bind('colorVariant');
+
+        &#{$self}--white {
+            color: map-get($colors, 'primary');
+        }
     }
 
     &#{$self}--text {
@@ -157,10 +161,13 @@ const component = computed(() => {
         background-color: transparent;
         border-color: transparent;
         padding: 0;
-        min-height: min-content;
+        height: min-content;
 
         #{$self}__content {
             white-space: normal;
+        }
+        &#{$self}--white {
+            color: map-get($colors, 'primary');
         }
     }
 

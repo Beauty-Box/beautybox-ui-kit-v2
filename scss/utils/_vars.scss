@@ -29,6 +29,7 @@ $color-anchor: #4395fd;
 $color-success: #34c759;
 $color-error: #ff2d55;
 $color-gray: #a4adba;
+$color-white: #fff;
 
 $alpha-channel: 0.25;
 
@@ -40,6 +41,7 @@ $colors: (
     'success': $color-success,
     'error': $color-error,
     'gray': $color-gray,
+    'white': $color-white,
 );
 
 $colors-alpha: (
@@ -50,6 +52,7 @@ $colors-alpha: (
     'success-alpha': rgba($color-success, $alpha-channel),
     'error-alpha': rgba($color-error, $alpha-channel),
     'gray-alpha': rgba($color-gray, $alpha-channel),
+    'white-alpha': rgba($color-white, $alpha-channel),
 );
 
 // Text colors
