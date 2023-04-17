@@ -37,13 +37,13 @@ const meta = {
         minHeight: {
             name: 'minHeight',
             control: {
-                type: 'number',
+                type: 'text',
             },
         },
         maxHeight: {
             name: 'maxHeight',
             control: {
-                type: 'number',
+                type: 'text',
             },
         },
         zIndex: {
@@ -80,10 +80,14 @@ export const Primary: Story = {
         template: '<BlockLoader v-bind="$props" >text</BlockLoader>',
     }),
     args: {
+        bgc: '#eeeeee',
         color: 'primary',
-
-        size: 60,
-        width: 4,
-        indeterminate: false,
+        position: 'absolute',
+        minHeight: 'auto',
+        maxHeight: 'auto',
+        zIndex: 10,
+        size: 50,
+        width: 3,
+        indeterminate: true,
     },
 };
