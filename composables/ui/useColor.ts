@@ -56,8 +56,8 @@ export const useColor: UseColor = (source) => {
             return `var(--${color.value}-alpha)`;
         }
         if (isHexColor.value) {
-            // 14 - в шестнадцатеричной системе 30 % прозрачности цвета
-            return color.value + '14';
+            // 40 - в шестнадцатеричной системе 25 % прозрачности цвета
+            return color.value + '40';
         }
         return 'var(--primary-alpha)';
     });

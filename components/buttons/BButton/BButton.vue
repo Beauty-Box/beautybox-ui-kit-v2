@@ -118,20 +118,20 @@ const component = computed(() => {
 
     &--small {
         font-size: 16px;
-        min-height: 28px; // TODO обсудить с дизайнером размеры кнопок
+        height: 28px; // TODO обсудить с дизайнером размеры кнопок
         padding: 0 $base-indent;
     }
 
     &--medium {
         font-size: 16px;
-        min-height: 44px;
-        padding: $half-indent - 1 $base-indent;
+        height: 44px;
+        padding: 0 $base-indent;
     }
 
     &--large {
         font-size: 16px;
-        min-height: 56px;
-        padding: $half-indent - 1 $base-indent;
+        height: 56px;
+        padding: 0 $base-indent;
     }
 
     &:not(&--white) {
@@ -171,6 +171,12 @@ const component = computed(() => {
     &:where(:hover, :focus-visible) {
         &:where(#{$self}--text) {
             text-decoration: underline;
+        }
+        &:where(#{$self}--fill):not(#{$self}--white) {
+            box-shadow: 0 2px 5px 0 v-bind('colorVariantAlpha');
+        }
+        &:where(#{$self}--fill)#{$self}--white {
+            box-shadow: 0 2px 5px 0 map-get($colors-alpha, 'gray-alpha');
         }
     }
 }
