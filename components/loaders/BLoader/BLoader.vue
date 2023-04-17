@@ -1,5 +1,6 @@
 <template>
     <div
+        v-intersect="onObserve"
         class="b-loader"
         role="progressbar"
         :aria-valuemin="0"
@@ -45,6 +46,11 @@
 <script setup lang="ts">
 import { ref, Ref, computed } from 'vue';
 import { PropsColors, useColor } from '../../../composables/ui/useColor';
+// Directives
+import intersect from '../../../directives/intersect';
+
+const vIntersect = { ...intersect };
+
 interface BLoaderProps {
     color?: PropsColors['color'];
     indeterminate?: boolean;
@@ -100,6 +106,14 @@ const strokeWidth = computed(() => {
 const viewBoxSize = computed(() => {
     return RADIUS / (1 - Number(props.width) / +props.size);
 });
+
+const onObserve = (
+    entries: IntersectionObserverEntry[],
+    observer: IntersectionObserver,
+    isIntersecting: boolean
+) => {
+    isVisible.value = isIntersecting;
+};
 
 const styles = computed(() => {
     const size = Number(props.size);
