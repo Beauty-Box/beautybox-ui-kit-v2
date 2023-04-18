@@ -32,11 +32,15 @@
   },
   "dependencies": {
     "@beautybox/core": "Beauty-Box/beautybox-base#march/vite",
+    "uuid": "^9.0.0",
+    "@vuelidate/core": "^2.0.1",
+    "@vuelidate/validators": "^2.0.1",
     "vue": "^2.7.14",
     "vue-router": "^3.6.5"
   },
   "devDependencies": {
     "@types/beautybox__core": "Beauty-Box/beautybox-base-types",
+    "@types/uuid": "^9.0.1",
     "@storybook/addon-docs": "^7.0.4",
     "@storybook/addon-essentials": "^7.0.4",
     "@storybook/addon-jest": "^7.0.4",
