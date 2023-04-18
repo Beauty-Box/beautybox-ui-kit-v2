@@ -77,7 +77,7 @@ export const Primary: Story = {
     render: (args, { argTypes }) => ({
         components: { BlockLoader },
         props: Object.keys(argTypes),
-        template: '<BlockLoader v-bind="$props" >text</BlockLoader>',
+        template: '<BlockLoader v-bind="$props" ></BlockLoader>',
     }),
     args: {
         bgc: '#eeeeee',

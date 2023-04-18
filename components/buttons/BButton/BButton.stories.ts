@@ -84,7 +84,7 @@ export const Primary: Story = {
     render: (args, { argTypes }) => ({
         components: { BButton },
         props: Object.keys(argTypes),
-        template: '<BButton v-bind="$props" >text</BButton>',
+        template: '<BButton v-bind="$props" >Text text</BButton>',
     }),
     args: {
         color: 'primary',

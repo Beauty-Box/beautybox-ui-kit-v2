@@ -1,17 +1,24 @@
 <template>
     <component v-bind="attrs" :is="component" :class="classes">
-        <span v-if="$slots.default" class="b-button__content">
+        <span v-if="loading" class="b-button__loader">
+            <template v-if="!!$slots.loader">
+                <slot name="loader" />
+            </template>
+            <b-loader v-else indeterminate :size="23" :width="2" color="inherit" />
+        </span>
+        <span class="b-button__content">
             <slot />
         </span>
     </component>
 </template>
 
 <script setup lang="ts">
-import { computed, useAttrs, useSlots } from 'vue';
+import { computed, useAttrs, useSlots, defineAsyncComponent } from 'vue';
 import { PropsColors, useColor } from '../../../composables/ui/useColor';
 import { PropsLink, useLink } from '../../../composables/ui/useLink';
 import { PropsVariant } from '../../../composables/ui/useVariant';
 import { PropsSize } from '../../../composables/ui/useSize';
+const BLoader = defineAsyncComponent(() => import('../../loaders/BLoader/index.vue'));
 
 interface BButtonProps {
     block?: boolean;
@@ -85,6 +92,7 @@ const component = computed(() => {
     $self: &;
     -webkit-appearance: button;
     appearance: button;
+    position: relative;
     box-sizing: border-box;
     display: inline-flex;
     border-radius: $border-radius;
@@ -116,22 +124,40 @@ const component = computed(() => {
         text-overflow: ellipsis;
     }
 
+    &__loader {
+        align-items: center;
+        display: flex;
+        height: 100%;
+        justify-content: center;
+        left: 0;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    &--is-loading &__content {
+        opacity: 0;
+    }
+
     &--small {
         font-size: 16px;
         height: 28px; // TODO обсудить с дизайнером размеры кнопок
         padding: 0 $base-indent;
+        min-width: 50px;
     }
 
     &--medium {
         font-size: 16px;
         height: 44px;
         padding: 0 $base-indent;
+        min-width: 64px;
     }
 
     &--large {
         font-size: 16px;
         height: 56px;
         padding: 0 $base-indent;
+        min-width: 92px;
     }
 
     &:not(&--white) {

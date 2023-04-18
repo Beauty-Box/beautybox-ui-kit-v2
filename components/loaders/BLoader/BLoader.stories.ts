@@ -1,4 +1,4 @@
-import BLoader from './BLoader.vue';
+import BLoader from './index.vue';
 import { colors } from '../../../composables/ui/useColor';
 
 import type { Meta, StoryObj } from '@storybook/vue';

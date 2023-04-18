@@ -9,7 +9,7 @@
 </template>
 
 <script lang="ts" setup>
-import BLoader from '../../loaders/BLoader/BLoader.vue';
+import BLoader from '../../loaders/BLoader/index.vue';
 import { computed } from 'vue';
 import { PropsColors } from '../../../composables/ui/useColor';
 import { PropsPositions } from '../../../composables/ui/usePosition';
