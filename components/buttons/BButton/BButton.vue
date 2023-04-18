@@ -4,7 +4,7 @@
             <template v-if="!!$slots.loader">
                 <slot name="loader" />
             </template>
-            <b-loader v-else indeterminate :size="23" :width="2" color="inherit" />
+            <b-loader v-else indeterminate :size="20" :width="2" color="inherit" />
         </span>
         <span class="b-button__content">
             <slot />
