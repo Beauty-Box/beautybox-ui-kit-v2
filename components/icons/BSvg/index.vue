@@ -46,7 +46,6 @@ const component = computed(() => {
 const sizeIcon = computed(() => {
     return isNumber(String(props.size)) ? `${props.size}px` : props.size;
 });
-console.log('sizeIcon', sizeIcon);
 </script>
 
 <style scoped lang="scss">
