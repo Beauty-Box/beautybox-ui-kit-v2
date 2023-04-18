@@ -1,6 +1,8 @@
 import { defineConfig, loadEnv } from 'vite';
 import vue from '@vitejs/plugin-vue2';
-import svgLoader from 'vite-svg-loader';
+// import svgLoader from 'vite-svg-loader';
+// временное решение для vue 2.7 из-за багов с vue/sfc-compiler и сторибук
+import { createSvgPlugin } from '@kingyue/vite-plugin-vue2-svg';
 
 // jsconfigPaths()
 export default defineConfig(({ mode }) => {
@@ -8,9 +10,10 @@ export default defineConfig(({ mode }) => {
     return {
         plugins: [
             vue(),
-            svgLoader({
-                // defaultImport: 'component',
-            }),
+            // svgLoader({
+            // defaultImport: 'component',
+            //}),
+            createSvgPlugin(),
         ],
 
         css: {

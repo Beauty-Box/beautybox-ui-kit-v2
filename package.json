@@ -31,10 +31,12 @@
     ]
   },
   "dependencies": {
+    "@beautybox/core": "Beauty-Box/beautybox-base#march/vite",
     "vue": "^2.7.14",
     "vue-router": "^3.6.5"
   },
   "devDependencies": {
+    "@types/beautybox__core": "Beauty-Box/beautybox-base-types",
     "@storybook/addon-docs": "^7.0.4",
     "@storybook/addon-essentials": "^7.0.4",
     "@storybook/addon-jest": "^7.0.4",
@@ -62,6 +64,7 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "sass": "^1.26.9",
+    "postcss": "^8.4.21",
     "storybook": "^7.0.4",
     "stylelint": "^13.7.0",
     "stylelint-config-prettier": "^8.0.1",
@@ -72,9 +75,17 @@
     "typescript": "^4.8.4",
     "vite": "^4.2.1",
     "vite-svg-loader": "^4.0.0",
-    "vue-template-compiler": "^2.7.14"
+    "vue-template-compiler": "^2.7.14",
+    "@kingyue/vite-plugin-vue2-svg": "^0.5.0"
   },
   "peerDependencies": {
+    "@vue/compiler-sfc": "^2.7.0 || ^3.0.0",
+    "postcss": "^8.4.21",
     "vite": "^4.0.0"
+  },
+  "peerDependenciesMeta": {
+      "@vue/compiler-sfc": {
+          "optional": true
+      }
   }
 }

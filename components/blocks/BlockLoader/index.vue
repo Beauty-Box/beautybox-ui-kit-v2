@@ -9,6 +9,7 @@
 </template>
 
 <script lang="ts" setup>
+import { isNumber } from '@beautybox/core/helpers';
 import BLoader from '../../loaders/BLoader/index.vue';
 import { computed } from 'vue';
 import { PropsColors } from '../../../composables/ui/useColor';
@@ -39,10 +40,10 @@ const props = withDefaults(defineProps<BlockLoaderProps>(), {
 });
 
 const calculatedMinHeight = computed(() => {
-    return typeof props.minHeight === 'number' ? `${props.minHeight}px` : props.minHeight;
+    return isNumber(String(props.minHeight)) ? `${props.minHeight}px` : props.minHeight;
 });
 const calculatedMaxHeight = computed(() => {
-    return typeof props.maxHeight === 'number' ? `${props.maxHeight}px` : props.maxHeight;
+    return isNumber(String(props.maxHeight)) ? `${props.maxHeight}px` : props.maxHeight;
 });
 </script>
 
