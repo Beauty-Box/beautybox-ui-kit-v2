@@ -163,6 +163,26 @@ $input-height: $spacer * 14;
         + #{$self}__label--raised {
             color: map-get($colors, 'error');
         }
+
+        + #{$self}__label {
+            animation: v-shake 0.6s cubic-bezier(0.25, 0.8, 0.5, 1);
+        }
+    }
+}
+
+@keyframes v-shake {
+    59% {
+        margin-left: 0;
+    }
+
+    60%,
+    80% {
+        margin-left: 2px;
+    }
+
+    70%,
+    90% {
+        margin-left: -2px;
     }
 }
 </style>
