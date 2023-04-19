@@ -214,6 +214,7 @@ $input-height: $spacer * 14;
         line-height: 2;
         cursor: text;
         color: map-get($colors, 'secondary');
+        pointer-events: none;
         @extend .text-2;
         &--raised {
         }
@@ -237,6 +238,7 @@ $input-height: $spacer * 14;
     &__label--raised {
         @extend .caption-2;
         line-height: 1;
+        cursor: default;
     }
     // выделение самого блока
 

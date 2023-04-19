@@ -6,6 +6,7 @@
 import { ref, Ref, reactive, computed, useAttrs } from 'vue';
 import { vMaska } from 'maska';
 import BInput from '../../inputs/BInput/index.vue';
+import { isNumber } from '@beautybox/core/helpers';
 
 interface BInputPasswordProps {
     name?: string;
@@ -23,7 +24,7 @@ const customProps = computed(() => {
         ...$attrs,
         name: props.name,
         label: props.label,
-        type: 'text',
+        type: 'tel',
     };
 });
 
@@ -37,7 +38,11 @@ const phoneMaska = reactive({
                     if (v == '8') {
                         return (v = '7');
                     } else {
-                        return (v = `7 (${v}`);
+                        if (isNumber(v)) {
+                            return (v = `7 (${v}`);
+                        } else {
+                            return v;
+                        }
                     }
                 } else {
                     return v;
