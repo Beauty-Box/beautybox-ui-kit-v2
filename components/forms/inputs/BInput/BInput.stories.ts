@@ -1,5 +1,7 @@
 import BInput from './index.vue';
 
+import BSvg from '../../../icons/BSvg/index.vue';
+
 import type { Meta, StoryObj } from '@storybook/vue';
 
 const meta = {
@@ -77,14 +79,28 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     name: 'BInput',
     render: (args, { argTypes }) => ({
-        components: { BInput },
+        components: { BInput, BSvg },
         props: Object.keys(argTypes),
         methods: {
             onInput(value) {
                 console.log(value);
             },
+            onClickPrepend() {
+                console.log('clickPrepend');
+            },
+            onClickAppend() {
+                console.log('clickAppend');
+            },
         },
-        template: '<BInput v-bind="$props" @input="onInput"></BInput>',
+        template: `<BInput v-bind="$props" @input="onInput" @click:prepend="onClickPrepend" @click:append="onClickAppend">
+        
+            <template #prepend>
+                <BSvg name="eye"/>
+            </template>
+            <template #append>
+                <BSvg name="eye-off"/>
+            </template>
+        </BInput>`,
     }),
     args: {
         value: '',

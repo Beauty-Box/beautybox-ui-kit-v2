@@ -1,29 +1,50 @@
 <template>
     <div class="b-input__wrapper">
-        <input
-            :id="_id"
-            v-model="inputValue"
-            :disabled="disabled"
-            :placeholder="placeholder"
-            :name="name"
-            :type="type"
-            :autocomplete="autocomplete"
-            class="b-input"
-            v-bind="$attrs"
-            :class="{
-                'b-input--error': hasError,
-                'b-input--raised': isLabelRaised,
-                'b-input--lowered': isLabelExists,
-            }"
-        />
-        <label
-            v-if="isLabelExists"
-            class="b-input__label"
-            :class="{ 'b-input__label--raised': isLabelRaised }"
-            :for="_id"
-        >
-            {{ label }}
-        </label>
+        <div class="b-input__inner" :class="{ 'b-input__inner--error': hasError }">
+            <div
+                v-if="!!$slots.prepend"
+                class="b-input__prepend"
+                :class="{ 'b-input__prepend--clickable': isPrependSlotClickable }"
+                @click="onClickPrepend"
+            >
+                <slot name="prepend" />
+            </div>
+            <div class="b-input__textfield">
+                <input
+                    :id="_id"
+                    v-model="inputValue"
+                    :disabled="disabled"
+                    :placeholder="placeholder"
+                    :name="name"
+                    :type="type"
+                    :autocomplete="autocomplete"
+                    class="b-input"
+                    v-bind="$attrs"
+                    :class="{
+                        'b-input--error': hasError,
+                        'b-input--raised': isLabelRaised,
+                        'b-input--lowered': isLabelExists,
+                    }"
+                    v-on="$listeners"
+                />
+                <label
+                    v-if="isLabelExists"
+                    class="b-input__label"
+                    :class="{ 'b-input__label--raised': isLabelRaised }"
+                    :for="_id"
+                >
+                    {{ label }}
+                </label>
+            </div>
+            <div
+                v-if="!!$slots.append"
+                class="b-input__append"
+                :class="{ 'b-input__append--clickable': isAppendSlotClickable }"
+                @click="onClickAppend"
+            >
+                <slot name="append" />
+            </div>
+        </div>
         <div class="b-input__error">
             {{ messages }}
         </div>
@@ -31,7 +52,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { computed, useListeners } from 'vue';
 import { v4 } from 'uuid';
 import { ErrorObject } from '@vuelidate/core';
 
@@ -49,6 +70,8 @@ export interface BInputProps {
 
 interface Emits {
     (e: 'input', value: BInputProps['value']): void;
+    (e: 'click:prepend'): void;
+    (e: 'click:append'): void;
 }
 
 const props = withDefaults(defineProps<BInputProps>(), {
@@ -65,6 +88,7 @@ const props = withDefaults(defineProps<BInputProps>(), {
 
 const emit = defineEmits<Emits>();
 
+// input and label control
 const _id = computed(() => {
     return typeof props.id === 'undefined' ? v4() : props.id;
 });
@@ -83,6 +107,24 @@ const inputValue = computed({
     set: (value) => emit('input', value),
 });
 
+// prepend and append icons slots
+const onClickPrepend = () => {
+    emit('click:prepend');
+};
+const onClickAppend = () => {
+    emit('click:append');
+};
+const $listeners = useListeners();
+console.log($listeners);
+
+const isPrependSlotClickable = computed(() => {
+    return 'click:prepend' in $listeners;
+});
+const isAppendSlotClickable = computed(() => {
+    return 'click:append' in $listeners;
+});
+
+// error message
 const messages = computed(() => {
     if (!hasError.value) {
         return '';
@@ -106,12 +148,10 @@ const messages = computed(() => {
 $input-height: $spacer * 14;
 .b-input {
     $self: &;
-    padding: $half-indent $base-indent;
-    border-radius: $border-radius;
+    padding: $half-indent 0;
+
     height: $input-height;
-    border-width: 1px;
-    border-style: solid;
-    border-color: $color-border--lighten;
+    border: 0;
     @extend .text-2;
 
     &__wrapper {
@@ -122,9 +162,43 @@ $input-height: $spacer * 14;
         gap: $spacer * 2;
     }
 
+    &__inner {
+        display: flex;
+        flex-grow: 1;
+        align-items: center;
+        border-width: 1px;
+        border-style: solid;
+        border-color: $color-border--lighten;
+        border-radius: $border-radius;
+        padding: 0 $base-indent;
+    }
+
+    &__prepend {
+        margin-right: $spacer;
+    }
+
+    &__append {
+        margin-left: $spacer;
+    }
+    &__prepend,
+    &__append {
+        line-height: 1;
+        &--clickable {
+            cursor: pointer;
+        }
+    }
+
+    &__textfield {
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        position: relative;
+    }
+
     &__label {
         position: absolute;
-        left: $base-indent;
+        // left: $base-indent;
+        left: 0;
         top: 0;
         transition: all 0.2s ease-in-out;
         transform: translateY(#{$half-indent});
@@ -156,9 +230,13 @@ $input-height: $spacer * 14;
         line-height: 1;
     }
     // выделение самого блока
-    &--error {
-        border-color: map-get($colors, 'error');
 
+    &__inner {
+        &--error {
+            border-color: map-get($colors, 'error');
+        }
+    }
+    &--error {
         &:where(:focus, :focus-visible, :placeholder-shown) + #{$self}__label,
         + #{$self}__label--raised {
             color: map-get($colors, 'error');
