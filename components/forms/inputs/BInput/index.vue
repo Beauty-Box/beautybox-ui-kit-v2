@@ -152,6 +152,8 @@ $input-height: $spacer * 14;
 
     height: $input-height;
     border: 0;
+    color: inherit;
+    outline: 0;
     @extend .text-2;
 
     &__wrapper {
