@@ -1,6 +1,9 @@
 <template>
     <div class="b-input__wrapper">
-        <div class="b-input__inner" :class="{ 'b-input__inner--error': hasError }">
+        <div
+            class="b-input__inner"
+            :class="{ 'b-input__inner--error': hasError, 'b-input__inner--disabled': disabled }"
+        >
             <div
                 v-if="!!$slots.prepend"
                 class="b-input__prepend"
@@ -109,19 +112,23 @@ const inputValue = computed({
 
 // prepend and append icons slots
 const onClickPrepend = () => {
-    emit('click:prepend');
+    if (!props.disabled) {
+        emit('click:prepend');
+    }
 };
 const onClickAppend = () => {
-    emit('click:append');
+    if (!props.disabled) {
+        emit('click:append');
+    }
 };
 const $listeners = useListeners();
 console.log($listeners);
 
 const isPrependSlotClickable = computed(() => {
-    return 'click:prepend' in $listeners;
+    return 'click:prepend' in $listeners && !props.disabled;
 });
 const isAppendSlotClickable = computed(() => {
-    return 'click:append' in $listeners;
+    return 'click:append' in $listeners && !props.disabled;
 });
 
 // error message
@@ -236,6 +243,9 @@ $input-height: $spacer * 14;
     &__inner {
         &--error {
             border-color: map-get($colors, 'error');
+        }
+        &--disabled {
+            opacity: 0.5;
         }
     }
     &--error {
