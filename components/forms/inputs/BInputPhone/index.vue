@@ -37,7 +37,7 @@ const phoneMaska = reactive({
                     if (v == '8') {
                         return (v = '7');
                     } else {
-                        return (v = `7${v}`);
+                        return (v = `7 (${v}`);
                     }
                 } else {
                     return v;
