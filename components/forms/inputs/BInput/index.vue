@@ -126,6 +126,7 @@ const inputListeners = {
     ...$listeners,
 };
 
+delete inputListeners['input'];
 delete inputListeners['click:prepend'];
 delete inputListeners['click:append'];
 console.log('listeners', $listeners);
