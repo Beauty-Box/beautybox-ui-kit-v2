@@ -99,13 +99,9 @@ export const Primary: Story = {
                 console.log('clickAppend');
             },
         },
-        template: `<BInput v-bind="$props" @input="onInput" @click:prepend="onClickPrepend" @click:append="onClickAppend">
-        
-            <template #prepend>
-                <BSvg name="eye"/>
-            </template>
+        template: `<BInput v-bind="$props" @input="onInput" @click:prepend="onClickPrepend" prependIcon="eye">
             <template #append>
-                <BSvg name="eye-off"/>
+                <BSvg name="eye-off" @click="onClickAppend"/>
             </template>
         </BInput>`,
     }),

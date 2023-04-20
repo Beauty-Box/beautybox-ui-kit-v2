@@ -18,18 +18,18 @@
                     // и далее
                     return acc;
                 }, { 'append': {}, 'input': {}, 'prepend': {}, });
-                
-                <slot name="prepend">
-                <span
-                    v-if="'prepend' in $slots"
-                    class="b-input__prepend"
-                    :class="{ 'b-input__prepend--clickable': isPrependSlotClickable }"
-                    @click="onClickPrepend"
-                >
-                    s
-                </span>
-            </slot> -->
-
+                 -->
+            <span class="b-input__prepend" :class="{ 'b-input__prepend--clickable': !disabled }">
+                <slot name="prepend" v-bind="{ disabled }">
+                    <b-svg
+                        v-if="!!prependIcon"
+                        :name="prependIcon"
+                        :size="22"
+                        :fill="prependIconFill"
+                        @click.native="onClickPrepend"
+                    />
+                </slot>
+            </span>
             <div class="b-input__textfield">
                 <input
                     :id="_id"
@@ -57,13 +57,16 @@
                     {{ label }}
                 </label>
             </div>
-            <span
-                v-if="'append' in $slots"
-                class="b-input__append"
-                :class="{ 'b-input__append--clickable': isAppendSlotClickable }"
-                @click="onClickAppend"
-            >
-                <slot name="append" />
+            <span class="b-input__append" :class="{ 'b-input__append--clickable': !disabled }">
+                <slot name="append" v-bind="{ disabled }">
+                    <b-svg
+                        v-if="!!appendIcon"
+                        :name="appendIcon"
+                        :size="22"
+                        :fill="appendIconFill"
+                        @click.native="onClickAppend"
+                    />
+                </slot>
             </span>
         </div>
         <div v-if="!hideDetails" class="b-input__error">
@@ -76,6 +79,8 @@
 import { computed, useListeners } from 'vue';
 import { v4 } from 'uuid';
 import { ErrorObject } from '@vuelidate/core';
+import BSvg from '../../../icons/BSvg/index.vue';
+import { PropsColors } from '../../../../composables/ui/useColor';
 
 export interface BInputProps {
     label?: string;
@@ -88,6 +93,10 @@ export interface BInputProps {
     autocomplete?: string;
     type?: string;
     hideDetails?: boolean;
+    prependIcon?: string;
+    prependIconFill?: PropsColors['color'];
+    appendIcon?: string;
+    appendIconFill?: PropsColors['color'];
 }
 
 interface Emits {
@@ -107,6 +116,10 @@ const props = withDefaults(defineProps<BInputProps>(), {
     autocomplete: 'off',
     type: 'text',
     hideDetails: false,
+    prependIcon: undefined,
+    appendIcon: undefined,
+    prependIconFill: 'secondary',
+    appendIconFill: 'secondary',
 });
 
 const emit = defineEmits<Emits>();
@@ -149,13 +162,6 @@ const inputListeners = {
 delete inputListeners['input'];
 delete inputListeners['click:prepend'];
 delete inputListeners['click:append'];
-
-const isPrependSlotClickable = computed(() => {
-    return 'click:prepend' in $listeners && !props.disabled;
-});
-const isAppendSlotClickable = computed(() => {
-    return 'click:append' in $listeners && !props.disabled;
-});
 
 // error message
 const messages = computed(() => {
@@ -209,11 +215,15 @@ $input-height: $spacer * 14;
     }
 
     &__prepend {
-        margin-right: $spacer;
+        svg {
+            margin-right: $spacer;
+        }
     }
 
     &__append {
-        margin-left: $spacer;
+        svg {
+            margin-left: $spacer;
+        }
     }
     &__prepend,
     &__append {

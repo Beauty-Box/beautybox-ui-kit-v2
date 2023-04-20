@@ -1,8 +1,20 @@
 <template>
-    <b-input v-bind="customProps" v-on="$listeners" @click:append="onHidePasswordToggle">
-        <template #append>
-            <b-svg v-show="hidePassword" name="eye" fill="secondary" :size="22" />
-            <b-svg v-show="!hidePassword" name="eye-off" fill="secondary" :size="22" />
+    <b-input v-bind="customProps" v-on="$listeners">
+        <template #append="{ disabled }">
+            <b-svg
+                v-show="hidePassword"
+                name="eye"
+                fill="secondary"
+                :size="22"
+                @click.native="onHidePasswordToggle(disabled)"
+            />
+            <b-svg
+                v-show="!hidePassword"
+                name="eye-off"
+                fill="secondary"
+                :size="22"
+                @click.native="onHidePasswordToggle(disabled)"
+            />
         </template>
     </b-input>
 </template>
@@ -28,8 +40,10 @@ const inputType = computed(() => {
     return hidePassword.value ? 'password' : 'text';
 });
 
-const onHidePasswordToggle = () => {
-    hidePassword.value = !hidePassword.value;
+const onHidePasswordToggle = (disabled: boolean) => {
+    if (!disabled) {
+        hidePassword.value = !hidePassword.value;
+    }
 };
 
 // const iconName = computed(() => {
