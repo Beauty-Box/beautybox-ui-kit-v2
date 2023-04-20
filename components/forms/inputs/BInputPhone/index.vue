@@ -1,10 +1,9 @@
 <template>
-    <b-input v-bind="customProps" v-on="$listeners" />
-    <!-- v-maska:[phoneMaska] -->
+    <b-input v-maska:[phoneMaska] v-bind="customProps" v-on="inputListeners" />
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, reactive, computed, useAttrs, useListeners } from 'vue';
+import { reactive, computed, useAttrs, useListeners } from 'vue';
 import { vMaska, MaskaDetail } from 'maska';
 import BInput from '../../inputs/BInput/index.vue';
 import { isNumber } from '@beautybox/core/helpers';
