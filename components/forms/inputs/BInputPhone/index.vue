@@ -1,10 +1,10 @@
 <template>
-    <b-input v-maska:[phoneMaska] v-bind="customProps" v-on="$listeners" />
+    <b-input v-maska:[phoneMaska] v-bind="customProps" v-on="inputListeners" />
 </template>
 
 <script setup lang="ts">
-import { ref, Ref, reactive, computed, useAttrs } from 'vue';
-import { vMaska } from 'maska';
+import { ref, Ref, reactive, computed, useAttrs, useListeners } from 'vue';
+import { vMaska, MaskaDetail } from 'maska';
 import BInput from '../../inputs/BInput/index.vue';
 import { isNumber } from '@beautybox/core/helpers';
 
@@ -13,10 +13,16 @@ interface BInputPasswordProps {
     label?: string;
 }
 
+interface Emits {
+    (e: 'input', value?: string | number | null): void;
+}
+
 const props = withDefaults(defineProps<BInputPasswordProps>(), {
     name: 'phone',
     label: 'Телефон',
 });
+
+const emit = defineEmits<Emits>();
 
 const $attrs = useAttrs();
 const customProps = computed(() => {
@@ -27,6 +33,13 @@ const customProps = computed(() => {
         type: 'tel',
     };
 });
+
+const $listeners = useListeners();
+const inputListeners = {
+    ...$listeners,
+};
+
+delete inputListeners['input'];
 
 const phoneMaska = reactive({
     mask: '+Y (###) ###-##-##',
@@ -50,6 +63,9 @@ const phoneMaska = reactive({
             },
         },
         '#': { pattern: /\d/ },
+    },
+    onMaska: (detail: MaskaDetail) => {
+        emit('input', detail.masked);
     },
 });
 </script>
