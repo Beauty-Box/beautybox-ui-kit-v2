@@ -1,5 +1,6 @@
 <template>
     <div class="b-input__wrapper">
+        {{ $listeners }}
         <div
             class="b-input__inner"
             :class="{ 'b-input__inner--error': hasError, 'b-input__inner--disabled': disabled }"
@@ -28,7 +29,7 @@
                         'b-input--raised': isLabelRaised,
                         'b-input--lowered': isLabelExists,
                     }"
-                    v-on="$listeners"
+                    v-on="$listeners['input']"
                 />
                 <label
                     v-if="isLabelExists"
