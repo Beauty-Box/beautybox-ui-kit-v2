@@ -1,5 +1,5 @@
 <template>
-    <v-app id="app" class="l-not-found" data-server-rendered="true">
+    <b-app id="app" class="l-not-found" data-server-rendered="true">
         <div class="l-not-found__inner">
             <i class="l-not-found__icon l-not-found__icon--left">
                 <b-svg name="404_broken" :size="56" />
@@ -31,16 +31,18 @@
         </div>
         <div class="l-not-found__title">403</div>
         <div class="l-not-found__block-shadow" />
-    </v-app>
+    </b-app>
 </template>
 
 <script>
+import BApp from '../BApp.vue';
 const BBlockEmpty = () => import('../../blocks/BlockEmpty/index.vue');
 const BButton = () => import('../../buttons/BButton/index.vue');
 const BSvg = () => import('../../../components/icons/BSvg/index.vue');
 
 export default {
     components: {
+        BApp,
         BBlockEmpty,
         BButton,
         BSvg,

@@ -1,17 +1,19 @@
 <template>
-    <v-app v-bind="$attrs">
-        <v-main>
+    <b-app v-bind="$attrs">
+        <b-main>
             <block-loader v-if="loading" />
             <router-view v-else :style="checkBg()" />
-        </v-main>
-    </v-app>
+        </b-main>
+    </b-app>
 </template>
 
 <script>
-const BlockLoader = () =>
-    import(/* webpackChunkName: "BlockLoader" */ '../components/blocks/BlockLoader/index.vue');
+import BApp from '../components/pages/BApp.vue';
+import BMain from '../components/pages/BMain.vue';
+const BlockLoader = () => import('../components/blocks/BlockLoader/index.vue');
+
 export default {
-    components: { BlockLoader },
+    components: { BlockLoader, BApp, BMain },
     data: () => ({
         loading: true,
     }),

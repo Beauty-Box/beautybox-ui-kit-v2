@@ -1,5 +1,5 @@
 <template>
-    <v-app class="not-found">
+    <b-app class="not-found">
         <div class="not-found__inner">
             <i class="not-found__icon not-found__icon--left">
                 <b-svg name="404_broken" :size="56" />
@@ -14,14 +14,16 @@
         </div>
         <div class="not-found__title">{{ $route.meta.code }}</div>
         <div class="not-found__block-shadow" />
-    </v-app>
+    </b-app>
 </template>
 
 <script>
+import BApp from '../components/pages/BApp.vue';
 const BSvg = () => import('../components/icons/BSvg/index.vue');
 
 export default {
     components: {
+        BApp,
         BSvg,
     },
 };
