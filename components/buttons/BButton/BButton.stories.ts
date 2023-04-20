@@ -1,4 +1,4 @@
-import BButton from './BButton.vue';
+import BButton from './index.vue';
 import { colors } from '../../../composables/ui/useColor';
 import { variants } from '../../../composables/ui/useVariant';
 import { sizes } from '../../../composables/ui/useSize';

@@ -19,7 +19,9 @@ export default defineConfig(({ mode }) => {
         css: {
             preprocessorOptions: {
                 scss: {
-                    additionalData: '@import "./scss/variables.scss";',
+                    additionalData: `
+                    @use 'sass:math';
+                    @import "./scss/variables.scss";`,
                 },
                 // // @see working vite sass styles override
                 // // https://stackoverflow.com/questions/70656230/overriding-vuetify-variables-when-building-a-vue2vuetify-app-with-vite
