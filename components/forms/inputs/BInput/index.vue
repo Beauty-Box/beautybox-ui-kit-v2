@@ -1,6 +1,5 @@
 <template>
     <div class="b-input__wrapper">
-        {{ $listeners }}
         <div
             class="b-input__inner"
             :class="{ 'b-input__inner--error': hasError, 'b-input__inner--disabled': disabled }"
@@ -29,7 +28,7 @@
                         'b-input--raised': isLabelRaised,
                         'b-input--lowered': isLabelExists,
                     }"
-                    v-on="$listeners['input']"
+                    v-on="inputListeners"
                 />
                 <label
                     v-if="isLabelExists"
@@ -123,7 +122,14 @@ const onClickAppend = () => {
     }
 };
 const $listeners = useListeners();
-console.log($listeners);
+const inputListeners = {
+    ...$listeners,
+};
+
+delete inputListeners['click:prepend'];
+delete inputListeners['click:append'];
+console.log('listeners', $listeners);
+console.log('inputListeners', inputListeners);
 
 const isPrependSlotClickable = computed(() => {
     return 'click:prepend' in $listeners && !props.disabled;
