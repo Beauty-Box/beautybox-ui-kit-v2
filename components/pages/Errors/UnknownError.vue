@@ -13,12 +13,17 @@
             <b-block-empty title="Что-то пошло не так" class="l-not-found__empty">
                 <template #text> Мы уже исправляем ошибку. Пожалуйста, вернитесь назад </template>
                 <template #buttons>
-                    <v-btn v-if="checkHistory" min-width="150" large color="white" @click="back">
+                    <b-button
+                        v-if="checkHistory"
+                        class="l-not-found__button"
+                        color="white"
+                        @click="back"
+                    >
                         Вернуться назад
-                    </v-btn>
-                    <v-btn v-else min-width="150" large color="primary" @click="goHome">
+                    </b-button>
+                    <b-button v-else class="l-not-found__button" @click="goHome">
                         Перейти на главную
-                    </v-btn>
+                    </b-button>
                 </template>
             </b-block-empty>
         </div>
@@ -30,11 +35,13 @@
 <script>
 const BBlockEmpty = () =>
     import(/* webpackChunkName: "BlockEmpty" */ '../../blocks/BlockEmpty/index.vue');
+const BButton = () => import('../../buttons/BButton/index.vue');
 const BSvg = () => import('../../../components/icons/BSvg/index.vue');
 
 export default {
     components: {
         BBlockEmpty,
+        BButton,
         BSvg,
     },
     computed: {

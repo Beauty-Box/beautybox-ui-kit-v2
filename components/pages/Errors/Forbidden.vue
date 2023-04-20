@@ -15,12 +15,17 @@
                     К сожалению, у вас нет прав для просмотра данной страницы
                 </template>
                 <template #buttons>
-                    <v-btn v-if="checkHistory" min-width="150" large color="white" @click="back">
+                    <b-button
+                        v-if="checkHistory"
+                        class="l-not-found__button"
+                        color="white"
+                        @click="back"
+                    >
                         Вернуться назад
-                    </v-btn>
-                    <v-btn v-else min-width="150" large color="primary" @click="goHome">
+                    </b-button>
+                    <b-button v-else class="l-not-found__button" @click="goHome">
                         Перейти на главную
-                    </v-btn>
+                    </b-button>
                 </template>
             </b-block-empty>
         </div>
@@ -30,14 +35,14 @@
 </template>
 
 <script>
-const BBlockEmpty = () =>
-    import(/* webpackChunkName: "BlockEmpty" */ '../../blocks/BlockEmpty/index.vue');
-
+const BBlockEmpty = () => import('../../blocks/BlockEmpty/index.vue');
+const BButton = () => import('../../buttons/BButton/index.vue');
 const BSvg = () => import('../../../components/icons/BSvg/index.vue');
 
 export default {
     components: {
         BBlockEmpty,
+        BButton,
         BSvg,
     },
     computed: {

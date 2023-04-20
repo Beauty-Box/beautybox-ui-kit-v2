@@ -16,21 +16,18 @@
                 </template>
                 <template #buttons>
                     <div class="button-box">
-                        <v-btn
+                        <b-button
                             v-if="checkHistory"
-                            min-width="150"
-                            large
                             color="white"
+                            class="l-not-found__button"
                             @click="back"
                         >
                             Назад
-                        </v-btn>
-                        <v-btn v-else min-width="150" large color="primary" @click="goHome">
+                        </b-button>
+                        <b-button v-else class="l-not-found__button" @click="goHome">
                             На главную
-                        </v-btn>
-                        <v-btn min-width="150" large color="primary" @click="reload">
-                            Повторить
-                        </v-btn>
+                        </b-button>
+                        <b-button class="l-not-found__button" @click="reload"> Повторить </b-button>
                     </div>
                 </template>
             </b-block-empty>
@@ -41,14 +38,15 @@
 </template>
 
 <script>
-const BBlockEmpty = () =>
-    import(/* webpackChunkName: "BlockEmpty" */ '../../blocks/BlockEmpty/index.vue');
+const BBlockEmpty = () => import('../../blocks/BlockEmpty/index.vue');
+const BButton = () => import('../../buttons/BButton/index.vue');
 const BSvg = () => import('../../../components/icons/BSvg/index.vue');
 
 export default {
     components: {
         BBlockEmpty,
         BSvg,
+        BButton,
     },
     computed: {
         checkHistory() {

@@ -16,15 +16,9 @@
                     <div v-if="timer !== 0">Сайт будет доступен через {{ timer }} сек.</div>
                 </template>
                 <template #buttons>
-                    <v-btn
-                        min-width="150"
-                        large
-                        color="primary"
-                        :disabled="timer !== 0"
-                        @click="update"
-                    >
+                    <b-button class="l-not-found__button" :disabled="timer !== 0" @click="update">
                         Продолжить работу
-                    </v-btn>
+                    </b-button>
                 </template>
             </b-block-empty>
         </div>
@@ -34,13 +28,14 @@
 </template>
 
 <script>
-const BBlockEmpty = () =>
-    import(/* webpackChunkName: "BlockEmpty" */ '../../blocks/BlockEmpty/index.vue');
+const BBlockEmpty = () => import('../../blocks/BlockEmpty/index.vue');
+const BButton = () => import('../../buttons/BButton/index.vue');
 const BSvg = () => import('../../../components/icons/BSvg/index.vue');
 
 export default {
     components: {
         BBlockEmpty,
+        BButton,
         BSvg,
     },
     data: () => ({

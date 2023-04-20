@@ -1,0 +1,13 @@
+.button-box {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    & > a,
+    & > button {
+        & + a,
+        & + button {
+            margin-left: $base-indent;
+        }
+    }
+} //.button-box

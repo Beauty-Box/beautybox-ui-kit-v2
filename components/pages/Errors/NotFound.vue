@@ -16,9 +16,9 @@
                 </template>
                 <template #buttons>
                     <div class="button-box">
-                        <v-btn min-width="150" large color="primary" @click="goHome">
+                        <b-button class="l-not-found__button" @click="goHome">
                             Перейти на главную
-                        </v-btn>
+                        </b-button>
                     </div>
                 </template>
             </b-block-empty>
@@ -29,13 +29,14 @@
 </template>
 
 <script>
-const BBlockEmpty = () =>
-    import(/* webpackChunkName: "BlockEmpty" */ '../../blocks/BlockEmpty/index.vue');
+const BBlockEmpty = () => import('../../blocks/BlockEmpty/index.vue');
+const BButton = () => import('../../buttons/BButton/index.vue');
 const BSvg = () => import('../../../components/icons/BSvg/index.vue');
 
 export default {
     components: {
         BBlockEmpty,
+        BButton,
         BSvg,
     },
     methods: {

@@ -68,6 +68,10 @@
         z-index: z(fixed);
     }
 
+    &__button {
+        min-width: 150px;
+    }
+
     &__block-shadow {
         position: relative;
         z-index: 1;
