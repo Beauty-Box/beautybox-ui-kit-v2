@@ -69,6 +69,13 @@ const meta = {
             },
             options: ['off', 'new-password'],
         },
+        hideDetails: {
+            name: 'hide details',
+            control: {
+                type: 'select',
+            },
+            options: [true, false],
+        },
     },
 } satisfies Meta<typeof BInput>;
 
@@ -112,5 +119,6 @@ export const Primary: Story = {
         errorMessage: undefined,
         type: 'text',
         autocomplete: 'off',
+        hideDetails: false,
     },
 };

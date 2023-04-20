@@ -4,14 +4,32 @@
             class="b-input__inner"
             :class="{ 'b-input__inner--error': hasError, 'b-input__inner--disabled': disabled }"
         >
-            <div
-                v-if="!!$slots.prepend"
-                class="b-input__prepend"
-                :class="{ 'b-input__prepend--clickable': isPrependSlotClickable }"
-                @click="onClickPrepend"
-            >
-                <slot name="prepend" />
-            </div>
+            <!-- 
+                1. препенд и аппенд иконки могут быть проброшены слотами, но если слота нет
+                то можно пробросить название. по аналогии с block empty
+                2. слоты для иконки и для суффикса должны быть разными слотами, суффикс лучше прокинуть строкой с необходимыми стилями
+                3. лучше разделить все события на три группы 1. инпут 2. препед 3. аппенд по наличию постфикса в конце имени события
+                4. v-on в vue 3 deprecated, лучше использовать события вида onClick внутри $attrs
+                Пример:
+                Object.keys($listeners).reduce((acc, key) => {
+                    if (key.endWith(':append')) {
+                        acc['append'][key] = $listeners[key];
+                    }
+                    // и далее
+                    return acc;
+                }, { 'append': {}, 'input': {}, 'prepend': {}, });
+                
+                <slot name="prepend">
+                <span
+                    v-if="'prepend' in $slots"
+                    class="b-input__prepend"
+                    :class="{ 'b-input__prepend--clickable': isPrependSlotClickable }"
+                    @click="onClickPrepend"
+                >
+                    s
+                </span>
+            </slot> -->
+
             <div class="b-input__textfield">
                 <input
                     :id="_id"
@@ -39,16 +57,16 @@
                     {{ label }}
                 </label>
             </div>
-            <div
-                v-if="!!$slots.append"
+            <span
+                v-if="'append' in $slots"
                 class="b-input__append"
                 :class="{ 'b-input__append--clickable': isAppendSlotClickable }"
                 @click="onClickAppend"
             >
                 <slot name="append" />
-            </div>
+            </span>
         </div>
-        <div class="b-input__error">
+        <div v-if="!hideDetails" class="b-input__error">
             {{ messages }}
         </div>
     </div>
@@ -69,6 +87,7 @@ export interface BInputProps {
     errorMessage?: string | ErrorObject[];
     autocomplete?: string;
     type?: string;
+    hideDetails?: boolean;
 }
 
 interface Emits {
@@ -87,6 +106,7 @@ const props = withDefaults(defineProps<BInputProps>(), {
     errorMessage: undefined,
     autocomplete: 'off',
     type: 'text',
+    hideDetails: false,
 });
 
 const emit = defineEmits<Emits>();
@@ -174,7 +194,7 @@ $input-height: $spacer * 14;
         position: relative;
         display: flex;
         flex-direction: column;
-        gap: $spacer * 2;
+        gap: $spacer;
     }
 
     &__inner {
@@ -212,7 +232,6 @@ $input-height: $spacer * 14;
 
     &__label {
         position: absolute;
-        // left: $base-indent;
         left: 0;
         top: 0;
         transition: all 0.2s ease-in-out;
@@ -228,7 +247,9 @@ $input-height: $spacer * 14;
     // блок с ошибками
     &__error {
         color: map-get($colors, 'error');
-        margin-left: $base-indent;
+        padding: 0 $base-indent;
+        margin-bottom: math.div($base-indent, 2);
+        min-height: 12px;
         @extend .caption-2;
     }
 
