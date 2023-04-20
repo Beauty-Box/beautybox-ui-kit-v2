@@ -1,5 +1,5 @@
 <template>
-    <div class="b-app">
+    <div id="app" class="b-app">
         <div class="b-app__wrapper">
             <slot />
         </div>
