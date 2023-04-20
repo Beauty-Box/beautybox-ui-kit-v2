@@ -1,5 +1,6 @@
 <template>
-    <b-input v-maska:[phoneMaska] v-bind="customProps" v-on="inputListeners" />
+    <b-input v-bind="customProps" v-on="$listeners" />
+    <!-- v-maska:[phoneMaska] -->
 </template>
 
 <script setup lang="ts">
