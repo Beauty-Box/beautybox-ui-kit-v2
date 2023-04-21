@@ -90,6 +90,19 @@ const meta = {
             },
             options: colors,
         },
+        appendIcon: {
+            name: 'append icon',
+            control: {
+                type: 'text',
+            },
+        },
+        appendIconFill: {
+            name: 'append icon fill',
+            control: {
+                type: 'select',
+            },
+            options: colors,
+        },
     },
 } satisfies Meta<typeof BInput>;
 
@@ -132,5 +145,7 @@ export const Primary: Story = {
         hideDetails: false,
         prependIcon: 'eye',
         prependIconFill: 'secondary',
+        appendIcon: undefined,
+        appendIconFill: 'secondary',
     },
 };

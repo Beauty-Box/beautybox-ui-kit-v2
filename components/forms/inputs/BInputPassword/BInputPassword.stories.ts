@@ -1,6 +1,7 @@
 import BInputPassword from './index.vue';
 
 import type { Meta, StoryObj } from '@storybook/vue';
+import { colors } from '../../../../composables/ui/useColor';
 
 const meta = {
     title: 'input password',
@@ -60,6 +61,32 @@ const meta = {
             },
             options: ['off', 'new-password'],
         },
+        prependIcon: {
+            name: 'prepend icon',
+            control: {
+                type: 'text',
+            },
+        },
+        prependIconFill: {
+            name: 'prepend icon fill',
+            control: {
+                type: 'select',
+            },
+            options: colors,
+        },
+        appendIcon: {
+            name: 'append icon',
+            control: {
+                type: 'text',
+            },
+        },
+        appendIconFill: {
+            name: 'append icon fill',
+            control: {
+                type: 'select',
+            },
+            options: colors,
+        },
     },
 } satisfies Meta<typeof BInputPassword>;
 
@@ -88,5 +115,7 @@ export const Primary: Story = {
         disabled: false,
         errorMessage: undefined,
         autocomplete: 'off',
+        prependIcon: undefined,
+        appendIcon: undefined,
     },
 };

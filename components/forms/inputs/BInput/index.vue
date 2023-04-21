@@ -20,7 +20,7 @@
                 }, { 'append': {}, 'input': {}, 'prepend': {}, });
                  -->
             <span
-                v-if="'prepend' in $slots || !!prependIcon"
+                v-if="'prepend' in $scopedSlots || !!prependIcon"
                 class="b-input__prepend"
                 :class="{ 'b-input__prepend--clickable': !disabled }"
             >
@@ -61,7 +61,7 @@
                 </label>
             </div>
             <span
-                v-if="'append' in $slots || !!appendIcon"
+                v-if="'append' in $scopedSlots || !!appendIcon"
                 class="b-input__append"
                 :class="{ 'b-input__append--clickable': !disabled }"
             >
@@ -260,7 +260,7 @@ $input-height: $spacer * 14;
     &__error {
         color: map-get($colors, 'error');
         padding: 0 $base-indent;
-        margin-bottom: math.div($base-indent, 2);
+        margin-bottom: $base-indent / 2;
         min-height: 12px;
         @extend .caption-2;
     }

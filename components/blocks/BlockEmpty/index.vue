@@ -96,7 +96,7 @@ const calculatedTextWidth = computed(() => {
             font-size: 16px;
         }
         & + .c-empty__text {
-            margin-top: math.div($base-indent, 2);
+            margin-top: $base-indent / 2;
         }
     } //.empty__title
 
@@ -149,7 +149,7 @@ const calculatedTextWidth = computed(() => {
                 margin-bottom: 21px;
             }
             &__title {
-                margin-bottom: math.div($base-indent, 2);
+                margin-bottom: $base-indent / 2;
                 font-size: 24px;
                 font-weight: 500;
             }
