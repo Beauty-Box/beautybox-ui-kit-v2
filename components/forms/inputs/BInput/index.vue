@@ -19,10 +19,13 @@
                     return acc;
                 }, { 'append': {}, 'input': {}, 'prepend': {}, });
                  -->
-            <span class="b-input__prepend" :class="{ 'b-input__prepend--clickable': !disabled }">
+            <span
+                v-if="'prepend' in $slots || !!prependIcon"
+                class="b-input__prepend"
+                :class="{ 'b-input__prepend--clickable': !disabled }"
+            >
                 <slot name="prepend" v-bind="{ disabled }">
                     <b-svg
-                        v-if="!!prependIcon"
                         :name="prependIcon"
                         :size="22"
                         :fill="prependIconFill"
@@ -57,10 +60,13 @@
                     {{ label }}
                 </label>
             </div>
-            <span class="b-input__append" :class="{ 'b-input__append--clickable': !disabled }">
+            <span
+                v-if="'append' in $slots || !!appendIcon"
+                class="b-input__append"
+                :class="{ 'b-input__append--clickable': !disabled }"
+            >
                 <slot name="append" v-bind="{ disabled }">
                     <b-svg
-                        v-if="!!appendIcon"
                         :name="appendIcon"
                         :size="22"
                         :fill="appendIconFill"
@@ -215,15 +221,11 @@ $input-height: $spacer * 14;
     }
 
     &__prepend {
-        svg {
-            margin-right: $spacer;
-        }
+        margin-right: $spacer;
     }
 
     &__append {
-        svg {
-            margin-left: $spacer;
-        }
+        margin-left: $spacer;
     }
     &__prepend,
     &__append {

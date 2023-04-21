@@ -1,6 +1,7 @@
 import BInput from './index.vue';
 
 import BSvg from '../../../icons/BSvg/index.vue';
+import { colors } from '../../../../composables/ui/useColor';
 
 import type { Meta, StoryObj } from '@storybook/vue';
 
@@ -76,6 +77,19 @@ const meta = {
             },
             options: [true, false],
         },
+        prependIcon: {
+            name: 'prepend icon',
+            control: {
+                type: 'text',
+            },
+        },
+        prependIconFill: {
+            name: 'prepend icon fill',
+            control: {
+                type: 'select',
+            },
+            options: colors,
+        },
     },
 } satisfies Meta<typeof BInput>;
 
@@ -99,7 +113,7 @@ export const Primary: Story = {
                 console.log('clickAppend');
             },
         },
-        template: `<BInput v-bind="$props" @input="onInput" @click:prepend="onClickPrepend" prependIcon="eye">
+        template: `<BInput v-bind="$props" @input="onInput" @click:prepend="onClickPrepend">
             <template #append>
                 <BSvg name="eye-off" @click="onClickAppend"/>
             </template>
@@ -116,5 +130,7 @@ export const Primary: Story = {
         type: 'text',
         autocomplete: 'off',
         hideDetails: false,
+        prependIcon: 'eye',
+        prependIconFill: 'secondary',
     },
 };
