@@ -188,6 +188,7 @@ const component = computed(() => {
         border-color: transparent;
         padding: 0;
         height: min-content;
+        font-weight: 400;
 
         #{$self}__content {
             white-space: normal;
