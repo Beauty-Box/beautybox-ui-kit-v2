@@ -188,7 +188,8 @@ const component = computed(() => {
         border-color: transparent;
         padding: 0;
         height: min-content;
-        font-weight: 400;
+        font-weight: inherit;
+        font-size: inherit;
 
         #{$self}__content {
             white-space: normal;
