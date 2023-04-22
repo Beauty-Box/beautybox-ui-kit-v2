@@ -206,7 +206,7 @@ $input-height: $spacer * 14;
         position: relative;
         display: flex;
         flex-direction: column;
-        gap: $spacer;
+        row-gap: $spacer;
     }
 
     &__inner {
