@@ -4,24 +4,30 @@
             <div class="b-checkbox__check">
                 <input
                     :id="_id"
-                    v-model="inputValue"
                     type="checkbox"
                     class="b-checkbox"
                     :class="{ 'b-checkbox--disabled': disabled }"
+                    :value="value"
+                    :checked="isActive"
+                    @change="onChange"
                 />
-                <div v-show="!value" class="b-checkbox__custom b-checkbox__custom--off" />
-                <div
-                    v-show="value && !inputIndeterminate"
-                    class="b-checkbox__custom b-checkbox__custom--on"
-                >
-                    <b-svg name="check" fill="white" :size="10" />
-                </div>
                 <div
                     v-show="inputIndeterminate"
                     class="b-checkbox__custom b-checkbox__custom--indeterminate"
                 >
-                    <b-svg name="minus" fill="white" :size="10" />
+                    <b-svg :name="indeterminateIcon" fill="white" :size="10" />
                 </div>
+                <div
+                    v-show="isActive && !inputIndeterminate"
+                    class="b-checkbox__custom b-checkbox__custom--on"
+                >
+                    <b-svg :name="activeIcon" fill="white" :size="10" />
+                </div>
+                <div
+                    v-show="!isActive && !inputIndeterminate"
+                    class="b-checkbox__custom b-checkbox__custom--off"
+                    :class="{ 'b-checkbox__custom--error': hasError }"
+                />
             </div>
             <div v-if="'label' in $slots || !!label" class="b-checkbox__label text-3">
                 <slot name="label">
@@ -41,7 +47,7 @@
 import { defineComponent } from 'vue';
 export default defineComponent({
     model: {
-        prop: 'value',
+        prop: 'inputValue',
         event: 'change',
     },
 });
@@ -51,13 +57,15 @@ export default defineComponent({
 import { ref, Ref, watch, computed, useListeners, useSlots, nextTick } from 'vue';
 import { v4 } from 'uuid';
 import { ErrorObject } from '@vuelidate/core';
+import { deepEqual } from '@beautybox/core/helpers';
 import BSvg from '../../../icons/BSvg/index.vue';
 import { PropsColors, useColor } from '../../../../composables/ui/useColor';
 
 export interface BCheckboxProps {
     label?: string;
     id?: string;
-    value?: boolean;
+    value?: any;
+    inputValue?: any;
     name?: string;
     color?: PropsColors['color'];
     indeterminate?: boolean;
@@ -70,22 +78,23 @@ export interface BCheckboxProps {
 }
 
 interface Emits {
-    (e: 'change', value: BCheckboxProps['value']): void;
+    (e: 'change', value: BCheckboxProps['inputValue']): void;
     (e: 'update:indeterminate', value: BCheckboxProps['indeterminate']): void;
 }
 
 const props = withDefaults(defineProps<BCheckboxProps>(), {
     label: undefined,
     id: undefined,
-    value: false,
+    value: undefined,
+    inputValue: undefined,
     name: undefined,
     color: 'info',
     indeterminate: false,
     disabled: false,
     errorMessage: undefined,
     hideDetails: false,
-    activeIcon: '',
-    indeterminateIcon: '',
+    activeIcon: 'check',
+    indeterminateIcon: 'minus',
     bindLabel: true,
 });
 
@@ -104,11 +113,45 @@ const hasError = computed(
         (Array.isArray(props.errorMessage) && props.errorMessage.length)
 );
 
-const inputValue = computed({
-    get: () => props.value,
-    set: (value) => {
-        emit('change', value);
+const lazyValue = ref(props.value) as Ref<BCheckboxProps['value']>;
+
+const internalValue = computed({
+    get(): any {
+        return lazyValue.value;
     },
+    set(val: any) {
+        lazyValue.value = val;
+        emit('change', val);
+    },
+});
+
+const onChange = (eventValue: BCheckboxProps['inputValue']) => {
+    let input = props.inputValue;
+    const value = props.value;
+
+    if (Array.isArray(input)) {
+        const oldLength = input.length;
+
+        input = input.filter((item) => !deepEqual(item, value));
+
+        if (input.length === oldLength) {
+            input.push(value);
+        }
+    } else if (value) {
+        input = deepEqual(input, value) ? null : value;
+    } else {
+        input = !input;
+    }
+
+    internalValue.value = input;
+};
+
+const isActive = computed(() => {
+    const input = props.inputValue;
+    if (Array.isArray(input)) {
+        return input.some((item) => deepEqual(item, props.value));
+    }
+    return props.value ? deepEqual(props.value, input) : Boolean(input);
 });
 
 // error message
@@ -129,7 +172,6 @@ const messages = computed(() => {
 });
 
 // indeterminate
-
 const inputIndeterminate = ref(props.indeterminate) as Ref<boolean>;
 
 watch(
@@ -142,13 +184,17 @@ watch(inputIndeterminate, (val) => {
     emit('update:indeterminate', val);
 });
 
+watch(isActive, () => {
+    if (!props.indeterminate) {
+        return;
+    }
+    inputIndeterminate.value = false;
+});
+
 watch(
-    () => props.value,
-    () => {
-        if (!props.indeterminate) {
-            return;
-        }
-        inputIndeterminate.value = false;
+    () => props.inputValue,
+    (val) => {
+        lazyValue.value = val;
     }
 );
 </script>
@@ -172,7 +218,6 @@ watch(
     // блок с ошибками
     &__error {
         color: map-get($colors, 'error');
-        // padding: 0 $base-indent;
         margin-bottom: $base-indent / 2;
         min-height: 12px;
         @extend .caption-2;
@@ -202,7 +247,13 @@ watch(
         bottom: 0;
 
         &--off {
-            border: 2px solid $color-border--lighten;
+            border-width: 2px;
+            border-style: solid;
+            border-color: $color-border--lighten;
+        }
+
+        &--error {
+            border-color: map-get($colors, 'error');
         }
 
         &--on {

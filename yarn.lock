@@ -1021,14 +1021,17 @@
 
 "@beautybox/core@Beauty-Box/beautybox-base#march/vite":
   version "1.0.0"
-  resolved "https://codeload.github.com/Beauty-Box/beautybox-base/tar.gz/1a8b2e145338c3215bd3ed3a0ba75a216f96ae54"
+  resolved "https://codeload.github.com/Beauty-Box/beautybox-base/tar.gz/87975c7d0e6da07cd1bb8f8be9258c3f1d8fd5c0"
   dependencies:
     "@jest/globals" "^26.6.2"
+    "@vuelidate/core" "^2.0.1"
+    "@vuelidate/validators" "^2.0.1"
     babel-loader "^8.2.1"
     cross-env "^7.0.3"
     css-loader "^5.0.1"
     mini-css-extract-plugin "^0.11.0"
     node-fetch "^2.6.1"
+    plural-ru "^2.0.2"
     preload-webpack-plugin "3.0.0-beta.3"
     sass "^1.26.11"
     sass-loader "^10.0.5"
@@ -1040,7 +1043,6 @@
     vue-loader "^15.9.3"
     vue-socket.io "^3.0.9"
     vue-toasted "^1.1.28"
-    vuelidate "^0.7.5"
     vuetify "^2.3.17"
     vuetify-loader "^1.6.0"
     vuex "^3.6.0"
@@ -2246,7 +2248,7 @@
 
 "@types/beautybox__core@Beauty-Box/beautybox-base-types":
   version "1.0.0"
-  resolved "https://codeload.github.com/Beauty-Box/beautybox-base-types/tar.gz/b608ff556efee90068c23d8bd222046d1ca9fcd6"
+  resolved "https://codeload.github.com/Beauty-Box/beautybox-base-types/tar.gz/eee9a871f2a41c38d6b00e493254b15e2dc158a3"
 
 "@types/body-parser@*":
   version "1.19.2"
@@ -8396,6 +8398,11 @@ please-upgrade-node@^3.2.0:
   dependencies:
     semver-compare "^1.0.0"
 
+plural-ru@^2.0.2:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/plural-ru/-/plural-ru-2.0.2.tgz#5fda445d7a7f83a94020e3b81266c873a85eebb4"
+  integrity sha512-zmQv/tMG7fjF8r8JJ2U1p9dP1RgQ54RnP9nOM9dJHlcWU4mVmesKU9RgouxvyrCIU7lwOtGBYJ6cBa00UlzUZQ==
+
 polished@^4.2.2:
   version "4.2.2"
   resolved "https://registry.yarnpkg.com/polished/-/polished-4.2.2.tgz#2529bb7c3198945373c52e34618c8fe7b1aa84d1"
@@ -11155,11 +11162,6 @@ vue@^2.6.12, vue@^2.7.14:
   dependencies:
     "@vue/compiler-sfc" "2.7.14"
     csstype "^3.1.0"
-
-vuelidate@^0.7.5:
-  version "0.7.7"
-  resolved "https://registry.yarnpkg.com/vuelidate/-/vuelidate-0.7.7.tgz#5df3930a63ddecf56fde7bdacea9dbaf0c9bf899"
-  integrity sha512-pT/U2lDI67wkIqI4tum7cMSIfGcAMfB+Phtqh2ttdXURwvHRBJEAQ0tVbUsW9Upg83Q5QH59bnCoXI7A9JDGnA==
 
 vuetify-loader@^1.6.0:
   version "1.9.2"

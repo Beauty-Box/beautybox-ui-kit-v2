@@ -111,3 +111,38 @@ export const Primary: Story = {
         bindLabel: false,
     },
 };
+
+export const Array: Story = {
+    name: 'BCheckbox array',
+    render: (args, { argTypes }) => ({
+        components: { BCheckbox, BSvg },
+        props: Object.keys(argTypes),
+        data() {
+            return {
+                services: [],
+            };
+        },
+        methods: {},
+        template: `
+        <div>
+            <pre>
+                {{ services }}
+            </pre>
+            <BCheckbox v-bind="$props" v-model="services" value="Маникюр"></BCheckbox>
+            <BCheckbox v-bind="$props" v-model="services" value="Педикюр"></BCheckbox>
+            <BCheckbox v-bind="$props" v-model="services" value="Волосы"></BCheckbox>
+        </div>`,
+    }),
+    args: {
+        // value: false,
+        label: 'Согласен',
+        id: undefined,
+        name: 'checkbox',
+        color: 'info',
+        indeterminate: false,
+        disabled: false,
+        errorMessage: undefined,
+        hideDetails: false,
+        bindLabel: false,
+    },
+};
