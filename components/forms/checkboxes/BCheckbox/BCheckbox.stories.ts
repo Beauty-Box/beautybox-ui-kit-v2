@@ -71,6 +71,13 @@ const meta = {
             },
             options: [true, false],
         },
+        bindLabel: {
+            name: 'bindLabel',
+            control: {
+                type: 'select',
+            },
+            options: [true, false],
+        },
     },
 } satisfies Meta<typeof BCheckbox>;
 
@@ -83,11 +90,16 @@ export const Primary: Story = {
     render: (args, { argTypes }) => ({
         components: { BCheckbox, BSvg },
         props: Object.keys(argTypes),
+        data() {
+            return {
+                isAgree: false,
+            };
+        },
         methods: {},
-        template: '<BCheckbox v-bind="$props"></BCheckbox>',
+        template: '<BCheckbox v-bind="$props" v-model="isAgree"></BCheckbox>',
     }),
     args: {
-        value: false,
+        // value: false,
         label: 'Согласен',
         id: undefined,
         name: 'checkbox',
@@ -96,5 +108,6 @@ export const Primary: Story = {
         disabled: false,
         errorMessage: undefined,
         hideDetails: false,
+        bindLabel: false,
     },
 };
