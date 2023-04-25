@@ -15,19 +15,28 @@
                 <div
                     v-show="inputIndeterminate"
                     class="b-checkbox__custom b-checkbox__custom--indeterminate"
+                    :class="{
+                        'b-checkbox__custom--disabled': disabled,
+                    }"
                 >
                     <b-svg :name="indeterminateIcon" fill="white" :size="10" />
                 </div>
                 <div
                     v-show="isActive && !inputIndeterminate"
                     class="b-checkbox__custom b-checkbox__custom--on"
+                    :class="{
+                        'b-checkbox__custom--disabled': disabled,
+                    }"
                 >
                     <b-svg :name="activeIcon" fill="white" :size="10" />
                 </div>
                 <div
                     v-show="!isActive && !inputIndeterminate"
                     class="b-checkbox__custom b-checkbox__custom--off"
-                    :class="{ 'b-checkbox__custom--error': hasError }"
+                    :class="{
+                        'b-checkbox__custom--error': hasError,
+                        'b-checkbox__custom--disabled': disabled,
+                    }"
                 />
             </div>
             <div v-if="'label' in $slots || !!label" class="b-checkbox__label text-3">
@@ -270,6 +279,10 @@ watch(
 
         &--indeterminate {
             background-color: v-bind('colorVariant');
+        }
+
+        &--disabled {
+            opacity: 0.5;
         }
     }
     &__inner {
