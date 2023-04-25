@@ -1,5 +1,5 @@
 <template>
-    <component :is="block ? 'div' : 'span'" class="b-button--block">
+    <component :is="isBlockWrapper ? 'div' : 'span'" :class="{ 'b-button--block': isBlockWrapper }">
         <component v-bind="attrs" :is="component" :class="classes" v-on="$listeners">
             <span v-if="loading" class="b-button__loader">
                 <template v-if="!!$slots.loader">
@@ -86,6 +86,10 @@ const component = computed(() => {
     }
 
     return 'button';
+});
+
+const isBlockWrapper = computed(() => {
+    return props.block && component.value === 'button';
 });
 </script>
 
