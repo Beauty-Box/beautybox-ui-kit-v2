@@ -29,8 +29,9 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { ref, Ref, watch } from 'vue';
+import { ref, Ref, watch, computed } from 'vue';
 import { PropsColors, useColor } from '../../../composables/ui/useColor';
+import { deepEqual } from '@beautybox/core/helpers';
 
 interface RoleItemProps {
     value?: any;
@@ -56,20 +57,24 @@ const emit = defineEmits<Emits>();
 
 const { colorVariant } = useColor(() => props.borderColor);
 
-const isActive = ref(!!props.inputValue) as Ref<any>;
+// const isActive = ref(!!props.inputValue) as Ref<any>;
 
-watch(
-    () => props.inputValue,
-    (val) => {
-        isActive.value = !!val;
-    }
-);
-
-// watch(isActive, (val) => {
-//     if (!!val !== props.inputValue) {
-//         emit('input', val);
+// watch(
+//     () => props.inputValue,
+//     (val) => {
+//         isActive.value = !!val;
 //     }
-// });
+// );
+
+const isActive = computed(() => {
+    return deepEqual(props.inputValue, props.value);
+});
+
+watch(isActive, (val) => {
+    if (!!val !== props.inputValue) {
+        emit('input', val);
+    }
+});
 </script>
 
 <style scoped lang="scss">
