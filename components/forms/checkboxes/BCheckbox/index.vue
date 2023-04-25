@@ -10,6 +10,7 @@
                     :value="value"
                     :checked="isActive"
                     @change="onChange"
+                    v-on="inputListeners"
                 />
                 <div
                     v-show="inputIndeterminate"
@@ -145,6 +146,13 @@ const onChange = (eventValue: BCheckboxProps['inputValue']) => {
 
     internalValue.value = input;
 };
+
+const $listeners = useListeners();
+const inputListeners = {
+    ...$listeners,
+};
+
+delete inputListeners['change'];
 
 const isActive = computed(() => {
     const input = props.inputValue;
