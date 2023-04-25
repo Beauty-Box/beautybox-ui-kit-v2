@@ -1,5 +1,5 @@
 <template>
-    <component :is="block ? 'div' : 'span'" class="b-button__wrapper">
+    <component :is="block ? 'div' : 'span'" class="b-button--block">
         <component v-bind="attrs" :is="component" :class="classes" v-on="$listeners">
             <span v-if="loading" class="b-button__loader">
                 <template v-if="!!$slots.loader">
@@ -112,10 +112,6 @@ const component = computed(() => {
     &--is-disabled {
         cursor: default;
         pointer-events: none;
-    }
-
-    &__wrapper {
-        width: 100%;
     }
 
     &__content {
