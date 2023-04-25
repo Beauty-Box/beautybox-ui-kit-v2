@@ -1,6 +1,10 @@
 <template>
     <div class="b-radio__wrapper">
-        <div class="b-radio__inner">
+        <component
+            :is="labelComponent"
+            class="b-radio__inner"
+            :class="{ 'b-radio__inner--disabled': disabled }"
+        >
             <div class="b-radio__check">
                 <input
                     :id="_id"
@@ -33,12 +37,12 @@
             </div>
             <div v-if="'label' in $slots || !!label" class="b-radio__label text-3">
                 <slot name="label">
-                    <label v-if="!!label" :for="bindLabel && !disabled ? _id : ''">
+                    <span v-if="!!label">
                         {{ label }}
-                    </label>
+                    </span>
                 </slot>
             </div>
-        </div>
+        </component>
         <p v-if="!hideDetails" class="b-radio__error">
             {{ messages }}
         </p>
@@ -160,6 +164,14 @@ const isActive = computed(() => {
     return props.value ? deepEqual(props.value, input) : Boolean(input);
 });
 
+const labelComponent = computed(() => {
+    if (props.bindLabel && !props.disabled) {
+        return 'label';
+    } else {
+        return 'span';
+    }
+});
+
 // error message
 const messages = computed(() => {
     if (!hasError.value) {
@@ -188,11 +200,13 @@ watch(
 <style scoped lang="scss">
 @import '../../../../scss/base/typography';
 .b-radio {
+    $self: &;
     width: 100%;
     height: 100%;
     opacity: 0;
     position: relative;
     z-index: z(default);
+    cursor: pointer;
     &__wrapper {
         box-sizing: border-box;
         position: relative;
@@ -254,6 +268,15 @@ watch(
     &__inner {
         display: flex;
         align-items: flex-start;
+
+        // debug
+        label#{$self}__inner {
+            cursor: pointer;
+
+            &--disabled {
+                cursor: default;
+            }
+        }
     }
 
     &__label {
@@ -263,6 +286,7 @@ watch(
 
     &--disabled {
         pointer-events: none;
+        cursor: default;
     }
 }
 </style>

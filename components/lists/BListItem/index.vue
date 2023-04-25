@@ -67,6 +67,7 @@ const isActive = computed(() => {
     background-color: $color-bg--secondary;
     padding: $base-indent;
     display: flex;
+    align-items: center;
     column-gap: $base-indent;
     border-radius: $border-radius;
     border-width: 1px;
