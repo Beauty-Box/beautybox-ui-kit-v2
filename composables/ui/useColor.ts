@@ -1,6 +1,6 @@
 import { computed, ComputedRef, WatchSource } from 'vue';
 import { useWatchSource } from './useWatchSource';
-export const colors = ['primary', 'secondary', 'white', 'info'] as const;
+export const colors = ['primary', 'secondary', 'white', 'info', 'error'] as const;
 export type Colors = (typeof colors)[number] | `#${string}`;
 export interface PropsColors {
     color?: Colors;
