@@ -57,24 +57,9 @@ const emit = defineEmits<Emits>();
 
 const { colorVariant } = useColor(() => props.borderColor);
 
-// const isActive = ref(!!props.inputValue) as Ref<any>;
-
-// watch(
-//     () => props.inputValue,
-//     (val) => {
-//         isActive.value = !!val;
-//     }
-// );
-
 const isActive = computed(() => {
     return deepEqual(props.inputValue, props.value);
 });
-
-// watch(isActive, (val) => {
-//     if (!!val !== props.inputValue) {
-//         emit('input', val);
-//     }
-// });
 </script>
 
 <style scoped lang="scss">
