@@ -1,5 +1,5 @@
 <template>
-    <component :is="block ? 'div' : 'span'">
+    <component :is="block ? 'div' : 'span'" class="b-button__wrapper">
         <component v-bind="attrs" :is="component" :class="classes" v-on="$listeners">
             <span v-if="loading" class="b-button__loader">
                 <template v-if="!!$slots.loader">
@@ -114,6 +114,10 @@ const component = computed(() => {
         pointer-events: none;
     }
 
+    &__wrapper {
+        width: 100%;
+    }
+
     &__content {
         color: inherit;
         font-size: inherit;
@@ -192,6 +196,7 @@ const component = computed(() => {
         height: min-content;
         font-weight: inherit;
         font-size: inherit;
+        min-width: unset;
 
         #{$self}__content {
             white-space: normal;
