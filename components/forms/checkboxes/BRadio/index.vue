@@ -1,12 +1,12 @@
 <template>
-    <div class="b-checkbox__wrapper">
-        <div class="b-checkbox__inner">
-            <div class="b-checkbox__check">
+    <div class="b-radio__wrapper">
+        <div class="b-radio__inner">
+            <div class="b-radio__check">
                 <input
                     :id="_id"
-                    type="checkbox"
-                    class="b-checkbox"
-                    :class="{ 'b-checkbox--disabled': disabled }"
+                    type="radio"
+                    class="b-radio"
+                    :class="{ 'b-radio--disabled': disabled }"
                     :value="value"
                     :name="name"
                     :checked="isActive"
@@ -14,33 +14,24 @@
                     v-on="inputListeners"
                 />
                 <div
-                    v-show="inputIndeterminate"
-                    class="b-checkbox__custom b-checkbox__custom--indeterminate"
+                    v-show="isActive"
+                    class="b-radio__custom b-radio__custom--on"
                     :class="{
-                        'b-checkbox__custom--disabled': disabled,
+                        'b-radio__custom--disabled': disabled,
                     }"
                 >
-                    <b-svg :name="indeterminateIcon" fill="white" :size="10" />
+                    <b-svg :name="activeIcon" :fill="color" :size="16" />
                 </div>
                 <div
-                    v-show="isActive && !inputIndeterminate"
-                    class="b-checkbox__custom b-checkbox__custom--on"
+                    v-show="!isActive"
+                    class="b-radio__custom b-radio__custom--off"
                     :class="{
-                        'b-checkbox__custom--disabled': disabled,
-                    }"
-                >
-                    <b-svg :name="activeIcon" fill="white" :size="10" />
-                </div>
-                <div
-                    v-show="!isActive && !inputIndeterminate"
-                    class="b-checkbox__custom b-checkbox__custom--off"
-                    :class="{
-                        'b-checkbox__custom--error': hasError,
-                        'b-checkbox__custom--disabled': disabled,
+                        'b-radio__custom--error': hasError,
+                        'b-radio__custom--disabled': disabled,
                     }"
                 />
             </div>
-            <div v-if="'label' in $slots || !!label" class="b-checkbox__label text-3">
+            <div v-if="'label' in $slots || !!label" class="b-radio__label text-3">
                 <slot name="label">
                     <label v-if="!!label" :for="bindLabel && !disabled ? _id : ''">
                         {{ label }}
@@ -48,7 +39,7 @@
                 </slot>
             </div>
         </div>
-        <div v-if="!hideDetails" class="b-checkbox__error">
+        <div v-if="!hideDetails" class="b-radio__error">
             {{ messages }}
         </div>
     </div>
@@ -65,7 +56,7 @@ export default defineComponent({
 </script>
 
 <script setup lang="ts">
-import { ref, Ref, watch, computed, useListeners, useSlots, nextTick } from 'vue';
+import { ref, Ref, watch, computed, useListeners, useSlots } from 'vue';
 import { v4 } from 'uuid';
 import { ErrorObject } from '@vuelidate/core';
 import { deepEqual } from '@beautybox/core/helpers';
@@ -79,18 +70,15 @@ export interface BCheckboxProps {
     inputValue?: any;
     name?: string;
     color?: PropsColors['color'];
-    indeterminate?: boolean;
     disabled?: boolean;
     errorMessage?: string | ErrorObject[];
     hideDetails?: boolean;
     activeIcon?: string;
-    indeterminateIcon?: string;
     bindLabel?: boolean;
 }
 
 interface Emits {
     (e: 'change', value: BCheckboxProps['inputValue']): void;
-    (e: 'update:indeterminate', value: BCheckboxProps['indeterminate']): void;
 }
 
 const props = withDefaults(defineProps<BCheckboxProps>(), {
@@ -104,7 +92,7 @@ const props = withDefaults(defineProps<BCheckboxProps>(), {
     disabled: false,
     errorMessage: undefined,
     hideDetails: false,
-    activeIcon: 'check',
+    activeIcon: 'radio-circle',
     indeterminateIcon: 'minus',
     bindLabel: true,
 });
@@ -189,26 +177,6 @@ const messages = computed(() => {
     return '';
 });
 
-// indeterminate
-const inputIndeterminate = ref(props.indeterminate) as Ref<boolean>;
-
-watch(
-    () => props.indeterminate,
-    (val) => {
-        nextTick(() => (inputIndeterminate.value = val));
-    }
-);
-watch(inputIndeterminate, (val) => {
-    emit('update:indeterminate', val);
-});
-
-watch(isActive, () => {
-    if (!props.indeterminate) {
-        return;
-    }
-    inputIndeterminate.value = false;
-});
-
 watch(
     () => props.inputValue,
     (val) => {
@@ -219,7 +187,7 @@ watch(
 
 <style scoped lang="scss">
 @import '../../../../scss/base/typography';
-.b-checkbox {
+.b-radio {
     width: 100%;
     height: 100%;
     opacity: 0;
@@ -257,6 +225,7 @@ watch(
         display: flex;
         justify-content: center;
         align-items: center;
+        border-radius: 50%;
 
         position: absolute;
         top: 0;
@@ -275,11 +244,7 @@ watch(
         }
 
         &--on {
-            background-color: v-bind('colorVariant');
-        }
-
-        &--indeterminate {
-            background-color: v-bind('colorVariant');
+            // border-color: v-bind('colorVariant');
         }
 
         &--disabled {
