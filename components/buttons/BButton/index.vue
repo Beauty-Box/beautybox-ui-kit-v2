@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <component :is="block ? 'div' : 'span'">
         <component v-bind="attrs" :is="component" :class="classes" v-on="$listeners">
             <span v-if="loading" class="b-button__loader">
                 <template v-if="!!$slots.loader">
@@ -11,7 +11,7 @@
                 <slot />
             </span>
         </component>
-    </span>
+    </component>
 </template>
 
 <script setup lang="ts">
