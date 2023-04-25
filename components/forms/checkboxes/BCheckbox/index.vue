@@ -48,9 +48,9 @@
                 </slot>
             </div>
         </div>
-        <div v-if="!hideDetails" class="b-checkbox__error">
+        <p v-if="!hideDetails" class="b-checkbox__error">
             {{ messages }}
-        </div>
+        </p>
     </div>
 </template>
 

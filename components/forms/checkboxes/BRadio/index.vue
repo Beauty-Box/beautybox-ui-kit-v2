@@ -39,9 +39,9 @@
                 </slot>
             </div>
         </div>
-        <div v-if="!hideDetails" class="b-radio__error">
+        <p v-if="!hideDetails" class="b-radio__error">
             {{ messages }}
-        </div>
+        </p>
     </div>
 </template>
 
