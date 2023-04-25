@@ -70,11 +70,11 @@ const isActive = computed(() => {
     return deepEqual(props.inputValue, props.value);
 });
 
-watch(isActive, (val) => {
-    if (!!val !== props.inputValue) {
-        emit('input', val);
-    }
-});
+// watch(isActive, (val) => {
+//     if (!!val !== props.inputValue) {
+//         emit('input', val);
+//     }
+// });
 </script>
 
 <style scoped lang="scss">
