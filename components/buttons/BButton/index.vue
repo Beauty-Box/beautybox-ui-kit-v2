@@ -1,15 +1,17 @@
 <template>
-    <component v-bind="attrs" :is="component" :class="classes">
-        <span v-if="loading" class="b-button__loader">
-            <template v-if="!!$slots.loader">
-                <slot name="loader" />
-            </template>
-            <b-loader v-else indeterminate :size="20" :width="2" color="inherit" />
-        </span>
-        <span class="b-button__content">
-            <slot />
-        </span>
-    </component>
+    <span>
+        <component v-bind="attrs" :is="component" :class="classes" v-on="$listeners">
+            <span v-if="loading" class="b-button__loader">
+                <template v-if="!!$slots.loader">
+                    <slot name="loader" />
+                </template>
+                <b-loader v-else indeterminate :size="20" :width="2" color="inherit" />
+            </span>
+            <span class="b-button__content">
+                <slot />
+            </span>
+        </component>
+    </span>
 </template>
 
 <script setup lang="ts">
