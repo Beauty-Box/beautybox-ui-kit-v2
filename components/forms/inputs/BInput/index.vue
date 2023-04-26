@@ -75,9 +75,9 @@
                 </slot>
             </span>
         </div>
-        <div v-if="!hideDetails" class="b-input__error">
+        <p v-if="!hideDetails" class="b-input__error">
             {{ messages }}
-        </div>
+        </p>
     </div>
 </template>
 

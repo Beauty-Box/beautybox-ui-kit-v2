@@ -2,7 +2,11 @@
     <component
         :is="tag"
         class="b-list-item"
-        :class="{ 'b-list-item--active': isActive, 'b-list-item--disabled': disabled }"
+        :class="{
+            'b-list-item--active': isActive,
+            'b-list-item--error': error,
+            'b-list-item--disabled': disabled,
+        }"
         v-bind="$attrs"
         v-on="$listeners"
     >
@@ -39,6 +43,7 @@ interface RoleItemProps {
     tag?: string;
     borderColor?: PropsColors['color'];
     disabled?: boolean;
+    error?: boolean;
 }
 
 const props = withDefaults(defineProps<RoleItemProps>(), {
@@ -47,6 +52,7 @@ const props = withDefaults(defineProps<RoleItemProps>(), {
     tag: 'li',
     borderColor: 'info',
     disabled: false,
+    error: false,
 });
 
 interface Emits {
@@ -89,6 +95,9 @@ const isActive = computed(() => {
 
     &--active {
         border-color: v-bind('colorVariant');
+    }
+    &--error {
+        border-color: map-get($colors, 'error');
     }
 
     &--disabled {
