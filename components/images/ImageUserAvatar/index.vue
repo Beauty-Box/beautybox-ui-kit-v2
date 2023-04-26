@@ -16,7 +16,7 @@
         <span v-else-if="name" class="c-avatar__letter" :style="{ '--size': size + 'rem' }">
             {{ initials }}
         </span>
-        <b-svg v-else name="avatar-empty" :size="size" />
+        <b-svg v-else name="avatar-empty" :size="size" class="c-avatar__empty" />
     </b-avatar>
 </template>
 
@@ -96,6 +96,9 @@ const initials = computed(() => {
         color: v-bind('colorVariantLetter');
     }
 
+    &__empty {
+        line-height: 0;
+    }
     &--square {
         border-radius: 8px;
     }
