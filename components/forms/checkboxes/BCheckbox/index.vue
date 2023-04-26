@@ -1,6 +1,6 @@
 <template>
     <div class="b-checkbox__wrapper">
-        <div class="b-checkbox__inner">
+        <component :is="labelComponent" class="b-checkbox__inner">
             <div class="b-checkbox__check">
                 <input
                     :id="_id"
@@ -42,12 +42,12 @@
             </div>
             <div v-if="'label' in $slots || !!label" class="b-checkbox__label text-3">
                 <slot name="label">
-                    <label v-if="!!label" :for="bindLabel && !disabled ? _id : ''">
+                    <span v-if="!!label" :for="bindLabel && !disabled ? _id : ''">
                         {{ label }}
-                    </label>
+                    </span>
                 </slot>
             </div>
-        </div>
+        </component>
         <p v-if="!hideDetails" class="b-checkbox__error">
             {{ messages }}
         </p>
@@ -172,6 +172,14 @@ const isActive = computed(() => {
     return props.value ? deepEqual(props.value, input) : Boolean(input);
 });
 
+const labelComponent = computed(() => {
+    if (props.bindLabel && !props.disabled) {
+        return 'label';
+    } else {
+        return 'div';
+    }
+});
+
 // error message
 const messages = computed(() => {
     if (!hasError.value) {
@@ -231,6 +239,16 @@ watch(
         display: flex;
         flex-direction: column;
         row-gap: $spacer;
+
+        & > {
+            label {
+                cursor: pointer;
+            }
+
+            span {
+                cursor: default;
+            }
+        }
     }
 
     // блок с ошибками

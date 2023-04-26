@@ -1,10 +1,6 @@
 <template>
     <div class="b-radio__wrapper">
-        <component
-            :is="labelComponent"
-            class="b-radio__inner"
-            :class="{ 'b-radio__inner--disabled': disabled }"
-        >
+        <component :is="labelComponent" class="b-radio__inner">
             <div class="b-radio__check">
                 <input
                     :id="_id"
@@ -168,7 +164,7 @@ const labelComponent = computed(() => {
     if (props.bindLabel && !props.disabled) {
         return 'label';
     } else {
-        return 'span';
+        return 'div';
     }
 });
 
@@ -213,6 +209,16 @@ watch(
         display: flex;
         flex-direction: column;
         row-gap: $spacer;
+
+        & > {
+            label {
+                cursor: pointer;
+            }
+
+            span {
+                cursor: default;
+            }
+        }
     }
 
     // блок с ошибками
@@ -268,15 +274,6 @@ watch(
     &__inner {
         display: flex;
         align-items: flex-start;
-
-        // debug
-        label#{$self}__inner {
-            cursor: pointer;
-
-            &--disabled {
-                cursor: default;
-            }
-        }
     }
 
     &__label {
