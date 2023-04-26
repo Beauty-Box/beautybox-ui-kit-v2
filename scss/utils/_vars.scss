@@ -32,6 +32,7 @@ $color-gray: #a4adba;
 $color-white: #fff;
 
 $alpha-channel: 0.25;
+$alpha-channel-low: 0.1;
 
 $colors: (
     'primary': $color-primary,
@@ -53,6 +54,16 @@ $colors-alpha: (
     'error-alpha': rgba($color-error, $alpha-channel),
     'gray-alpha': rgba($color-gray, $alpha-channel),
     'white-alpha': rgba($color-white, $alpha-channel),
+);
+$colors-alpha-low: (
+    'primary-alpha-low': rgba($color-primary, $alpha-channel-low),
+    'secondary-alpha-low': rgba($color-secondary, $alpha-channel-low),
+    'info-alpha-low': rgba($color-info, $alpha-channel-low),
+    'anchor-alpha-low': rgba($color-anchor, $alpha-channel-low),
+    'success-alpha-low': rgba($color-success, $alpha-channel-low),
+    'error-alpha-low': rgba($color-error, $alpha-channel-low),
+    'gray-alpha-low': rgba($color-gray, $alpha-channel-low),
+    'white-alpha-low': rgba($color-white, $alpha-channel-low),
 );
 
 // Text colors

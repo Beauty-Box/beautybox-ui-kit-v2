@@ -9,6 +9,7 @@ export interface PropsColors {
 type UseColor = (source: WatchSource<Colors | 'inherit' | undefined>) => {
     colorVariant: ComputedRef<string>;
     colorVariantAlpha: ComputedRef<string>;
+    colorVariantAlphaLow: ComputedRef<string>;
     isDefaultColor: ComputedRef<boolean>;
     isHexColor: ComputedRef<boolean>;
 };
@@ -62,5 +63,19 @@ export const useColor: UseColor = (source) => {
         return 'var(--primary-alpha)';
     });
 
-    return { isDefaultColor, isHexColor, colorVariant, colorVariantAlpha };
+    const colorVariantAlphaLow = computed(() => {
+        if (isInherit.value) {
+            return 'inherit';
+        }
+        if (isDefaultColor.value) {
+            return `var(--${color.value}-alpha-low)`;
+        }
+        if (isHexColor.value) {
+            // 1A - в шестнадцатеричной системе 10 % прозрачности цвета
+            return color.value + '1A';
+        }
+        return 'var(--primary-alpha-low)';
+    });
+
+    return { isDefaultColor, isHexColor, colorVariant, colorVariantAlpha, colorVariantAlphaLow };
 };
