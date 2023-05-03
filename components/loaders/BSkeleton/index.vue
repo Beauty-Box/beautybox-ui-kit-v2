@@ -7,8 +7,8 @@ import { computed } from 'vue';
 import { isNumber } from '@beautybox/core/helpers';
 
 interface SkeletonProps {
-    width: string | number;
-    height: string | number;
+    width?: string | number;
+    height?: string | number;
     tag?: string;
 }
 
