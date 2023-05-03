@@ -1,5 +1,5 @@
 <template>
-    <div class="b-skeleton" :style="styles" />
+    <component :is="tag" class="b-skeleton" :style="styles" />
 </template>
 
 <script setup lang="ts">
@@ -9,11 +9,13 @@ import { isNumber } from '@beautybox/core/helpers';
 interface SkeletonProps {
     width: string | number;
     height: string | number;
+    tag?: string;
 }
 
 const props = withDefaults(defineProps<SkeletonProps>(), {
     width: '100%',
     height: 'auto',
+    tag: 'div',
 });
 
 const calculatedWidth = computed(() => {
