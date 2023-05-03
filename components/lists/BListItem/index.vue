@@ -10,13 +10,13 @@
         v-bind="$attrs"
         v-on="$listeners"
     >
-        <div class="b-list-item__avatar">
+        <div v-if="'avatar' in $scopedSlots" class="b-list-item__avatar">
             <slot name="avatar" v-bind="{ isActive }" />
         </div>
         <div class="b-list-item__body">
             <slot v-bind="{ isActive }" />
         </div>
-        <div class="b-list-item__actions">
+        <div v-if="'actions' in $scopedSlots" class="b-list-item__actions">
             <slot name="actions" v-bind="{ isActive }" />
         </div>
     </component>
