@@ -76,7 +76,7 @@ const isActive = computed(() => {
     align-items: center;
     column-gap: $base-indent;
     border-radius: $border-radius;
-    border-width: 1px;
+    border-width: 1.5px;
     border-style: solid;
     border-color: $color-bg--secondary;
     cursor: pointer;
