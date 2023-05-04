@@ -3,6 +3,7 @@
         <div class="c-security-code__inner">
             <label v-for="n in securityCodeLength" :key="n" class="c-security-code__field">
                 <input
+                    ref="digit"
                     v-model="securityCode[n - 1]"
                     :style="{ '--bg': bg }"
                     :type="type"
@@ -72,6 +73,7 @@ export default {
         if (this.value !== 0) {
             this.securityCode = this.value.toString().substr(0, this.securityCodeLength).split('');
         }
+        this.focusFirstDigit();
     },
     setup(props, { emit }) {
         const hasError = computed(
@@ -102,6 +104,12 @@ export default {
         };
     },
     methods: {
+        focusFirstDigit() {
+            const digits = this.$refs.digit;
+            if (this.securityCodeLength > 0) {
+                digits[0].focus();
+            }
+        },
         inputEvent(event) {
             const value = event.target.value;
 
