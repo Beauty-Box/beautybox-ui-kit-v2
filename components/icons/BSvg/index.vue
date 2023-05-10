@@ -35,9 +35,6 @@ const classes = computed(() => {
 
 const { colorVariant } = useColor(() => props.fill);
 
-// const modules: Record<string, AsyncComponentLoader> = import.meta.glob(
-//     '../../../assets/icons/*.svg'
-// );
 const modules: Record<string, AsyncComponentLoader> = import.meta.glob('@svg-path/*.svg');
 const component = computed(() => {
     const icon = modules[`/${ICON_PATH}/${props.name}.svg`];
