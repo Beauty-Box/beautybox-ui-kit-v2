@@ -15,3 +15,5 @@ export const vitePluginSvgPath = ({ path }: { path: string }) => {
         }),
     } as PluginOption;
 };
+
+export default vitePluginSvgPath;
