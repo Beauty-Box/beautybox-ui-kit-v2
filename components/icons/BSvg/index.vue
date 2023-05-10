@@ -16,6 +16,8 @@ import type { AsyncComponentLoader } from 'vue/types/v3-define-async-component';
 import { isNumber } from '@beautybox/core/helpers';
 import { PropsColors, useColor } from '../../../composables/ui/useColor';
 
+const ICON_PATH = import.meta.env.VITE_ICON_PATH;
+
 interface BSvgProps {
     fill?: PropsColors['color'];
     name: string;
@@ -33,11 +35,12 @@ const classes = computed(() => {
 
 const { colorVariant } = useColor(() => props.fill);
 
-const modules: Record<string, AsyncComponentLoader> = import.meta.glob(
-    '../../../assets/icons/*.svg'
-);
+// const modules: Record<string, AsyncComponentLoader> = import.meta.glob(
+//     '../../../assets/icons/*.svg'
+// );
+const modules: Record<string, AsyncComponentLoader> = import.meta.glob('@svg-path/*.svg');
 const component = computed(() => {
-    const icon = modules[`../../../assets/icons/${props.name}.svg`];
+    const icon = modules[`/${ICON_PATH}/${props.name}.svg`];
     return defineAsyncComponent(icon);
     // загрузка иконок и vue template compiler
     // @see https://github.com/jpkleemans/vite-svg-loader/issues/76
