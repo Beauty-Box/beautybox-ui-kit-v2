@@ -27,8 +27,9 @@
     },
     "include": [
         "./**/*.ts",
+        "./**/*.mts",
         "./**/*.tsx",
-        "./**/*.vue",
+        "./**/*.vue", 
     ],
     "exclude": [
         "node_modules"
