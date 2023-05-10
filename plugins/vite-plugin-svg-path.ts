@@ -1,4 +1,4 @@
-import { PluginOption } from 'vite';
+import type { PluginOption } from 'vite';
 
 export const vitePluginSvgPath = ({ path }: { path: string }) => {
     return {
