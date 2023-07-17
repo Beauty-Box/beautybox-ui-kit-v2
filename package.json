@@ -31,7 +31,7 @@
     ]
   },
   "dependencies": {
-    "@beautybox/core": "Beauty-Box/beautybox-base#march/vite",
+    "@beautybox/core": "Beauty-Box/beautybox-base",
     "uuid": "^9.0.0",
     "@vuelidate/core": "^2.0.1",
     "@vuelidate/validators": "^2.0.1",
