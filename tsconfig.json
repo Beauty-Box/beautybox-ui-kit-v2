@@ -1,7 +1,7 @@
 {
     "compilerOptions": {
         "allowJs": true,
-        "target": "es5",
+        "target": "ESNext",
         "module": "esnext",
         // this enables stricter inference for data properties on `this`
         "strict": true,

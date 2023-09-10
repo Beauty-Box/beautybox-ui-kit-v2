@@ -1,5 +1,4 @@
-import { VNodeDirective } from 'vue/types/vnode';
-import { VNode } from 'vue';
+import { VNode, VNodeDirective } from 'vue-demi';
 
 type ObserveHandler = (
     entries: IntersectionObserverEntry[],
@@ -68,9 +67,11 @@ function unbind(el: HTMLElement, binding: ObserveVNodeDirective, vnode: VNode) {
     delete el._observe![vnode.context!._uid];
 }
 
-export const Intersect = {
+const Intersect = {
     inserted,
     unbind,
 };
+
+export { Intersect };
 
 export default Intersect;
