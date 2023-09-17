@@ -28,7 +28,7 @@
                     <span
                         v-if="prependIcon"
                         class="b-input__icon"
-                        v-on="!disabled && listeners['prepend']"
+                        v-bind="!disabled && listeners['prepend']"
                     >
                         <b-svg :name="prependIcon" :size="22" :fill="prependIconFill" />
                     </span>
@@ -46,13 +46,12 @@
                     :type="type"
                     :autocomplete="autocomplete"
                     class="b-input"
-                    v-bind="$attrs"
+                    v-bind="{ ...$attrs, ...listeners['content'] }"
                     :class="{
                         'b-input--error': hasError,
                         'b-input--raised': isLabelRaised,
                         'b-input--lowered': isLabelExists,
                     }"
-                    v-on="listeners['content']"
                 />
                 <label
                     v-if="isLabelExists"
@@ -72,7 +71,7 @@
                     <span
                         v-if="appendIcon"
                         class="b-input__icon"
-                        v-on="!disabled && listeners['append']"
+                        v-bind="!disabled && listeners['append']"
                     >
                         <b-svg :name="appendIcon" :size="22" :fill="appendIconFill" />
                     </span>
