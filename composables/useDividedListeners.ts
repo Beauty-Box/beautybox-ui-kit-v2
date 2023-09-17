@@ -1,7 +1,7 @@
 import { computed, useAttrs, isVue2, getCurrentInstance } from 'vue-demi';
 
 export function useDividedListeners() {
-    let $listeners: Record<string, any> = {};
+    let $listeners = {};
     if (isVue2) {
         const instance = getCurrentInstance();
         // @ts-nocheck
