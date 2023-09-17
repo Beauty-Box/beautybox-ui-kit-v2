@@ -39,7 +39,7 @@
                 <!-- v-model="inputValue" -->
                 <input
                     :id="_id"
-                    :value="value"
+                    :value="modelValue"
                     :disabled="disabled"
                     :placeholder="placeholder"
                     :name="name"
@@ -96,7 +96,7 @@ import { useDividedListeners } from '../../../../composables/useDividedListeners
 export interface BInputProps {
     label?: string;
     id?: string;
-    value?: string | number | null;
+    modelValue?: string | number | null;
     name?: string;
     placeholder?: string;
     disabled?: boolean;
@@ -110,16 +110,16 @@ export interface BInputProps {
     appendIconFill?: PropsColors['color'];
 }
 
-// interface Emits {
-//     (e: 'input', value: BInputProps['value']): void;
-//     (e: 'click:prepend'): void;
-//     (e: 'click:append'): void;
-// }
+//interface Emits {
+//  (e: 'update:modelValue', value: BInputProps['modelValue']): void;
+// (e: 'click:prepend'): void;
+// (e: 'click:append'): void;
+//}
 
 const props = withDefaults(defineProps<BInputProps>(), {
     label: undefined,
     id: undefined,
-    value: null,
+    modelValue: null,
     name: undefined,
     placeholder: undefined,
     disabled: false,
@@ -140,7 +140,7 @@ const _id = computed(() => {
     return typeof props.id === 'undefined' ? v4() : props.id;
 });
 
-const isLabelRaised = computed(() => Boolean(props.value));
+const isLabelRaised = computed(() => Boolean(props.modelValue));
 const isLabelExists = computed(() => typeof props.label !== 'undefined');
 
 const hasError = computed(
@@ -177,7 +177,7 @@ const { listeners } = useDividedListeners();
 console.log('listeners', listeners);
 const attrs = useAttrs();
 const inputAttrs = computed(() => {
-    return { ...attrs, ...listeners.value['content'] };
+    return { ...listeners.value['content'] };
 });
 console.log('inputAttrs', inputAttrs);
 const slots = useSlots();
