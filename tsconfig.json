@@ -23,17 +23,18 @@
             "dom",
             "dom.iterable",
             "scripthost"
-        ]
+        ],
+        "skipLibCheck": true
     },
     "include": [
         "./**/*.ts",
         "./**/*.tsx",
-        "./**/*.vue", 
+        "./**/*.vue"
     ],
     "exclude": [
         "node_modules"
     ],
     "files": [
-        "./shims-vue.d.ts",
+        "./shims-vue.d.ts"
     ]
 }
