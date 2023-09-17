@@ -1,7 +1,7 @@
 import { computed, useAttrs, isVue2, getCurrentInstance } from 'vue-demi';
 
 export function useDividedListeners() {
-    let $listeners: Record<string, any>;
+    let $listeners: Record<string, any> | unknown = {};
     if (isVue2) {
         const instance = getCurrentInstance();
         ({ $listeners = {} as Record<string, any> } = instance?.proxy ?? {
@@ -17,7 +17,7 @@ export function useDividedListeners() {
     }
 
     const listeners = computed(() => {
-        return Object.keys($listeners).reduce<{
+        return Object.keys($listeners as Record<string, any>).reduce<{
             prepend: Record<string, any>;
             append: Record<string, any>;
             content: Record<string, any>;
