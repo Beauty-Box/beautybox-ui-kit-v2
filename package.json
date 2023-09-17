@@ -40,12 +40,12 @@
     "vuex": "^3.6.2",
     "vue-demi": "^0.14.6",
     "@vueuse/core": "^10.4.1",
-    "@vueuse/components": "^10.4.1"
+    "@vueuse/components": "^10.4.1",
+    "@types/beautybox__core": "Beauty-Box/beautybox-base-types",
+    "@types/uuid": "^9.0.1"
   },
   "devDependencies": {
     "vue": "^2.7.14",
-    "@types/beautybox__core": "Beauty-Box/beautybox-base-types",
-    "@types/uuid": "^9.0.1",
     "@storybook/addon-docs": "^7.0.4",
     "@storybook/addon-essentials": "^7.0.4",
     "@storybook/addon-jest": "^7.0.4",
