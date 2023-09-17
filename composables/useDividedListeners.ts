@@ -3,7 +3,8 @@ import { computed, useAttrs, isVue2, getCurrentInstance } from 'vue-demi';
 export function useDividedListeners() {
     let $listeners: Record<string, any>;
     if (isVue2) {
-        ({ $listeners } = getCurrentInstance().proxy);
+        const instance = getCurrentInstance();
+        ({ $listeners = {} } = instance?.proxy ?? {});
     } else {
         const $attrs = useAttrs();
         $listeners = Object.fromEntries(
