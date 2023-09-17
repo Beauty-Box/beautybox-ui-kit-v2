@@ -36,10 +36,9 @@
                 </slot>
             </span>
             <div class="b-input__textfield">
-                <!-- v-model="inputValue" -->
                 <input
                     :id="_id"
-                    :value="modelValue"
+                    v-model="inputValue"
                     :disabled="disabled"
                     :placeholder="placeholder"
                     :name="name"
@@ -110,11 +109,11 @@ export interface BInputProps {
     appendIconFill?: PropsColors['color'];
 }
 
-//interface Emits {
-//  (e: 'update:modelValue', value: BInputProps['modelValue']): void;
-// (e: 'click:prepend'): void;
-// (e: 'click:append'): void;
-//}
+interface Emits {
+    (e: 'update:modelValue', value: BInputProps['modelValue']): void;
+    // (e: 'click:prepend'): void;
+    // (e: 'click:append'): void;
+}
 
 const props = withDefaults(defineProps<BInputProps>(), {
     label: undefined,
@@ -133,7 +132,7 @@ const props = withDefaults(defineProps<BInputProps>(), {
     appendIconFill: 'secondary',
 });
 
-// const emit = defineEmits<Emits>();
+const emit = defineEmits<Emits>();
 
 // input and label control
 const _id = computed(() => {
@@ -149,10 +148,10 @@ const hasError = computed(
         (Array.isArray(props.errorMessage) && props.errorMessage.length)
 );
 
-// const inputValue = computed({
-//     get: () => props.value,
-//     set: (value) => emit('input', value),
-// });
+const inputValue = computed({
+    get: () => props.modelValue,
+    set: (value) => emit('update:modelValue', value),
+});
 
 // prepend and append icons slots
 // const onClickPrepend = () => {
@@ -173,15 +172,14 @@ const hasError = computed(
 // delete inputListeners['input'];
 // delete inputListeners['click:prepend'];
 // delete inputListeners['click:append'];
+
 const { listeners } = useDividedListeners();
-console.log('listeners', listeners);
 const attrs = useAttrs();
 const inputAttrs = computed(() => {
-    return { ...listeners.value['content'] };
+    return { ...attrs, ...listeners.value['content'] };
 });
-console.log('inputAttrs', inputAttrs);
 const slots = useSlots();
-console.log('slots', slots);
+
 // error message
 const messages = computed(() => {
     if (!hasError.value) {
