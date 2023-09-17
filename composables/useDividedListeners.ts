@@ -4,7 +4,7 @@ export function useDividedListeners() {
     let $listeners: Record<string, any>;
     if (isVue2) {
         const instance = getCurrentInstance();
-        ({ $listeners = {} } = instance?.proxy ?? {});
+        ({ $listeners = {} } = instance?.proxy ?? { $listeners: {} });
     } else {
         const $attrs = useAttrs();
         $listeners = Object.fromEntries(
