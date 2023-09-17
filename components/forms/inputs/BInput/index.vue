@@ -46,7 +46,7 @@
                     :type="type"
                     :autocomplete="autocomplete"
                     class="b-input"
-                    v-bind="{ ...$attrs, ...listeners['content'] }"
+                    v-bind="inputAttrs"
                     :class="{
                         'b-input--error': hasError,
                         'b-input--raised': isLabelRaised,
@@ -86,7 +86,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useSlots } from 'vue-demi';
+import { computed, useSlots, useAttrs } from 'vue-demi';
 import { v4 } from 'uuid';
 import { ErrorObject } from '@vuelidate/core';
 import BSvg from '../../../icons/BSvg/index.vue';
@@ -175,6 +175,11 @@ const hasError = computed(
 // delete inputListeners['click:append'];
 const { listeners } = useDividedListeners();
 console.log('listeners', listeners);
+const attrs = useAttrs();
+const inputAttrs = computed(() => {
+    return { ...attrs, ...listeners.value['content'] };
+});
+console.log('inputAttrs', inputAttrs);
 const slots = useSlots();
 console.log('slots', slots);
 // error message
