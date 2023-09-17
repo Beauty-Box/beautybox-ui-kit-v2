@@ -20,23 +20,26 @@
                 }, { 'append': {}, 'input': {}, 'prepend': {}, });
                  -->
             <span
-                v-if="'prepend' in $scopedSlots || !!prependIcon"
+                v-if="'prepend' in slots || !!prependIcon"
                 class="b-input__prepend"
                 :class="{ 'b-input__prepend--clickable': !disabled }"
             >
                 <slot name="prepend" v-bind="{ disabled }">
-                    <b-svg
-                        :name="prependIcon"
-                        :size="22"
-                        :fill="prependIconFill"
-                        @click.native="onClickPrepend"
-                    />
+                    <span
+                        v-if="prependIcon"
+                        class="b-input__icon"
+                        v-on="!disabled && listeners['prepend']"
+                    >
+                        <b-svg :name="prependIcon" :size="22" :fill="prependIconFill" />
+                    </span>
+                    <!--  @click.native="onClickPrepend" -->
                 </slot>
             </span>
             <div class="b-input__textfield">
+                <!-- v-model="inputValue" -->
                 <input
                     :id="_id"
-                    v-model="inputValue"
+                    :value="value"
                     :disabled="disabled"
                     :placeholder="placeholder"
                     :name="name"
@@ -49,7 +52,7 @@
                         'b-input--raised': isLabelRaised,
                         'b-input--lowered': isLabelExists,
                     }"
-                    v-on="inputListeners"
+                    v-on="listeners['content']"
                 />
                 <label
                     v-if="isLabelExists"
@@ -61,17 +64,19 @@
                 </label>
             </div>
             <span
-                v-if="'append' in $scopedSlots || !!appendIcon"
+                v-if="'append' in slots || !!appendIcon"
                 class="b-input__append"
                 :class="{ 'b-input__append--clickable': !disabled }"
             >
                 <slot name="append" v-bind="{ disabled }">
-                    <b-svg
-                        :name="appendIcon"
-                        :size="22"
-                        :fill="appendIconFill"
-                        @click.native="onClickAppend"
-                    />
+                    <span
+                        v-if="appendIcon"
+                        class="b-input__icon"
+                        v-on="!disabled && listeners['append']"
+                    >
+                        <b-svg :name="appendIcon" :size="22" :fill="appendIconFill" />
+                    </span>
+                    <!-- @click.native="onClickAppend" -->
                 </slot>
             </span>
         </div>
@@ -82,11 +87,12 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useListeners } from 'vue';
+import { computed, useSlots } from 'vue-demi';
 import { v4 } from 'uuid';
 import { ErrorObject } from '@vuelidate/core';
 import BSvg from '../../../icons/BSvg/index.vue';
 import { PropsColors } from '../../../../composables/ui/useColor';
+import { useDividedListeners } from '../../../../composables/useDividedListeners';
 
 export interface BInputProps {
     label?: string;
@@ -105,11 +111,11 @@ export interface BInputProps {
     appendIconFill?: PropsColors['color'];
 }
 
-interface Emits {
-    (e: 'input', value: BInputProps['value']): void;
-    (e: 'click:prepend'): void;
-    (e: 'click:append'): void;
-}
+// interface Emits {
+//     (e: 'input', value: BInputProps['value']): void;
+//     (e: 'click:prepend'): void;
+//     (e: 'click:append'): void;
+// }
 
 const props = withDefaults(defineProps<BInputProps>(), {
     label: undefined,
@@ -128,7 +134,7 @@ const props = withDefaults(defineProps<BInputProps>(), {
     appendIconFill: 'secondary',
 });
 
-const emit = defineEmits<Emits>();
+// const emit = defineEmits<Emits>();
 
 // input and label control
 const _id = computed(() => {
@@ -144,31 +150,34 @@ const hasError = computed(
         (Array.isArray(props.errorMessage) && props.errorMessage.length)
 );
 
-const inputValue = computed({
-    get: () => props.value,
-    set: (value) => emit('input', value),
-});
+// const inputValue = computed({
+//     get: () => props.value,
+//     set: (value) => emit('input', value),
+// });
 
 // prepend and append icons slots
-const onClickPrepend = () => {
-    if (!props.disabled) {
-        emit('click:prepend');
-    }
-};
-const onClickAppend = () => {
-    if (!props.disabled) {
-        emit('click:append');
-    }
-};
-const $listeners = useListeners();
-const inputListeners = {
-    ...$listeners,
-};
+// const onClickPrepend = () => {
+//     if (!props.disabled) {
+//         emit('click:prepend');
+//     }
+// };
+// const onClickAppend = () => {
+//     if (!props.disabled) {
+//         emit('click:append');
+//     }
+// };
+// const $listeners = useListeners();
+// const inputListeners = {
+//     ...$listeners,
+// };
 
-delete inputListeners['input'];
-delete inputListeners['click:prepend'];
-delete inputListeners['click:append'];
-
+// delete inputListeners['input'];
+// delete inputListeners['click:prepend'];
+// delete inputListeners['click:append'];
+const { listeners } = useDividedListeners();
+console.log('listeners', listeners);
+const slots = useSlots();
+console.log('slots', slots);
 // error message
 const messages = computed(() => {
     if (!hasError.value) {
@@ -219,7 +228,10 @@ $input-height: $spacer * 14;
         border-radius: $border-radius;
         padding: 0 $base-indent;
     }
-
+    &__icon {
+        display: flex;
+        align-items: center;
+    }
     &__prepend {
         margin-right: $spacer;
     }

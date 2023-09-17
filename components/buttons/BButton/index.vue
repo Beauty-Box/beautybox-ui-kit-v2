@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, useAttrs, useSlots, defineAsyncComponent } from 'vue';
+import { computed, useAttrs, useSlots, defineAsyncComponent } from 'vue-demi';
 import { PropsColors, useColor } from '../../../composables/ui/useColor';
 import { PropsLink, useLink } from '../../../composables/ui/useLink';
 import { PropsVariant } from '../../../composables/ui/useVariant';
