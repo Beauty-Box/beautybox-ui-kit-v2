@@ -128,3 +128,22 @@ $z-index: (
     'overlay': 1000,
     'modal': 1010,
 ) !default;
+
+$theme: (
+    'light': (
+        'text': #101928,
+        'text--light': #67768c,
+        'background': #fff,
+        'background--light': #fff,
+        'background--lighten': #dee3e7,
+        'box-shadow': #67768c,
+    ),
+    'dark': (
+        'text': #fff,
+        'text--light': #bcbcbc,
+        'background': #1c1c1e,
+        'background--light': #2c2c2e,
+        'background--lighten': #3a3a3c,
+        'box-shadow': #67768c,
+    ),
+);
