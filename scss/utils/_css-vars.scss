@@ -7,9 +7,9 @@ body {
         --color-background--light: #{map-deep-get($theme, 'dark', 'background--light')};
         --color-background--lighten: #{map-deep-get($theme, 'dark', 'background--lighten')};
         --color-background--lighten-alpha: #{rgba(
-                map-deep-get($theme, 'dark', 'background--lighten'),
-                0.3
-            )};
+            map-deep-get($theme, 'dark', 'background--lighten'),
+            0.3
+        )};
         --color-text: #{map-deep-get($theme, 'dark', 'text')};
         --color-text--light: #{map-deep-get($theme, 'dark', 'text--light')};
         --color-box-shadow: #{map-deep-get($theme, 'dark', 'box-shadow')};
@@ -19,9 +19,9 @@ body {
     --color-background--light: #{map-deep-get($theme, 'light', 'background--light')};
     --color-background--lighten: #{map-deep-get($theme, 'light', 'background--lighten')};
     --color-background--lighten-alpha: #{rgba(
-            map-deep-get($theme, 'light', 'background--lighten'),
-            0.3
-        )};
+        map-deep-get($theme, 'light', 'background--lighten'),
+        0.3
+    )};
     --color-text: #{map-deep-get($theme, 'light', 'text')};
     --color-text--light: #{map-deep-get($theme, 'light', 'text--light')};
     --color-box-shadow: #{map-deep-get($theme, 'light', 'box-shadow')};
