@@ -1,6 +1,6 @@
 <template>
     <component :is="isBlockWrapper ? 'div' : 'span'" :class="{ 'b-button--block': isBlockWrapper }">
-        <component v-bind="attrs" :is="component" :class="classes" v-on="$listeners">
+        <component v-bind="attrs" :is="component" :class="classes">
             <span v-if="loading" class="b-button__loader">
                 <slot name="loader">
                     <b-loader indeterminate :size="20" :width="2" color="inherit" />
@@ -19,6 +19,7 @@ import { PropsColors, useColor } from '../../../composables/ui/useColor';
 import { PropsLink, useLink } from '../../../composables/ui/useLink';
 import { PropsVariant } from '../../../composables/ui/useVariant';
 import { PropsSize } from '../../../composables/ui/useSize';
+import { useDividedListeners } from '../../../composables/useDividedListeners';
 const BLoader = defineAsyncComponent(() => import('../../loaders/BLoader/index.vue'));
 
 interface BButtonProps {
@@ -63,6 +64,7 @@ const { colorVariant, colorVariantAlpha, colorVariantAlphaLow } = useColor(() =>
 const { isHref, isLink, isRouterLink, attrsLink } = useLink(() => props);
 
 const $attrs = useAttrs();
+const { listeners } = useDividedListeners();
 const attrs = computed(() => {
     const _attrs = { ...$attrs, ...(isLink.value && attrsLink.value) } as Record<string, any>;
     if (!isLink.value) {
@@ -73,7 +75,7 @@ const attrs = computed(() => {
         _attrs.tabindex = '-1';
     }
 
-    return _attrs;
+    return { ..._attrs, ...listeners.value['content'] };
 });
 
 const component = computed(() => {
