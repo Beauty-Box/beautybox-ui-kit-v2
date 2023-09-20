@@ -38,10 +38,11 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue';
 import BApp from '../BApp.vue';
-const BBlockEmpty = () => import('../../blocks/BlockEmpty/index.vue');
-const BButton = () => import('../../buttons/BButton/index.vue');
-const BSvg = () => import('../../../components/icons/BSvg/index.vue');
+const BBlockEmpty = defineAsyncComponent(() => import('../../blocks/BlockEmpty/index.vue'));
+const BButton = defineAsyncComponent(() => import('../../buttons/BButton/index.vue'));
+const BSvg = defineAsyncComponent(() => import('../../../components/icons/BSvg/index.vue'));
 
 export default {
     components: {

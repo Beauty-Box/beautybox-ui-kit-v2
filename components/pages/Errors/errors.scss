@@ -81,7 +81,7 @@
         box-shadow: 0px -3px 25px #0000001a;
     }
 
-    ::v-deep {
+    :deep(*) {
         .empty {
             &__title {
                 font-size: 32px;
