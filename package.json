@@ -98,9 +98,6 @@
     "peerDependenciesMeta": {
         "@vue/compiler-sfc": {
             "optional": true
-        },
-        "pinia": {
-            "optional": true
         }
     }
 }
