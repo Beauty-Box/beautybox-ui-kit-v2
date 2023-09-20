@@ -10,7 +10,7 @@
 
 <style scoped lang="scss">
 .b-app {
-    color: $color-primary;
+    color: inherit;
 
     &__wrapper {
         flex: 1 1 auto;
