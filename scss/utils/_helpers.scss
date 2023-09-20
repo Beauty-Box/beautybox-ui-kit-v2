@@ -15,3 +15,143 @@
         border: 1px solid $color;
     }
 }
+
+.d-flex {
+    display: flex;
+}
+
+.flex-column {
+    flex-direction: column;
+}
+
+.flex-grow-1 {
+    flex-grow: 1;
+}
+
+.flex-grow-0 {
+    flex-grow: 0;
+}
+
+.align-start {
+    align-items: flex-start;
+}
+
+.align-end {
+    align-items: flex-end;
+}
+
+.align-center {
+    align-items: center;
+}
+
+.justify-start {
+    justify-content: flex-start;
+}
+
+.justify-end {
+    justify-content: flex-end;
+}
+
+.justify-center {
+    justify-content: center;
+}
+
+.justify-space-between {
+    justify-content: space-between;
+}
+
+@for $i from 0 through 15 {
+    .mt-#{$i} {
+        margin-top: $spacer * $i + px;
+    }
+    .mb-#{$i} {
+        margin-bottom: $spacer * $i + px;
+    }
+    .ml-#{$i} {
+        margin-left: $spacer * $i + px;
+    }
+    .mr-#{$i} {
+        margin-right: $spacer * $i + px;
+    }
+    .mx-#{$i} {
+        margin-right: $spacer * $i + px;
+        margin-left: $spacer * $i + px;
+    }
+    .my-#{$i} {
+        margin-top: $spacer * $i + px;
+        margin-bottom: $spacer * $i + px;
+    }
+
+    .pt-#{$i} {
+        padding-top: $spacer * $i + px;
+    }
+    .pb-#{$i} {
+        padding-bottom: $spacer * $i + px;
+    }
+    .pl-#{$i} {
+        padding-left: $spacer * $i + px;
+    }
+    .pr-#{$i} {
+        padding-right: $spacer * $i + px;
+    }
+    .px-#{$i} {
+        padding-right: $spacer * $i + px;
+        padding-left: $spacer * $i + px;
+    }
+    .py-#{$i} {
+        padding-top: $spacer * $i + px;
+        padding-bottom: $spacer * $i + px;
+    }
+}
+
+.mt-auto {
+    margin-top: auto;
+}
+
+.mb-auto {
+    margin-bottom: auto;
+}
+
+.ml-auto {
+    margin-left: auto;
+}
+
+.mr-auto {
+    margin-right: auto;
+}
+
+.mx-auto {
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.my-auto {
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.pt-auto {
+    padding-top: auto;
+}
+
+.pb-auto {
+    padding-bottom: auto;
+}
+
+.pl-auto {
+    padding-left: auto;
+}
+
+.pr-auto {
+    padding-right: auto;
+}
+
+.px-auto {
+    padding-right: auto;
+    padding-left: auto;
+}
+
+.py-auto {
+    padding-top: auto;
+    padding-bottom: auto;
+}
