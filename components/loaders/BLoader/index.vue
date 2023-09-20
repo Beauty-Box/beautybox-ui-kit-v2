@@ -8,7 +8,7 @@
         :aria-valuenow="indeterminate ? undefined : normalizedValue"
         :class="classes"
         :style="styles"
-        v-on="$listeners"
+        v-bind="$attrs"
     >
         <svg
             :style="svgStyles"
@@ -46,10 +46,6 @@
 <script setup lang="ts">
 import { ref, Ref, computed } from 'vue';
 import { PropsColors, useColor } from '../../../composables/ui/useColor';
-// Directives
-// import intersect from '../../../directives/intersect';
-
-// const vIntersect = { ...intersect };
 
 import { vIntersectionObserver } from '@vueuse/components';
 
