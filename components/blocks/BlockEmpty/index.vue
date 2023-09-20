@@ -92,7 +92,7 @@ const calculatedTextWidth = computed(() => {
     &__title {
         display: block;
         color: $color-text;
-        font-size: 21px;
+        font-size: 20px;
         font-weight: 500;
         text-align: center;
 
