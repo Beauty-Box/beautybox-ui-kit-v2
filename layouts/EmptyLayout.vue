@@ -8,9 +8,12 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue-demi';
 import BApp from '../components/pages/BApp.vue';
 import BMain from '../components/pages/BMain.vue';
-const BlockLoader = () => import('../components/blocks/BlockLoader/index.vue');
+const BlockLoader = defineAsyncComponent(() =>
+    import('../components/blocks/BlockLoader/index.vue')
+);
 
 export default {
     components: { BlockLoader, BApp, BMain },

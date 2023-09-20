@@ -18,8 +18,9 @@
 </template>
 
 <script>
+import { defineAsyncComponent } from 'vue-demi';
 import BApp from '../components/pages/BApp.vue';
-const BSvg = () => import('../components/icons/BSvg/index.vue');
+const BSvg = defineAsyncComponent(() => import('../components/icons/BSvg/index.vue'));
 
 export default {
     components: {
