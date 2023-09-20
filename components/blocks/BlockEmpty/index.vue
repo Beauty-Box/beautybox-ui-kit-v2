@@ -10,25 +10,30 @@
                 :size="56"
             />
         </slot>
-        <h4
-            v-if="title.length"
-            class="c-empty__title"
-            :class="{ 'c-empty__title--normal': titleNormal }"
-            :style="{
-                maxWidth: calculatedTextWidth,
-            }"
-        >
-            {{ title }}
-        </h4>
-        <p
-            v-if="text.length"
-            class="c-empty__text"
-            :style="{
-                maxWidth: calculatedTextWidth,
-            }"
-        >
-            {{ text }}
-        </p>
+        <slot name="title">
+            <h4
+                v-if="title.length"
+                class="c-empty__title"
+                :class="{ 'c-empty__title--normal': titleNormal }"
+                :style="{
+                    maxWidth: calculatedTextWidth,
+                }"
+            >
+                {{ title }}
+            </h4>
+        </slot>
+        <slot name="text">
+            <p
+                v-if="text.length"
+                class="c-empty__text"
+                :style="{
+                    maxWidth: calculatedTextWidth,
+                }"
+            >
+                {{ text }}
+            </p>
+        </slot>
+
         <div v-if="'buttons' in $slots" class="c-empty__btn-wrapper">
             <slot name="buttons" />
         </div>
