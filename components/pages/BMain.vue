@@ -19,6 +19,8 @@
         flex: 1 1 auto;
         max-width: 100%;
         position: relative;
+        display: flex;
+        flex-direction: column;
     }
 }
 </style>
