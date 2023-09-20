@@ -135,7 +135,10 @@ const calculatedTextWidth = computed(() => {
     &__btn,
     button,
     a {
-        margin-top: 30px;
+        &,
+        :slotted(&) {
+            margin-top: 30px;
+        }
     } //.empty__btn
 
     &--centre {

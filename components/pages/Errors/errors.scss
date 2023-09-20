@@ -81,22 +81,20 @@
         box-shadow: 0px -3px 25px #0000001a;
     }
 
-    :deep(*) {
-        .empty {
-            &__title {
-                font-size: 32px;
-                font-weight: 700;
-                line-height: 43px;
+    :deep(.empty) {
+        &__title {
+            font-size: 32px;
+            font-weight: 700;
+            line-height: 43px;
 
-                @media screen and (orientation: portrait) {
-                    font-size: 28px;
-                    line-height: 33px;
-                }
+            @media screen and (orientation: portrait) {
+                font-size: 28px;
+                line-height: 33px;
             }
-            &__text {
-                max-width: 40ch;
-                font-size: 14px;
-            }
+        }
+        &__text {
+            max-width: 40ch;
+            font-size: 14px;
         }
     }
 }
