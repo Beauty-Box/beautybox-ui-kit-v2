@@ -29,7 +29,9 @@
         >
             {{ text }}
         </p>
-        <slot name="buttons" />
+        <div v-if="'buttons' in $slots" class="c-empty__btn-wrapper">
+            <slot name="buttons" />
+        </div>
     </div>
 </template>
 
@@ -132,14 +134,9 @@ const calculatedTextWidth = computed(() => {
         } //.empty__text--full
     } //.empty__text
 
-    &__btn,
-    button,
-    a {
-        &,
-        :slotted(&) {
-            margin-top: 30px;
-        }
-    } //.empty__btn
+    &__btn-wrapper {
+        margin-top: 30px;
+    }
 
     &--centre {
         flex: 1;
@@ -159,9 +156,9 @@ const calculatedTextWidth = computed(() => {
             &__text {
                 font-size: 16px;
             }
-            &__btn {
-                min-width: 300px !important;
-            }
+            // &__btn {
+            //     min-width: 300px !important;
+            // }
         }
     }
 } //.empty
