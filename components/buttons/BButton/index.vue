@@ -2,10 +2,9 @@
     <component :is="isBlockWrapper ? 'div' : 'span'" :class="{ 'b-button--block': isBlockWrapper }">
         <component v-bind="attrs" :is="component" :class="classes" v-on="$listeners">
             <span v-if="loading" class="b-button__loader">
-                <template v-if="!!$slots.loader">
-                    <slot name="loader" />
-                </template>
-                <b-loader v-else indeterminate :size="20" :width="2" color="inherit" />
+                <slot name="loader">
+                    <b-loader indeterminate :size="20" :width="2" color="inherit" />
+                </slot>
             </span>
             <span class="b-button__content">
                 <slot />
@@ -60,7 +59,7 @@ const classes = computed(() => {
     ];
 });
 
-const { colorVariant, colorVariantAlpha } = useColor(() => props.color);
+const { colorVariant, colorVariantAlpha, colorVariantAlphaLow } = useColor(() => props.color);
 const { isHref, isLink, isRouterLink, attrsLink } = useLink(() => props);
 
 const $attrs = useAttrs();
@@ -180,7 +179,7 @@ const isBlockWrapper = computed(() => {
 
     &#{$self}--outline {
         border-color: currentColor;
-        background-color: #fff;
+        background-color: transparent;
         color: v-bind('colorVariant');
 
         &#{$self}--white {
@@ -201,6 +200,14 @@ const isBlockWrapper = computed(() => {
         #{$self}__content {
             white-space: normal;
         }
+        &#{$self}--white {
+            color: map-get($colors, 'primary');
+        }
+    }
+    &#{$self}--plain {
+        background-color: v-bind('colorVariantAlphaLow');
+        border-color: transparent;
+        color: v-bind('colorVariant');
         &#{$self}--white {
             color: map-get($colors, 'primary');
         }
