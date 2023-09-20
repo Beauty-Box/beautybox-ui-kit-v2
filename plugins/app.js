@@ -1,19 +1,21 @@
-const EmptyLayout = () =>
-    import(/* webpackChunkName: "EmptyLayout" */ './../layouts/EmptyLayout.vue');
-const ErrorLayout = () =>
-    import(/* webpackChunkName: "ErrorLayout" */ './../layouts/ErrorLayout.vue');
-const Forbidden = () =>
-    import(/* webpackChunkName: "Forbidden" */ './../components/pages/Errors/Forbidden.vue');
-const NotFound = () =>
-    import(/* webpackChunkName: "NotFound" */ './../components/pages/Errors/NotFound.vue');
-const ServerError = () =>
-    import(/* webpackChunkName: "ServerError" */ './../components/pages/Errors/ServerError.vue');
-const BadRequest = () =>
-    import(/* webpackChunkName: "BadRequest" */ './../components/pages/Errors/BadRequest.vue');
-const UnknownError = () =>
-    import(/* webpackChunkName: "UnknownError" */ './../components/pages/Errors/UnknownError.vue');
+import { defineAsyncComponent } from 'vue-demi';
 
-import { mapGetters } from 'vuex';
+const EmptyLayout = defineAsyncComponent(() => import('./../layouts/EmptyLayout.vue'));
+const ErrorLayout = defineAsyncComponent(() => import('./../layouts/ErrorLayout.vue'));
+const Forbidden = defineAsyncComponent(() => import('./../components/pages/Errors/Forbidden.vue'));
+const NotFound = defineAsyncComponent(() => import('./../components/pages/Errors/NotFound.vue'));
+const ServerError = defineAsyncComponent(() =>
+    import('./../components/pages/Errors/ServerError.vue')
+);
+const BadRequest = defineAsyncComponent(() =>
+    import('./../components/pages/Errors/BadRequest.vue')
+);
+const UnknownError = defineAsyncComponent(() =>
+    import('./../components/pages/Errors/UnknownError.vue')
+);
+
+import { mapState } from 'pinia';
+import { useErrorsStore } from '../stores/errors';
 
 const app = {
     components: {
@@ -26,10 +28,13 @@ const app = {
         UnknownError,
     },
     computed: {
-        ...mapGetters(['ERROR', 'TYPE']),
+        ...mapState(useErrorsStore, {
+            error: 'error',
+            type: 'type',
+        }),
         layout() {
-            if (this.ERROR) {
-                return this.TYPE;
+            if (this.error) {
+                return this.type;
             } else {
                 return (this.$route.meta.layout || 'empty') + '-layout';
             }
