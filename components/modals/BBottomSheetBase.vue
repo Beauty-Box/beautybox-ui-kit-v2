@@ -72,7 +72,7 @@ const onCloseModal = () => {
     transform: translateY(0);
 }
 
-.bottom-sheet-enter,
+.bottom-sheet-enter-from,
 .bottom-sheet-leave-to {
     transform: translateY(100%);
 }
