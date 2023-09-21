@@ -10,7 +10,7 @@ const toastOptions: PluginOptions = {
 };
 
 const toastPlugin = {
-    install(app: App, options: unknown[]): any {
+    install(app: App, ...options: unknown[]): any {
         app.use(Toast, toastOptions);
     },
 };
