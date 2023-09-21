@@ -32,20 +32,21 @@
     },
     "dependencies": {
         "@beautybox/core": "Beauty-Box/beautybox-base",
-        "uuid": "^9.0.0",
+        "@types/beautybox__core": "Beauty-Box/beautybox-base-types",
+        "@types/uuid": "^9.0.1",
         "@vuelidate/core": "^2.0.1",
         "@vuelidate/validators": "^2.0.1",
-        "maska": "^2.1.8",
-        "vue-router": "^3.6.5",
-        "pinia": "^2.1.6",
-        "vue-demi": "^0.14.6",
-        "@vueuse/core": "^10.4.1",
         "@vueuse/components": "^10.4.1",
-        "@types/beautybox__core": "Beauty-Box/beautybox-base-types",
-        "@types/uuid": "^9.0.1"
+        "@vueuse/core": "^10.4.1",
+        "maska": "^2.1.8",
+        "pinia": "^2.1.6",
+        "uuid": "^9.0.0",
+        "vue-demi": "^0.14.6",
+        "vue-router": "^3.6.5",
+        "vue-toastification": "^2.0.0-rc.5"
     },
     "devDependencies": {
-        "vue": "^2.7.14",
+        "@kingyue/vite-plugin-vue2-svg": "^0.5.0",
         "@storybook/addon-docs": "^7.0.4",
         "@storybook/addon-essentials": "^7.0.4",
         "@storybook/addon-jest": "^7.0.4",
@@ -55,7 +56,6 @@
         "@storybook/addon-viewport": "^7.0.4",
         "@storybook/vue": "^7.0.4",
         "@storybook/vue-vite": "^7.0.4",
-        "storybook-vue-router": "^1.0.7",
         "@typescript-eslint/eslint-plugin": "^5.40.1",
         "@typescript-eslint/parser": "^5.40.1",
         "@vitejs/plugin-vue2": "^2.2.0",
@@ -69,12 +69,13 @@
         "eslint-plugin-vue": "^7.1.0",
         "husky": "^4.2.5",
         "lint-staged": "^10.2.13",
+        "postcss": "^8.4.21",
         "prettier": "^2.1.1",
         "react": "^18.2.0",
         "react-dom": "^18.2.0",
         "sass": "~1.26.11",
-        "postcss": "^8.4.21",
         "storybook": "^7.0.4",
+        "storybook-vue-router": "^1.0.7",
         "stylelint": "^13.7.0",
         "stylelint-config-prettier": "^8.0.1",
         "stylelint-config-standard": "^20.0.0",
@@ -84,15 +85,15 @@
         "typescript": "^4.8.4",
         "vite": "^4.2.1",
         "vite-svg-loader": "^4.0.0",
-        "vue-template-compiler": "^2.7.14",
-        "@kingyue/vite-plugin-vue2-svg": "^0.5.0"
+        "vue": "^2.7.14",
+        "vue-template-compiler": "^2.7.14"
     },
     "peerDependencies": {
         "@vue/compiler-sfc": "^2.7.0 || ^3.0.0",
+        "pinia": "^2.1.6",
         "postcss": "^8.4.21",
         "vite": "^4.0.0",
-        "vue": "^2.0.0 || >=3.0.0",
-        "pinia": "^2.1.6"
+        "vue": "^2.0.0 || >=3.0.0"
     },
     "peerDependenciesMeta": {
         "@vue/compiler-sfc": {
