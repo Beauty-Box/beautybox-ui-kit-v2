@@ -13,12 +13,21 @@
     </component>
 </template>
 
+<script lang="ts">
+import { defineComponent } from 'vue-demi';
+
+export default defineComponent({
+    inheritAttrs: false,
+});
+</script>
+
 <script setup lang="ts">
 import { computed, useAttrs, useSlots, defineAsyncComponent } from 'vue-demi';
 import { PropsColors, useColor } from '../../../composables/ui/useColor';
 import { PropsLink, useLink } from '../../../composables/ui/useLink';
 import { PropsVariant } from '../../../composables/ui/useVariant';
 import { PropsSize } from '../../../composables/ui/useSize';
+import { useDividedListeners } from '../../../composables/useDividedListeners';
 const BLoader = defineAsyncComponent(() => import('../../loaders/BLoader/index.vue'));
 
 interface BButtonProps {
@@ -63,6 +72,7 @@ const { colorVariant, colorVariantAlpha, colorVariantAlphaLow } = useColor(() =>
 const { isHref, isLink, isRouterLink, attrsLink } = useLink(() => props);
 
 const $attrs = useAttrs();
+const { listeners } = useDividedListeners();
 const attrs = computed(() => {
     const _attrs = { ...$attrs, ...(isLink.value && attrsLink.value) } as Record<string, any>;
     if (!isLink.value) {
@@ -73,7 +83,7 @@ const attrs = computed(() => {
         _attrs.tabindex = '-1';
     }
 
-    return { ..._attrs };
+    return { ..._attrs, ...listeners.value['content'] };
 });
 
 const component = computed(() => {
