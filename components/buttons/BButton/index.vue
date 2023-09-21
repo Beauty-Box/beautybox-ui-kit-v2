@@ -77,7 +77,7 @@ const attrs = computed(() => {
 
     return { ..._attrs, ...listeners.value['content'] };
 });
-console.log('attrs button', attrs);
+console.log('attrs button', attrs.value);
 
 const component = computed(() => {
     if (isHref.value) {
