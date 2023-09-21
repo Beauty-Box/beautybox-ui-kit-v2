@@ -1,6 +1,6 @@
 import { type App } from 'vue-demi';
 import Toast, { PluginOptions, POSITION } from 'vue-toastification';
-import '../scss/ui/_toasts';
+import '../scss/ui/_toasts.scss';
 
 const toastOptions: PluginOptions = {
     closeButton: false,
