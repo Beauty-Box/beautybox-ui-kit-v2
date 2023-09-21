@@ -22,4 +22,7 @@ $vt-font-family: $font-family-base;
     @media #{$vt-mobile} {
         border-radius: $border-radius;
     }
+    & .#{$vt-namespace}__toast-body {
+        line-height: 1.2;
+    }
 }
