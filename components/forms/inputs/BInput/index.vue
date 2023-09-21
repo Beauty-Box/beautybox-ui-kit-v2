@@ -274,7 +274,7 @@ $input-height: $spacer * 14;
     &__error {
         color: map-get($colors, 'error');
         padding: 0 $base-indent;
-        margin-bottom: $base-indent / 2;
+        margin-bottom: math.div($base-indent, 2);
         min-height: 12px;
         @extend .caption-2;
     }

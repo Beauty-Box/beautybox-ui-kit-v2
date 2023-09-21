@@ -224,7 +224,7 @@ watch(
     // блок с ошибками
     &__error {
         color: map-get($colors, 'error');
-        margin-bottom: $base-indent / 2;
+        margin-bottom: math.div($base-indent, 2);
         min-height: 12px;
         @extend .caption-2;
     }
@@ -240,7 +240,7 @@ watch(
     &__custom {
         width: 100%;
         height: 100%;
-        border-radius: $border-radius / 4;
+        border-radius: math.div($border-radius, 4);
         line-height: 0;
         display: flex;
         justify-content: center;
