@@ -1,12 +1,13 @@
 import { type App } from 'vue-demi';
 import Toast, { PluginOptions, POSITION } from 'vue-toastification';
-import 'vue-toastification/dist/index.css';
+import '../scss/ui/_toasts';
 
 const toastOptions: PluginOptions = {
     closeButton: false,
     hideProgressBar: true,
     maxToasts: 5,
     position: POSITION.TOP_CENTER,
+    containerClassName: 'toasts-container',
 };
 
 const toastPlugin = {

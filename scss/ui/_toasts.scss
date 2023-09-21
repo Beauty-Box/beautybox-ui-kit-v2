@@ -1,0 +1,25 @@
+$vt-toast-min-height: 24px;
+$vt-color-success: $color-success;
+$vt-color-error: $color-error;
+$vt-font-family: $font-family-base;
+
+@import 'vue-toastification/src/scss/_variables';
+@import 'vue-toastification/src/scss/_toastContainer';
+@import 'vue-toastification/src/scss/_toast';
+@import 'vue-toastification/src/scss/_closeButton';
+@import 'vue-toastification/src/scss/_progressBar';
+@import 'vue-toastification/src/scss/_icon';
+@import 'vue-toastification/src/scss/animations/_bounce';
+
+.#{$vt-namespace}__container.toasts-container {
+    @media #{$vt-mobile} {
+        padding: $base-indent;
+    }
+}
+
+.#{$vt-namespace}__toast.toast-message {
+    padding: $base-indent;
+    @media #{$vt-mobile} {
+        border-radius: $border-radius;
+    }
+}

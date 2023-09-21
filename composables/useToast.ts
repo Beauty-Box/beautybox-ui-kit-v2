@@ -11,6 +11,7 @@ export function useToast() {
                 iconChildren: 'check_circle_outline',
                 iconTag: 'span',
             },
+            toastClassName: 'toast-message',
         });
     };
     const messageError = (text: string, timeout = 2000) => {
@@ -21,6 +22,7 @@ export function useToast() {
                 iconChildren: 'error_outline',
                 iconTag: 'span',
             },
+            toastClassName: 'toast-message',
         });
     };
 
