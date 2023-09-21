@@ -3,7 +3,11 @@
         <div>
             <b-overlay v-if="model" @click="onCloseModal" />
             <transition name="bottom-sheet">
-                <div v-if="model" class="bottom-sheet">
+                <div
+                    v-if="model"
+                    class="bottom-sheet"
+                    :class="{ 'bottom-sheet--hide-padding': hidePadding }"
+                >
                     <slot />
                 </div>
             </transition>
@@ -17,13 +21,16 @@ import BOverlay from './BOverlay.vue';
 
 interface Props {
     modelValue: boolean;
+    hidePadding?: boolean;
 }
 
 interface Emits {
     (e: 'update:modelValue', modelValue: Props['modelValue']): void;
 }
 
-const props = defineProps<Props>();
+const props = withDefaults(defineProps<Props>(), {
+    hidePadding: false,
+});
 const emit = defineEmits<Emits>();
 
 const model = computed({
@@ -50,6 +57,14 @@ const onCloseModal = () => {
     z-index: z(modal);
     background-color: var(--color-background, #fff);
     border-radius: $border-radius-large $border-radius-large 0 0;
+
+    padding-left: $base-indent;
+    padding-right: $base-indent;
+
+    &--hide-padding {
+        padding-left: 0;
+        padding-right: 0;
+    }
 }
 
 .bottom-sheet-enter-active,
