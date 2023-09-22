@@ -66,9 +66,9 @@ interface ITouchScroll {
     initialYPosition: number;
     currentY: number;
     lastY: number;
-    closeThreshold: number;
     windowHeight: number;
     offset: number;
+    shouldClose: boolean;
 }
 const bottomSheet = ref(null) as Ref<HTMLElement | null>;
 const touchScroll = ref({
@@ -78,9 +78,9 @@ const touchScroll = ref({
     initialYPosition: 0,
     currentY: 0,
     lastY: 0,
-    closeThreshold: 150,
     windowHeight: window.innerHeight,
     offset: 0,
+    shouldClose: false,
 }) as Ref<ITouchScroll>;
 
 const touchStyles = computed(() => {
@@ -92,6 +92,7 @@ const touchStyles = computed(() => {
 
 const onTouchStart = () => {
     touchScroll.value.isTouched = true;
+    touchScroll.value.shouldClose = false;
     touchScroll.value.offset = 0;
     // if (!bottomSheet.value) {
     //     bottomSheet.value = this.$refs.draggableBlock.$refs.dialog;
@@ -117,7 +118,9 @@ const onTouchMove = (event: TouchEvent) => {
 
         // if (this.scroll.currentY / 1.5 > this.scroll.blockHeight) {
         if (touchScroll.value.blockHeight * 0.5 < touchScroll.value.offset) {
-            touchScroll.value.isTouched = false;
+            touchScroll.value.shouldClose = true;
+        } else {
+            touchScroll.value.shouldClose = false;
         }
     }
     touchScroll.value.lastY = touchScroll.value.currentY;
@@ -126,11 +129,12 @@ const onTouchEnd = () => {
     if (bottomSheet.value) {
         // bottomSheet.value.style = '';
 
-        if (!touchScroll.value.isTouched) {
+        if (touchScroll.value.shouldClose) {
             model.value = false;
         }
 
         touchScroll.value.isTouched = false;
+        touchScroll.value.shouldClose = false;
     }
 };
 </script>
