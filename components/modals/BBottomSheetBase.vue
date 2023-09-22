@@ -150,6 +150,7 @@ const onTouchEnd = () => {
         padding-left: $base-indent;
         padding-right: $base-indent;
         padding-bottom: $base-indent;
+        padding-top: $large-indent;
 
         &--hide-padding {
             padding-left: 0;
