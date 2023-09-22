@@ -19,7 +19,9 @@
                             @touchend="onTouchEnd"
                             @touchstart="onTouchStart"
                         />
-                        <slot />
+                        <div class="bottom-sheet__scrollable d-flex flex-column flex-grow-1">
+                            <slot />
+                        </div>
                     </div>
                 </div>
             </transition>
@@ -157,6 +159,9 @@ const onTouchEnd = () => {
             padding-right: 0;
             padding-bottom: 0;
         }
+    }
+    &__scrollable {
+        overflow-y: auto;
     }
 }
 
