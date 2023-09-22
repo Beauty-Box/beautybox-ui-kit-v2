@@ -94,9 +94,7 @@ const onTouchStart = () => {
     touchScroll.value.isTouched = true;
     touchScroll.value.shouldClose = false;
     touchScroll.value.offset = 0;
-    // if (!bottomSheet.value) {
-    //     bottomSheet.value = this.$refs.draggableBlock.$refs.dialog;
-    // }
+
     if (bottomSheet.value) {
         touchScroll.value.blockHeight = bottomSheet.value.offsetHeight;
     }
@@ -113,10 +111,8 @@ const onTouchMove = (event: TouchEvent) => {
             touchScroll.value.offset =
                 touchScroll.value.blockHeight -
                 (touchScroll.value.windowHeight - touchScroll.value.currentY);
-            //  bottomSheet.value.style.cssText = `transform: scale3d(1, 1, 1) translate3d(0, ${offset}px, 0); transition: none 0s ease 0s;`;
         }
 
-        // if (this.scroll.currentY / 1.5 > this.scroll.blockHeight) {
         if (touchScroll.value.blockHeight * 0.5 < touchScroll.value.offset) {
             touchScroll.value.shouldClose = true;
         } else {
@@ -127,8 +123,6 @@ const onTouchMove = (event: TouchEvent) => {
 };
 const onTouchEnd = () => {
     if (bottomSheet.value) {
-        // bottomSheet.value.style = '';
-
         if (touchScroll.value.shouldClose) {
             model.value = false;
         }
@@ -149,6 +143,7 @@ const onTouchEnd = () => {
     z-index: z(modal);
     background-color: var(--color-background, #fff);
     border-radius: $border-radius-large $border-radius-large 0 0;
+    max-height: 90%;
 
     &__inner {
         position: relative;
@@ -172,15 +167,14 @@ const onTouchEnd = () => {
     display: flex;
     justify-content: center;
     width: 100%;
-    height: 40px;
+    height: 30px;
     padding-top: 10px;
 
     &::before {
         content: '';
-        opacity: 0.7;
         display: block;
         width: 40px;
-        height: 5px;
+        height: 4px;
         border-radius: $border-radius-large;
         background-color: var(
             --color-background--lighten,
