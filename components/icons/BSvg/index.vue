@@ -1,5 +1,5 @@
 <template>
-    <span>
+    <span class="d-flex">
         <component
             :is="component"
             :class="classes"
@@ -22,11 +22,15 @@ interface BSvgProps {
     fill?: PropsColors['color'];
     name: string;
     size?: number | string;
+    width?: number | string;
+    height?: number | string;
 }
 
 const props = withDefaults(defineProps<BSvgProps>(), {
     fill: 'primary',
     size: 20,
+    width: undefined,
+    height: undefined,
 });
 
 const classes = computed(() => {
@@ -46,13 +50,29 @@ const component = computed(() => {
 const sizeIcon = computed(() => {
     return isNumber(String(props.size)) ? `${props.size}px` : props.size;
 });
+
+const widthIcon = computed(() => {
+    if (props.width !== undefined) {
+        return isNumber(String(props.width)) ? `${props.width}px` : props.width;
+    } else {
+        return sizeIcon.value;
+    }
+});
+
+const heightIcon = computed(() => {
+    if (props.height !== undefined) {
+        return isNumber(String(props.height)) ? `${props.height}px` : props.height;
+    } else {
+        return sizeIcon.value;
+    }
+});
 </script>
 
 <style scoped lang="scss">
 :where(.icon) {
     display: inline-flex;
-    width: v-bind('sizeIcon');
-    height: v-bind('sizeIcon');
+    width: v-bind('widthIcon');
+    height: v-bind('heightIcon');
     fill: v-bind('colorVariant');
 } //.icon
 </style>
