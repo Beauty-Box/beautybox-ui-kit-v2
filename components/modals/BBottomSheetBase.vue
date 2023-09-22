@@ -5,10 +5,22 @@
             <transition name="bottom-sheet">
                 <div
                     v-if="model"
+                    ref="bottomSheet"
                     class="bottom-sheet"
-                    :class="{ 'bottom-sheet--hide-padding': hidePadding }"
+                    :style="touchScroll.isTouched ? touchStyles : {}"
                 >
-                    <slot />
+                    <div
+                        class="bottom-sheet__inner d-flex flex-column"
+                        :class="{ 'bottom-sheet__inner--hide-padding': hidePadding }"
+                    >
+                        <div
+                            class="btn-for-draggable"
+                            @touchmove="onTouchMove"
+                            @touchend="onTouchEnd"
+                            @touchstart="onTouchStart"
+                        />
+                        <slot />
+                    </div>
                 </div>
             </transition>
         </div>
@@ -16,7 +28,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
+import { ref, type Ref, computed } from 'vue';
 import BOverlay from './BOverlay.vue';
 
 interface Props {
@@ -45,6 +57,82 @@ const model = computed({
 const onCloseModal = () => {
     model.value = false;
 };
+
+// slide to scroll
+interface ITouchScroll {
+    blockHeight: number | null;
+    isTouched: boolean;
+    scrollHeight: number | null;
+    initialYPosition: number;
+    currentY: number;
+    lastY: number;
+    closeThreshold: number;
+    windowHeight: number;
+    offset: number;
+}
+const bottomSheet = ref(null) as Ref<HTMLElement | null>;
+const touchScroll = ref({
+    blockHeight: null,
+    isTouched: false,
+    scrollHeight: null,
+    initialYPosition: 0,
+    currentY: 0,
+    lastY: 0,
+    closeThreshold: 150,
+    windowHeight: window.innerHeight,
+    offset: 0,
+}) as Ref<ITouchScroll>;
+
+const touchStyles = computed(() => {
+    return {
+        transition: 'none 0s ease 0s',
+        transform: `scale3d(1, 1, 1) translate3d(0, ${touchScroll.value.offset}px, 0)`,
+    };
+});
+
+const onTouchStart = () => {
+    touchScroll.value.isTouched = true;
+    touchScroll.value.offset = 0;
+    // if (!bottomSheet.value) {
+    //     bottomSheet.value = this.$refs.draggableBlock.$refs.dialog;
+    // }
+    if (bottomSheet.value) {
+        touchScroll.value.blockHeight = bottomSheet.value.offsetHeight;
+    }
+};
+const onTouchMove = (event: TouchEvent) => {
+    touchScroll.value.currentY = event.changedTouches[0].clientY;
+    touchScroll.value.scrollHeight = event.changedTouches[0].pageY;
+    if (!touchScroll.value.initialYPosition) {
+        touchScroll.value.initialYPosition = touchScroll.value.currentY;
+    }
+    touchScroll.value.offset = 0;
+    if (touchScroll.value.blockHeight !== null && bottomSheet.value) {
+        if (touchScroll.value.currentY > touchScroll.value.initialYPosition) {
+            touchScroll.value.offset =
+                touchScroll.value.blockHeight -
+                (touchScroll.value.windowHeight - touchScroll.value.currentY);
+            //  bottomSheet.value.style.cssText = `transform: scale3d(1, 1, 1) translate3d(0, ${offset}px, 0); transition: none 0s ease 0s;`;
+        }
+
+        // if (this.scroll.currentY / 1.5 > this.scroll.blockHeight) {
+        if (touchScroll.value.blockHeight * 0.5 < touchScroll.value.offset) {
+            touchScroll.value.isTouched = false;
+        }
+    }
+    touchScroll.value.lastY = touchScroll.value.currentY;
+};
+const onTouchEnd = () => {
+    if (bottomSheet.value) {
+        // bottomSheet.value.style = '';
+
+        if (!touchScroll.value.isTouched) {
+            model.value = false;
+        }
+
+        touchScroll.value.isTouched = false;
+    }
+};
 </script>
 
 <style scoped lang="scss">
@@ -58,12 +146,42 @@ const onCloseModal = () => {
     background-color: var(--color-background, #fff);
     border-radius: $border-radius-large $border-radius-large 0 0;
 
-    padding-left: $base-indent;
-    padding-right: $base-indent;
+    &__inner {
+        position: relative;
+        padding-left: $base-indent;
+        padding-right: $base-indent;
+        padding-bottom: $base-indent;
 
-    &--hide-padding {
-        padding-left: 0;
-        padding-right: 0;
+        &--hide-padding {
+            padding-left: 0;
+            padding-right: 0;
+            padding-bottom: 0;
+        }
+    }
+}
+
+.btn-for-draggable {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: z(default);
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    height: 40px;
+    padding-top: 10px;
+
+    &::before {
+        content: '';
+        opacity: 0.7;
+        display: block;
+        width: 40px;
+        height: 5px;
+        border-radius: $border-radius-large;
+        background-color: var(
+            --color-background--lighten,
+            #{map-deep-get($theme, 'light', 'background--lighten')}
+        );
     }
 }
 
