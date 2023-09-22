@@ -6,7 +6,7 @@
                 <div
                     v-if="model"
                     ref="bottomSheet"
-                    class="bottom-sheet"
+                    class="bottom-sheet d-flex flex-column"
                     :style="touchScroll.isTouched ? touchStyles : {}"
                 >
                     <div
@@ -36,6 +36,7 @@ import BOverlay from './BOverlay.vue';
 interface Props {
     modelValue: boolean;
     hidePadding?: boolean;
+    maxHeight?: string;
 }
 
 interface Emits {
@@ -44,6 +45,7 @@ interface Emits {
 
 const props = withDefaults(defineProps<Props>(), {
     hidePadding: false,
+    maxHeight: '90%',
 });
 const emit = defineEmits<Emits>();
 
@@ -145,7 +147,7 @@ const onTouchEnd = () => {
     z-index: z(modal);
     background-color: var(--color-background, #fff);
     border-radius: $border-radius-large $border-radius-large 0 0;
-    max-height: 90%;
+    max-height: v-bind('maxHeight');
 
     &__inner {
         position: relative;
@@ -153,6 +155,7 @@ const onTouchEnd = () => {
         padding-right: $base-indent;
         padding-bottom: $base-indent;
         padding-top: $large-indent;
+        overflow-y: auto;
 
         &--hide-padding {
             padding-left: 0;
