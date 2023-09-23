@@ -28,14 +28,14 @@
     </b-app>
 </template>
 
-<script>
-import { defineAsyncComponent } from 'vue';
+<script lang="ts">
+import { defineComponent, defineAsyncComponent } from 'vue';
 import BApp from '../BApp.vue';
 const BBlockEmpty = defineAsyncComponent(() => import('../../blocks/BlockEmpty/index.vue'));
 const BButton = defineAsyncComponent(() => import('../../buttons/BButton/index.vue'));
 const BSvg = defineAsyncComponent(() => import('../../../components/icons/BSvg/index.vue'));
 
-export default {
+export default defineComponent({
     components: {
         BApp,
         BBlockEmpty,
@@ -49,7 +49,7 @@ export default {
             );
         },
     },
-};
+});
 </script>
 
 <style lang="scss" scoped src="./errors.scss" />
