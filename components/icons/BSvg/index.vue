@@ -11,8 +11,7 @@
 </template>
 
 <script setup lang="ts">
-import { computed, defineAsyncComponent } from 'vue';
-import type { AsyncComponentLoader } from 'vue/types/v3-define-async-component';
+import { computed, defineAsyncComponent, type AsyncComponentLoader } from 'vue-demi';
 import { isNumber } from '@beautybox/core/helpers';
 import { PropsColors, useColor } from '../../../composables/ui/useColor';
 

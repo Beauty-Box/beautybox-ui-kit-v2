@@ -5,6 +5,7 @@ export function useDividedListeners() {
     if (isVue2) {
         const instance = getCurrentInstance();
         // @ts-nocheck
+        // @ts-ignore
         ({ $listeners = {} as Record<string, any> } = instance?.proxy ?? {
             $listeners: {} as Record<string, any>,
         });

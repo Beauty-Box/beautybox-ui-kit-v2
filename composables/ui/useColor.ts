@@ -1,7 +1,7 @@
 import { computed, type ComputedRef, type WatchSource } from 'vue';
 import { useWatchSource } from './useWatchSource';
 export const colors = ['primary', 'secondary', 'white', 'info', 'anchor', 'error'] as const;
-export type Colors = (typeof colors)[number] | `#${string}`;
+export type Colors = (typeof colors)[number] | `#${string}` | 'inherit';
 export interface PropsColors {
     color?: Colors;
 }
