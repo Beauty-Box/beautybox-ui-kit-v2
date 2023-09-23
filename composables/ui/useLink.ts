@@ -1,6 +1,6 @@
-import { computed, WatchSource } from 'vue';
+import { computed, type WatchSource } from 'vue';
 import { useWatchSource } from './useWatchSource';
-import { RawLocation } from 'vue-router';
+import { type RawLocation } from 'vue-router';
 export interface PropsLink {
     href?: string;
     to?: RawLocation;

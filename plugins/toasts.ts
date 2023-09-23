@@ -1,5 +1,5 @@
 import { type App } from 'vue-demi';
-import Toast, { PluginOptions, POSITION } from 'vue-toastification';
+import Toast, { type PluginOptions, POSITION } from 'vue-toastification';
 import '../scss/ui/_toasts.scss';
 
 const toastOptions: PluginOptions = {
