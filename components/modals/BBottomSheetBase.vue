@@ -30,7 +30,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref, computed } from 'vue';
+import { ref, type Ref, computed, watch } from 'vue';
 import BOverlay from './BOverlay.vue';
 
 interface Props {
@@ -135,6 +135,14 @@ const onTouchEnd = () => {
         touchScroll.value.shouldClose = false;
     }
 };
+
+watch(model, (value) => {
+    if (value) {
+        document.documentElement.classList.add('overflow-y-hidden');
+    } else {
+        document.documentElement.classList.remove('overflow-y-hidden');
+    }
+});
 </script>
 
 <style scoped lang="scss">
