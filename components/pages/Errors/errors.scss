@@ -6,6 +6,7 @@
     min-height: -webkit-fill-available;
     overflow: hidden;
     background-color: #fff;
+    color: map-deep-get($theme, 'light', 'text');
 
     &__inner {
         max-width: $max-width;
