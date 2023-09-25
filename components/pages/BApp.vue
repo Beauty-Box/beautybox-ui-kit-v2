@@ -17,7 +17,7 @@
         backface-visibility: hidden;
         display: flex;
         flex-direction: column;
-        min-height: 100vh;
+        min-height: 100dvh;
         max-width: 100%;
         position: relative;
     }
