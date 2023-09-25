@@ -213,8 +213,4 @@ watch(model, (value) => {
 .bottom-sheet-leave-to {
     transform: translateY(100%);
 }
-
-.overscroll {
-    overscroll-behavior: none;
-}
 </style>
