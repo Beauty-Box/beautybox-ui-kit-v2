@@ -119,7 +119,7 @@ const isBlockWrapper = computed(() => {
     border-style: solid;
     border-color: transparent;
 
-    font-weight: 700;
+    font-weight: 500;
     line-height: 1.2;
 
     &--is-disabled {
