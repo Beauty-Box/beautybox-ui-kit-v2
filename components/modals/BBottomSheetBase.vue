@@ -6,6 +6,8 @@
                 <div
                     v-if="model"
                     ref="bottomSheet"
+                    role="dialog"
+                    aria-modal="true"
                     class="bottom-sheet d-flex flex-column"
                     :style="touchScroll.isTouched ? touchStyles : {}"
                 >
@@ -70,7 +72,7 @@ interface ITouchScroll {
     initialYPosition: number;
     currentY: number;
     lastY: number;
-    windowHeight: number;
+    // windowHeight: number;
     offset: number;
     shouldClose: boolean;
 }
@@ -82,7 +84,7 @@ const touchScroll = ref({
     initialYPosition: 0,
     currentY: 0,
     lastY: 0,
-    windowHeight: window.innerHeight,
+    // windowHeight: window.innerHeight,
     offset: 0,
     shouldClose: false,
 }) as Ref<ITouchScroll>;
@@ -113,8 +115,8 @@ const onTouchMove = (event: TouchEvent) => {
     if (touchScroll.value.blockHeight !== null && bottomSheet.value) {
         if (touchScroll.value.currentY > touchScroll.value.initialYPosition) {
             touchScroll.value.offset =
-                touchScroll.value.blockHeight -
-                (touchScroll.value.windowHeight - touchScroll.value.currentY);
+                touchScroll.value.blockHeight - (window.innerHeight - touchScroll.value.currentY);
+            // touchScroll.value.windowHeight
         }
 
         if (touchScroll.value.blockHeight * 0.5 < touchScroll.value.offset) {
@@ -139,8 +141,10 @@ const onTouchEnd = () => {
 watch(model, (value) => {
     if (value) {
         document.documentElement.classList.add('overflow-y-hidden');
+        document.documentElement.classList.add('overscroll');
     } else {
         document.documentElement.classList.remove('overflow-y-hidden');
+        document.documentElement.classList.remove('overscroll');
     }
 });
 </script>
@@ -208,5 +212,9 @@ watch(model, (value) => {
 .bottom-sheet-enter-from,
 .bottom-sheet-leave-to {
     transform: translateY(100%);
+}
+
+.overscroll {
+    overscroll-behavior: none;
 }
 </style>
