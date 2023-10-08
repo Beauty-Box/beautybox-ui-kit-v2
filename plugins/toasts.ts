@@ -1,4 +1,5 @@
 import { type App } from 'vue-demi';
+// @see https://github.com/Maronato/vue-toastification/issues/327 for nuxt 3 usage
 import Toast, { type PluginOptions } from 'vue-toastification';
 // @ts-ignore
 import * as AllToast from 'vue-toastification/dist/index.mjs';
