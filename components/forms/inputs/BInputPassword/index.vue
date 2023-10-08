@@ -1,5 +1,5 @@
 <template>
-    <b-input v-bind="customProps" v-on="$listeners">
+    <b-input v-bind="customProps">
         <template #append="{ disabled }">
             <b-svg
                 v-show="hidePassword"
