@@ -1,23 +1,24 @@
 <template>
-    <b-input v-maska:[phoneMaska] v-bind="customProps" v-on="inputListeners" />
+    <b-input v-maska:[phoneMaska] v-bind="customProps" />
 </template>
 
 <script setup lang="ts">
-import { reactive, computed, useAttrs, useListeners } from 'vue';
+import { reactive, computed, useAttrs } from 'vue-demi';
 import { vMaska, MaskaDetail } from 'maska';
 import BInput from '../../inputs/BInput/index.vue';
+import { useListeners } from '../../../../composables/useListeners';
 import { isNumber } from '@beautybox/core/helpers';
 
-interface BInputPasswordProps {
+interface BInputPhoneProps {
     name?: string;
     label?: string;
 }
 
 interface Emits {
-    (e: 'input', value?: string | number | null): void;
+    (e: 'update:modelValue', value?: string | number | null): void;
 }
 
-const props = withDefaults(defineProps<BInputPasswordProps>(), {
+const props = withDefaults(defineProps<BInputPhoneProps>(), {
     name: 'phone',
     label: 'Телефон',
 });
@@ -25,21 +26,23 @@ const props = withDefaults(defineProps<BInputPasswordProps>(), {
 const emit = defineEmits<Emits>();
 
 const $attrs = useAttrs();
-const customProps = computed(() => {
-    return {
-        ...$attrs,
-        name: props.name,
-        label: props.label,
-        type: 'tel',
-    };
-});
 
 const $listeners = useListeners();
 const inputListeners = {
     ...$listeners,
 };
 
-delete inputListeners['input'];
+delete inputListeners['update:modelValue'];
+
+const customProps = computed(() => {
+    return {
+        ...$attrs,
+        ...inputListeners,
+        name: props.name,
+        label: props.label,
+        type: 'tel',
+    };
+});
 
 const phoneMaska = reactive({
     mask: '+Y (###) ###-##-##',
@@ -65,7 +68,7 @@ const phoneMaska = reactive({
         '#': { pattern: /\d/ },
     },
     onMaska: (detail: MaskaDetail) => {
-        emit('input', detail.masked);
+        emit('update:modelValue', detail.masked);
     },
 });
 </script>
