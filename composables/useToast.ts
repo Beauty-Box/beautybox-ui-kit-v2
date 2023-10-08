@@ -1,4 +1,5 @@
-import * as Toast from 'vue-toastification';
+// @ts-ignore
+import * as Toast from 'vue-toastification/dist/index.mjs';
 
 const { useToast: useToastOriginal } = Toast;
 

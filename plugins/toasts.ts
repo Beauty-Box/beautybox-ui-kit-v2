@@ -1,6 +1,7 @@
 import { type App } from 'vue-demi';
 import Toast, { type PluginOptions } from 'vue-toastification';
-import * as AllToast from 'vue-toastification';
+// @ts-ignore
+import * as AllToast from 'vue-toastification/dist/index.mjs';
 const { POSITION } = AllToast;
 import '../scss/ui/_toasts.scss';
 
