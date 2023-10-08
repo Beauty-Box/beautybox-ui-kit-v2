@@ -1,4 +1,6 @@
-import { useToast as useToastOriginal } from 'vue-toastification';
+import * as Toast from 'vue-toastification';
+
+const { useToast: useToastOriginal } = Toast;
 
 export function useToast() {
     const toast = useToastOriginal();
