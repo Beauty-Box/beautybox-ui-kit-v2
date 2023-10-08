@@ -27,7 +27,8 @@ import { PropsColors, useColor } from '../../../composables/ui/useColor';
 import { PropsLink, useLink } from '../../../composables/ui/useLink';
 import { PropsVariant } from '../../../composables/ui/useVariant';
 import { PropsSize } from '../../../composables/ui/useSize';
-import { useDividedListeners } from '../../../composables/useDividedListeners';
+// import { useDividedListeners } from '../../../composables/useDividedListeners';
+import { useListeners } from '../../../composables/useListeners';
 const BLoader = defineAsyncComponent(() => import('../../loaders/BLoader/index.vue'));
 
 interface BButtonProps {
@@ -72,7 +73,7 @@ const { colorVariant, colorVariantAlpha, colorVariantAlphaLow } = useColor(() =>
 const { isHref, isLink, isRouterLink, attrsLink } = useLink(() => props);
 
 const $attrs = useAttrs();
-const { listeners } = useDividedListeners();
+const listeners = useListeners();
 const attrs = computed(() => {
     const _attrs = { ...$attrs, ...(isLink.value && attrsLink.value) } as Record<string, any>;
     if (!isLink.value) {
@@ -83,7 +84,7 @@ const attrs = computed(() => {
         _attrs.tabindex = '-1';
     }
 
-    return { ..._attrs, ...listeners.value['content'] };
+    return { ..._attrs, ...listeners };
 });
 
 const component = computed(() => {
