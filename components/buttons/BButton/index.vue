@@ -27,7 +27,6 @@ import { PropsColors, useColor } from '../../../composables/ui/useColor';
 import { PropsLink, useLink } from '../../../composables/ui/useLink';
 import { PropsVariant } from '../../../composables/ui/useVariant';
 import { PropsSize } from '../../../composables/ui/useSize';
-// import { useDividedListeners } from '../../../composables/useDividedListeners';
 import { useListeners } from '../../../composables/useListeners';
 const BLoader = defineAsyncComponent(() => import('../../loaders/BLoader/index.vue'));
 

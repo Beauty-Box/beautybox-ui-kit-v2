@@ -32,7 +32,6 @@
                     >
                         <b-svg :name="prependIcon" :size="22" :fill="prependIconFill" />
                     </span>
-                    <!--  @click.native="onClickPrepend" -->
                 </slot>
             </span>
             <div class="b-input__textfield">
@@ -74,7 +73,6 @@
                     >
                         <b-svg :name="appendIcon" :size="22" :fill="appendIconFill" />
                     </span>
-                    <!-- @click.native="onClickAppend" -->
                 </slot>
             </span>
         </div>
@@ -111,8 +109,6 @@ export interface BInputProps {
 
 interface Emits {
     (e: 'update:modelValue', value: BInputProps['modelValue']): void;
-    // (e: 'click:prepend'): void;
-    // (e: 'click:append'): void;
 }
 
 const props = withDefaults(defineProps<BInputProps>(), {
@@ -152,26 +148,6 @@ const inputValue = computed({
     get: () => props.modelValue,
     set: (value) => emit('update:modelValue', value),
 });
-
-// prepend and append icons slots
-// const onClickPrepend = () => {
-//     if (!props.disabled) {
-//         emit('click:prepend');
-//     }
-// };
-// const onClickAppend = () => {
-//     if (!props.disabled) {
-//         emit('click:append');
-//     }
-// };
-// const $listeners = useListeners();
-// const inputListeners = {
-//     ...$listeners,
-// };
-
-// delete inputListeners['input'];
-// delete inputListeners['click:prepend'];
-// delete inputListeners['click:append'];
 
 const { listeners } = useDividedListeners();
 const attrs = useAttrs();
