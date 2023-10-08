@@ -10,8 +10,8 @@
                     :value="value"
                     :name="name"
                     :checked="isActive"
+                    v-bind="inputListeners"
                     @change="onChange"
-                    v-on="inputListeners"
                 />
                 <div
                     v-show="inputIndeterminate"
@@ -54,7 +54,7 @@
     </div>
 </template>
 
-<script lang="ts">
+<!-- <script lang="ts">
 import { defineComponent } from 'vue';
 export default defineComponent({
     model: {
@@ -62,21 +62,22 @@ export default defineComponent({
         event: 'change',
     },
 });
-</script>
+</script> -->
 
 <script setup lang="ts">
-import { ref, Ref, watch, computed, useListeners, useSlots, nextTick } from 'vue';
+import { ref, Ref, watch, computed, nextTick } from 'vue-demi';
 import { v4 } from 'uuid';
 import { ErrorObject } from '@vuelidate/core';
 import { deepEqual } from '@beautybox/core/helpers';
 import BSvg from '../../../icons/BSvg/index.vue';
 import { PropsColors, useColor } from '../../../../composables/ui/useColor';
+import { useListeners } from '../../../../composables/useListeners';
 
 export interface BCheckboxProps {
     label?: string;
     id?: string;
     value?: any;
-    inputValue?: any;
+    modelValue?: any;
     name?: string;
     color?: PropsColors['color'];
     indeterminate?: boolean;
@@ -89,7 +90,7 @@ export interface BCheckboxProps {
 }
 
 interface Emits {
-    (e: 'change', value: BCheckboxProps['inputValue']): void;
+    (e: 'update:modelValue', value: BCheckboxProps['modelValue']): void;
     (e: 'update:indeterminate', value: BCheckboxProps['indeterminate']): void;
 }
 
@@ -97,7 +98,7 @@ const props = withDefaults(defineProps<BCheckboxProps>(), {
     label: undefined,
     id: undefined,
     value: undefined,
-    inputValue: undefined,
+    modelValue: undefined,
     name: undefined,
     color: 'info',
     indeterminate: false,
@@ -132,12 +133,12 @@ const internalValue = computed({
     },
     set(val: any) {
         lazyValue.value = val;
-        emit('change', val);
+        emit('update:modelValue', val);
     },
 });
 
-const onChange = (eventValue: BCheckboxProps['inputValue']) => {
-    let input = props.inputValue;
+const onChange = (eventValue: BCheckboxProps['modelValue']) => {
+    let input = props.modelValue;
     const value = props.value;
 
     if (Array.isArray(input)) {
@@ -162,10 +163,10 @@ const inputListeners = {
     ...$listeners,
 };
 
-delete inputListeners['change'];
+delete inputListeners['update:modelValue'];
 
 const isActive = computed(() => {
-    const input = props.inputValue;
+    const input = props.modelValue;
     if (Array.isArray(input)) {
         return input.some((item) => deepEqual(item, props.value));
     }
@@ -218,7 +219,7 @@ watch(isActive, () => {
 });
 
 watch(
-    () => props.inputValue,
+    () => props.modelValue,
     (val) => {
         lazyValue.value = val;
     }
