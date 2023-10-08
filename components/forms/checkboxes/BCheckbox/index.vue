@@ -54,16 +54,6 @@
     </div>
 </template>
 
-<!-- <script lang="ts">
-import { defineComponent } from 'vue';
-export default defineComponent({
-    model: {
-        prop: 'inputValue',
-        event: 'change',
-    },
-});
-</script> -->
-
 <script setup lang="ts">
 import { ref, Ref, watch, computed, nextTick } from 'vue-demi';
 import { v4 } from 'uuid';
