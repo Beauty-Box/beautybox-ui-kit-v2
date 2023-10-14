@@ -1,5 +1,5 @@
 <template>
-    <div class="b-avatar" :style="styles" v-on="$listeners">
+    <div class="b-avatar" :style="styles" v-bind="$attrs">
         <slot />
     </div>
 </template>

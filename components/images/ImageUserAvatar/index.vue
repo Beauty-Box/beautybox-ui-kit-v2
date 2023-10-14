@@ -4,7 +4,7 @@
         :color="color"
         class="c-avatar"
         :class="{ 'c-avatar--square': square, 'c-avatar--shadow': shadow }"
-        v-on="$listeners"
+        v-bind="$attrs"
     >
         <img
             v-if="image && !error"
