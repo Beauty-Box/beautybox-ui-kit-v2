@@ -1,7 +1,7 @@
 import { computed, type ComputedRef, type WatchSource } from 'vue';
 import { useWatchSource } from './useWatchSource';
 export const colors = ['primary', 'secondary', 'white', 'info', 'anchor', 'error'] as const;
-export type Colors = (typeof colors)[number] | `#${string}` | 'inherit';
+export type Colors = (typeof colors)[number] | `#${string}` | 'inherit' | 'currentColor';
 export interface PropsColors {
     color?: Colors;
 }
@@ -27,6 +27,10 @@ export const useColor: UseColor = (source) => {
         return color.value === 'inherit';
     });
 
+    const isCurrentColor = computed(() => {
+        return color.value === 'currentColor';
+    });
+
     const isDefaultColor = computed(() => {
         //@ts-ignore
         return colors.includes(color.value);
@@ -39,6 +43,9 @@ export const useColor: UseColor = (source) => {
     const colorVariant = computed(() => {
         if (isInherit.value) {
             return 'inherit';
+        }
+        if (isCurrentColor.value) {
+            return 'currentColor';
         }
         if (isDefaultColor.value) {
             return `var(--${color.value})`;
@@ -53,6 +60,9 @@ export const useColor: UseColor = (source) => {
         if (isInherit.value) {
             return 'inherit';
         }
+        if (isCurrentColor.value) {
+            return 'currentColor';
+        }
         if (isDefaultColor.value) {
             return `var(--${color.value}-alpha)`;
         }
@@ -66,6 +76,9 @@ export const useColor: UseColor = (source) => {
     const colorVariantAlphaLow = computed(() => {
         if (isInherit.value) {
             return 'inherit';
+        }
+        if (isCurrentColor.value) {
+            return 'currentColor';
         }
         if (isDefaultColor.value) {
             return `var(--${color.value}-alpha-low)`;
