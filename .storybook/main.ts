@@ -1,4 +1,4 @@
-import type { StorybookConfig } from '@storybook/vue-vite';
+import type { StorybookConfig } from '@storybook/vue3-vite';
 import { resolve } from 'path';
 
 export const config: StorybookConfig =  {
@@ -19,7 +19,7 @@ export const config: StorybookConfig =  {
         autodocs: 'tag'
     },
     framework: {
-        name: '@storybook/vue-vite',
+        name: '@storybook/vue3-vite',
         options: {}
     },
     core: {

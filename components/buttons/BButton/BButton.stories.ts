@@ -4,12 +4,12 @@ import { variants } from '../../../composables/ui/useVariant';
 import { sizes } from '../../../composables/ui/useSize';
 
 import type { Meta, StoryObj } from '@storybook/vue';
-import StoryRouter from 'storybook-vue-router';
+import { vueRouter } from 'storybook-vue3-router';
 
 const meta = {
     title: 'base button',
     component: BButton,
-    decorators: [StoryRouter()],
+    decorators: [vueRouter()],
     argTypes: {
         color: {
             name: 'color',
