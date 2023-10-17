@@ -201,6 +201,7 @@ const isBlockWrapper = computed(() => {
         color: v-bind('colorVariant');
         background-color: transparent;
         border-color: transparent;
+        border-width: 0;
         padding: 0;
         height: min-content;
         font-weight: inherit;
