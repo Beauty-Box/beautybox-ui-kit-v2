@@ -1,7 +1,7 @@
 import BSvg from './index.vue';
 import { colors } from '../../../composables/ui/useColor';
 
-import type { Meta, StoryObj } from '@storybook/vue';
+import type { Meta, StoryObj } from '@storybook/vue3';
 
 const meta = {
     title: 'svg icon',
@@ -38,7 +38,10 @@ export const Primary: Story = {
     render: (args, { argTypes }) => ({
         components: { BSvg },
         props: Object.keys(argTypes),
-        template: '<BSvg v-bind="$props" ></BSvg>',
+        setup() {
+            return { args };
+        },
+        template: '<BSvg v-bind="args" ></BSvg>',
     }),
     args: {
         fill: 'primary',
