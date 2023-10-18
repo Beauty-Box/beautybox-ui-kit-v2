@@ -55,13 +55,13 @@ export const Primary: Story = {
             <BTab :value="2" text="test 2"></BTab>
         </BTabs>
         <BTabsItems v-model="active">
-            <BTabItem :value="0">
+            <BTabItem :value="0" eager>
                 content 0
             </BTabItem>
-            <BTabItem :value="1">
+            <BTabItem :value="1" eager>
                 content 1
             </BTabItem>
-            <BTabItem :value="2">
+            <BTabItem :value="2" eager>
                 content 2
             </BTabItem>
         </BTabsItems>
