@@ -138,7 +138,9 @@ $theme: (
         'background': #fff,
         'background--light': #fff,
         'background--lighten': #dee3e7,
+        'background--secondary': #f7f7f8,
         'box-shadow': #67768c,
+        'control--secondary': #f7f7f8,
     ),
     'dark': (
         'text': #fff,
@@ -146,6 +148,8 @@ $theme: (
         'background': #1c1c1e,
         'background--light': #2c2c2e,
         'background--lighten': #3a3a3c,
+        'background--secondary': #1c1c1e,
         'box-shadow': #67768c,
+        'control--secondary': #636267,
     ),
 );

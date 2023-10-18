@@ -68,7 +68,7 @@ const onClickTab = () => {
         box-shadow: none;
 
         &--active {
-            background-color: var(--color-background--lighten);
+            background-color: var(--color-control--secondary);
             color: var(--color-text);
             border-color: var(--color-background--lighten);
         }
