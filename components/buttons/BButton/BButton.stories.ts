@@ -3,7 +3,7 @@ import { colors } from '../../../composables/ui/useColor';
 import { variants } from '../../../composables/ui/useVariant';
 import { sizes } from '../../../composables/ui/useSize';
 
-import type { Meta, StoryObj } from '@storybook/vue';
+import type { Meta, StoryObj } from '@storybook/vue3';
 import { vueRouter } from 'storybook-vue3-router';
 
 const meta = {
@@ -84,7 +84,10 @@ export const Primary: Story = {
     render: (args, { argTypes }) => ({
         components: { BButton },
         props: Object.keys(argTypes),
-        template: '<BButton v-bind="$props" >Text text</BButton>',
+        setup() {
+            return { args };
+        },
+        template: '<BButton v-bind="args" >Text text</BButton>',
     }),
     args: {
         color: 'primary',

@@ -1,6 +1,8 @@
 <template>
-    <div :class="[$style.tabs, { [$style['tabs--rounded']]: rounded }]">
-        {{ model }}
+    <div
+        class="d-flex"
+        :class="[$style.tabs, { [$style['tabs--rounded']]: rounded, [$style['tabs--grow']]: grow }]"
+    >
         <slot />
     </div>
 </template>
@@ -19,6 +21,7 @@ import {
 interface Props {
     modelValue: number;
     rounded?: boolean;
+    grow?: boolean;
 }
 
 interface Emits {
@@ -27,6 +30,7 @@ interface Emits {
 
 const props = withDefaults(defineProps<Props>(), {
     rounded: false,
+    grow: false,
 });
 
 const emit = defineEmits<Emits>();
@@ -40,15 +44,32 @@ const model = computed({
     },
 });
 
-provide('active', model);
+const rounded = computed(() => {
+    return props.rounded;
+});
+
+provide('tabs-active', model);
+provide('tabs-rounded', rounded);
 </script>
 
 <style module lang="scss">
 .tabs {
     background-color: var(--color-background--light);
     padding: $spacer;
+    column-gap: $spacer;
+    flex-grow: 0;
+    width: min-content;
+    border-radius: $border-radius;
+
     &--rounded {
         border-radius: $border-radius-largest;
+    }
+    &--grow {
+        flex-grow: 1;
+        width: 100%;
+        & > * {
+            flex-grow: 1;
+        }
     }
 }
 </style>

@@ -1,12 +1,27 @@
 import BTabs from './BTabs.vue';
 import BTab from './BTab.vue';
 
-import type { Meta, StoryObj } from '@storybook/vue';
+import type { Meta, StoryObj } from '@storybook/vue3';
 
 const meta = {
     title: 'base tabs',
     component: BTabs,
-    argTypes: {},
+    argTypes: {
+        rounded: {
+            name: 'rounded',
+            control: {
+                type: 'select',
+            },
+            options: [false, true],
+        },
+        grow: {
+            name: 'grow',
+            control: {
+                type: 'select',
+            },
+            options: [false, true],
+        },
+    },
 } satisfies Meta<typeof BTabs>;
 
 export default meta;
@@ -23,11 +38,24 @@ export const Primary: Story = {
                 active: 0,
             };
         },
-        template: `<BTabs v-bind="$props" v-model="active">
-                        <BTab :value="1">1</BTab>
-                        <BTab :value="2">2</BTab>
-                        <BTab :value="3">3</BTab>
+        setup() {
+            return {
+                args,
+            };
+        },
+        template: `
+        <div>
+           {{ active }}
+        </div>
+        <BTabs v-bind="args" v-model="active">
+                        <BTab :value="0" text="test 0"></BTab>
+                        <BTab :value="1" text="test 1"></BTab>
+                        <BTab :value="2" text="test 2"></BTab>
                     </BTabs>`,
     }),
-    args: {},
+    args: {
+        modelValue: 0,
+        rounded: true,
+        grow: true,
+    },
 };

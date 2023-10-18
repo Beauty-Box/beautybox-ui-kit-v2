@@ -154,9 +154,16 @@ const isBlockWrapper = computed(() => {
         opacity: 0;
     }
 
+    &--x-small {
+        font-size: 16px;
+        height: 28px;
+        padding: 0 $base-indent;
+        min-width: 50px;
+    }
+
     &--small {
         font-size: 16px;
-        height: 28px; // TODO обсудить с дизайнером размеры кнопок
+        height: 36px;
         padding: 0 $base-indent;
         min-width: 50px;
     }
