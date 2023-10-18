@@ -8,18 +8,9 @@
 </template>
 
 <script setup lang="ts">
-import {
-    ref,
-    type Ref,
-    computed,
-    onMounted,
-    nextTick,
-    useSlots,
-    provide,
-    type VNode,
-} from 'vue-demi';
+import { computed, provide } from 'vue-demi';
 interface Props {
-    modelValue: number;
+    modelValue: unknown;
     rounded?: boolean;
     grow?: boolean;
 }

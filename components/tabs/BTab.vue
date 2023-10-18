@@ -19,7 +19,6 @@
 
 <script setup lang="ts">
 import {
-    ref,
     computed,
     type ComputedRef,
     type WritableComputedRef,

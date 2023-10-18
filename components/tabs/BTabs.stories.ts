@@ -1,5 +1,7 @@
 import BTabs from './BTabs.vue';
 import BTab from './BTab.vue';
+import BTabsItems from './BTabsItems.vue';
+import BTabItem from './BTabItem.vue';
 
 import type { Meta, StoryObj } from '@storybook/vue3';
 
@@ -31,7 +33,7 @@ type Story = StoryObj<typeof meta>;
 export const Primary: Story = {
     name: 'BTabs',
     render: (args, { argTypes }) => ({
-        components: { BTabs, BTab },
+        components: { BTabs, BTab, BTabsItems, BTabItem },
         props: Object.keys(argTypes),
         data() {
             return {
@@ -48,10 +50,22 @@ export const Primary: Story = {
            {{ active }}
         </div>
         <BTabs v-bind="args" v-model="active">
-                        <BTab :value="0" text="test 0"></BTab>
-                        <BTab :value="1" text="test 1"></BTab>
-                        <BTab :value="2" text="test 2"></BTab>
-                    </BTabs>`,
+            <BTab :value="0" text="test 0"></BTab>
+            <BTab :value="1" text="test 1"></BTab>
+            <BTab :value="2" text="test 2"></BTab>
+        </BTabs>
+        <BTabsItems v-model="active">
+            <BTabItem :value="0">
+                content 0
+            </BTabItem>
+            <BTabItem :value="1">
+                content 1
+            </BTabItem>
+            <BTabItem :value="2">
+                content 2
+            </BTabItem>
+        </BTabsItems>
+        `,
     }),
     args: {
         modelValue: 0,
