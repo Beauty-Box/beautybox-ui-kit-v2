@@ -98,7 +98,8 @@ const component = computed(() => {
 });
 
 const isBlockWrapper = computed(() => {
-    return props.block && component.value === 'button';
+    return props.block;
+    //  && component.value === 'button'
 });
 </script>
 
