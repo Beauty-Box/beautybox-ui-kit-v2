@@ -2,7 +2,7 @@ import ImageUserAvatar from './index.vue';
 
 import { colors } from '../../../composables/ui/useColor';
 
-import type { Meta, StoryObj } from '@storybook/vue';
+import type { Meta, StoryObj } from '@storybook/vue3';
 
 const meta = {
     title: 'image user avatar',
