@@ -28,7 +28,7 @@ interface Props {
     photos: string[];
     size?: number;
     indent?: number;
-    border?: number;
+    border?: number | string;
     direction?: Direction;
 }
 
@@ -66,6 +66,10 @@ const containerClasses = computed(() => {
         'justify-end': props.direction === 'right',
     };
 });
+
+const borderStyle = computed(() => {
+    return typeof props.border === 'number' ? `${props.border}px` : `${props.border}`;
+});
 </script>
 
 <style scoped lang="scss">
@@ -80,7 +84,7 @@ const containerClasses = computed(() => {
         position: absolute;
     }
     &__avatar-wrapper {
-        border-width: v-bind('border') + px;
+        border-width: v-bind('borderStyle');
         border-style: solid;
         border-color: var(--color-background);
     }
