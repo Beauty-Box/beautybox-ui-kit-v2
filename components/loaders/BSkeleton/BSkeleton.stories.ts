@@ -1,6 +1,6 @@
 import BSkeleton from './index.vue';
 
-import type { Meta, StoryObj } from '@storybook/vue';
+import type { Meta, StoryObj } from '@storybook/vue3';
 
 const meta = {
     title: 'skeleton',
@@ -18,6 +18,20 @@ const meta = {
                 type: 'text',
             },
         },
+        rounded: {
+            name: 'rounded',
+            control: {
+                type: 'select',
+            },
+            options: [true, false],
+        },
+        boilerplate: {
+            name: 'boilerplate',
+            control: {
+                type: 'select',
+            },
+            options: [true, false],
+        },
     },
 } satisfies Meta<typeof BSkeleton>;
 
@@ -30,10 +44,15 @@ export const Primary: Story = {
     render: (args, { argTypes }) => ({
         components: { BSkeleton },
         props: Object.keys(argTypes),
-        template: '<BSkeleton v-bind="$props" ></BSkeleton>',
+        setup() {
+            return { args };
+        },
+        template: '<BSkeleton v-bind="args" ></BSkeleton>',
     }),
     args: {
         width: '100%',
         height: '56',
+        rounded: false,
+        boilerplate: false,
     },
 };
