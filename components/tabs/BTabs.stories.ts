@@ -70,6 +70,6 @@ export const Primary: Story = {
     args: {
         modelValue: 0,
         rounded: true,
-        grow: true,
+        grow: false,
     },
 };
