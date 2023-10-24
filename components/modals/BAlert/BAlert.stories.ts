@@ -6,7 +6,23 @@ import type { Meta, StoryObj } from '@storybook/vue3';
 const meta = {
     title: 'modals/alert',
     component: BAlert,
-    argTypes: {},
+    argTypes: {
+        width: {
+            name: 'width',
+            control: {
+                type: 'range',
+                min: 0,
+                max: 900,
+            },
+        },
+        persistent: {
+            name: 'persistent',
+            control: {
+                type: 'select',
+            },
+            options: [false, true],
+        },
+    },
 } satisfies Meta<typeof BAlert>;
 
 export default meta;
@@ -44,5 +60,7 @@ export const Primary: Story = {
     }),
     args: {
         modelValue: false,
+        persistent: false,
+        width: 320,
     },
 };
