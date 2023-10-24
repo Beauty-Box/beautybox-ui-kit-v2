@@ -76,7 +76,7 @@ export const Primary: Story = {
         modelValue: false,
         persistent: false,
         width: 320,
-        successText: 'Удалить',
+        successText: 'Подключить',
         cancelText: 'Оставить',
     },
 };

@@ -3,7 +3,12 @@
         <div>
             <b-overlay v-if="model" @click="onClickOverlay" />
             <transition name="dialog">
-                <div v-if="model" :class="[$style.dialog, { [$style['dialog--bounce']]: bounce }]">
+                <div
+                    v-if="model"
+                    role="dialog"
+                    aria-modal="true"
+                    :class="[$style.dialog, { [$style['dialog--bounce']]: bounce }]"
+                >
                     <slot />
                 </div>
             </transition>
@@ -12,7 +17,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref, computed, nextTick } from 'vue';
+import { ref, type Ref, computed, watch, nextTick } from 'vue';
 import BOverlay from '../BOverlay.vue';
 
 interface Props {
@@ -73,6 +78,16 @@ const bounceClick = () => {
         }, 150);
     });
 };
+
+watch(model, (value) => {
+    if (value) {
+        document.documentElement.classList.add('overflow-y-hidden');
+        document.documentElement.classList.add('overscroll');
+    } else {
+        document.documentElement.classList.remove('overflow-y-hidden');
+        document.documentElement.classList.remove('overscroll');
+    }
+});
 </script>
 
 <style scoped lang="scss">

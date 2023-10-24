@@ -19,33 +19,31 @@
             </div>
             <template v-if="actions">
                 <div :class="$style.divider" />
-                <footer class="d-flex">
-                    <div class="flex-grow-1">
-                        <b-button
-                            :color="successColor"
-                            variant="text"
-                            block
-                            :loading="loadingBtn"
-                            :class="$style['alert__button']"
-                            class="u-text-weight--bold"
-                            @click="onSuccess"
-                        >
-                            {{ successText }}
-                        </b-button>
-                    </div>
+                <footer :class="$style.footer">
+                    <b-button
+                        :color="successColor"
+                        variant="text"
+                        block
+                        :loading="loadingBtn"
+                        :class="$style['alert__button']"
+                        class="u-text-weight--bold"
+                        @click="onSuccess"
+                    >
+                        {{ successText }}
+                    </b-button>
+
                     <div :class="[$style.divider, $style['divider--vertical']]" />
-                    <div class="flex-grow-1">
-                        <b-button
-                            :color="calculatedCancelColor"
-                            variant="text"
-                            block
-                            :class="$style['alert__button']"
-                            class="u-text-weight--bold"
-                            @click="onCancel"
-                        >
-                            {{ cancelText }}
-                        </b-button>
-                    </div>
+
+                    <b-button
+                        :color="calculatedCancelColor"
+                        variant="text"
+                        block
+                        :class="$style['alert__button']"
+                        class="u-text-weight--bold"
+                        @click="onCancel"
+                    >
+                        {{ cancelText }}
+                    </b-button>
                 </footer>
             </template>
         </div>
@@ -127,7 +125,7 @@ const onSuccess = () => {
         color: var(--color-text--light);
     }
     &__button {
-        min-height: 40px;
+        min-height: 44px;
         &:hover {
             text-decoration: none;
         }
@@ -145,5 +143,9 @@ const onSuccess = () => {
         width: 100%;
         height: 1px;
     }
+}
+.footer {
+    display: grid;
+    grid-template-columns: 1fr 1px 1fr;
 }
 </style>
