@@ -34,6 +34,13 @@ const meta = {
                 type: 'text',
             },
         },
+        btnReverse: {
+            name: 'btnReverse',
+            control: {
+                type: 'select',
+            },
+            options: [false, true],
+        },
     },
 } satisfies Meta<typeof BAlert>;
 
@@ -78,5 +85,6 @@ export const Primary: Story = {
         width: 320,
         successText: 'Подключить',
         cancelText: 'Оставить',
+        btnReverse: false,
     },
 };

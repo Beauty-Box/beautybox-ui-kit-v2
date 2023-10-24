@@ -20,30 +20,32 @@
             <template v-if="actions">
                 <div :class="$style.divider" />
                 <footer :class="$style.footer">
-                    <b-button
-                        :color="successColor"
-                        variant="text"
-                        block
-                        :loading="loadingBtn"
-                        :class="$style['alert__button']"
-                        class="u-text-weight--bold"
-                        @click="onSuccess"
-                    >
-                        {{ successText }}
-                    </b-button>
-
+                    <div :class="{ [$style['order-last']]: btnReverse }">
+                        <b-button
+                            :color="successColor"
+                            variant="text"
+                            block
+                            :loading="loadingBtn"
+                            :class="$style['alert__button']"
+                            class="u-text-weight--bold"
+                            @click="onSuccess"
+                        >
+                            {{ successText }}
+                        </b-button>
+                    </div>
                     <div :class="[$style.divider, $style['divider--vertical']]" />
-
-                    <b-button
-                        :color="calculatedCancelColor"
-                        variant="text"
-                        block
-                        :class="$style['alert__button']"
-                        class="u-text-weight--bold"
-                        @click="onCancel"
-                    >
-                        {{ cancelText }}
-                    </b-button>
+                    <div :class="{ [$style['order-first']]: btnReverse }">
+                        <b-button
+                            :color="calculatedCancelColor"
+                            variant="text"
+                            block
+                            :class="$style['alert__button']"
+                            class="u-text-weight--bold"
+                            @click="onCancel"
+                        >
+                            {{ cancelText }}
+                        </b-button>
+                    </div>
                 </footer>
             </template>
         </div>
@@ -69,6 +71,7 @@ interface Props {
     successColor?: PropsColors['color'];
     cancelColor?: PropsColors['color'];
     loadingBtn?: boolean;
+    btnReverse?: boolean;
 }
 
 interface Emits {
@@ -86,6 +89,7 @@ const props = withDefaults(defineProps<Props>(), {
     successColor: 'error',
     cancelColor: undefined,
     loadingBtn: false,
+    btnReverse: false,
 });
 const emit = defineEmits<Emits>();
 
@@ -147,5 +151,12 @@ const onSuccess = () => {
 .footer {
     display: grid;
     grid-template-columns: 1fr 1px 1fr;
+}
+
+.order-first {
+    order: -1;
+}
+.order-last {
+    order: 3;
 }
 </style>
