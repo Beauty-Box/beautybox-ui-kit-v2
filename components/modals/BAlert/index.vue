@@ -1,33 +1,93 @@
 <template>
-    <teleport to="body">
-        <div>
-            <b-overlay v-if="model" @click="onClickOverlay" />
-            <transition name="dialog">
-                <div v-if="model" :class="[$style.alert, { [$style['alert--bounce']]: bounce }]">
-                    s
+    <b-dialog v-model="model" :width="width" :persistent="persistent" @click:overlay="onCancel">
+        <div class="d-flex flex-column">
+            <div class="px-4 py-4">
+                <header v-if="title || $slots.title">
+                    <slot name="title">
+                        <h4 class="h4 u-text-align--center" :class="$style['alert__title']">
+                            {{ title }}
+                        </h4>
+                    </slot>
+                </header>
+                <div v-if="text || $slots.text" class="mt-4">
+                    <slot name="text">
+                        <p class="text-3 u-text-align--center" :class="$style['alert__text']">
+                            {{ text }}
+                        </p>
+                    </slot>
                 </div>
-            </transition>
+            </div>
+            <template v-if="actions">
+                <div :class="$style.divider" />
+                <footer class="d-flex">
+                    <div class="flex-grow-1">
+                        <b-button
+                            :color="successColor"
+                            variant="text"
+                            block
+                            :loading="loadingBtn"
+                            :class="$style['alert__button']"
+                            class="u-text-weight--bold"
+                            @click="onSuccess"
+                        >
+                            {{ successText }}
+                        </b-button>
+                    </div>
+                    <div :class="[$style.divider, $style['divider--vertical']]" />
+                    <div class="flex-grow-1">
+                        <b-button
+                            :color="calculatedCancelColor"
+                            variant="text"
+                            block
+                            :class="$style['alert__button']"
+                            class="u-text-weight--bold"
+                            @click="onCancel"
+                        >
+                            {{ cancelText }}
+                        </b-button>
+                    </div>
+                </footer>
+            </template>
         </div>
-    </teleport>
+    </b-dialog>
 </template>
 
 <script setup lang="ts">
-import { ref, type Ref, computed, watch, nextTick } from 'vue';
-import BOverlay from '../BOverlay.vue';
+import { computed } from 'vue';
+import BDialog from '../BDialog/index.vue';
+import BButton from '../../buttons/BButton/index.vue';
+import { useDarkTheme } from '../../../composables/useDarkTheme';
+import { PropsColors } from '../../../composables/ui/useColor';
 
 interface Props {
     modelValue: boolean;
     width?: number | string;
     persistent?: boolean;
+    title?: string;
+    text?: string;
+    actions?: boolean;
+    successText: string;
+    cancelText: string;
+    successColor?: PropsColors['color'];
+    cancelColor?: PropsColors['color'];
+    loadingBtn?: boolean;
 }
 
 interface Emits {
     (e: 'update:modelValue', modelValue: Props['modelValue']): void;
+    (e: 'cancel'): void;
+    (e: 'success'): void;
 }
 
 const props = withDefaults(defineProps<Props>(), {
     width: 320,
     persistent: false,
+    title: undefined,
+    text: undefined,
+    actions: true,
+    successColor: 'error',
+    cancelColor: undefined,
+    loadingBtn: false,
 });
 const emit = defineEmits<Emits>();
 
@@ -40,81 +100,50 @@ const model = computed({
     },
 });
 
-const calculatedWidth = computed(() => {
-    return typeof props.width === 'number' ? `${props.width}px` : props.width;
+const { isDark } = useDarkTheme();
+
+const calculatedCancelColor = computed(() => {
+    if (props.cancelColor) {
+        return props.cancelColor;
+    }
+
+    return isDark.value ? 'white' : 'primary';
 });
 
-const onCloseModal = () => {
-    model.value = false;
+const onCancel = () => {
+    emit('cancel');
 };
-
-// persistent
-const onClickOverlay = () => {
-    if (props.persistent) {
-        bounceClick();
-    } else {
-        onCloseModal();
-    }
-};
-
-const bounce = ref(false) as Ref<boolean>;
-const bounceTimeout = ref(undefined) as Ref<NodeJS.Timeout | undefined>;
-
-const bounceClick = () => {
-    bounce.value = false;
-
-    nextTick(() => {
-        bounce.value = true;
-        clearTimeout(bounceTimeout.value);
-        bounceTimeout.value = setTimeout(() => {
-            bounce.value = false;
-        }, 150);
-    });
+const onSuccess = () => {
+    emit('success');
 };
 </script>
 
-<style scoped lang="scss">
-.dialog-enter-active,
-.dialog-leave-active {
-    transform: translate(-50%, -50%) scale(0.8);
-}
-
-.dialog-enter-to,
-.dialog-leave-from {
-    transform: translate(-50%, -50%) scale(1);
-}
-</style>
-
 <style module lang="scss">
 .alert {
-    width: v-bind('calculatedWidth');
-    height: 173px;
-
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    // transition: transform 0.3s ease-in-out;
-    transition: transform 0.2s cubic-bezier(0.25, 0.8, 0.25, 1);
-    z-index: z(modal);
-    background-color: var(--color-background, #fff);
-    border-radius: $border-radius;
-    &--bounce {
-        animation-duration: 0.15s;
-        animation-name: bounce-dialog;
-        animation-timing-function: cubic-bezier(0.25, 0.8, 0.25, 1);
+    &__title {
+        color: var(--color-text);
+    }
+    &__text {
+        color: var(--color-text--light);
+    }
+    &__button {
+        min-height: 40px;
+        &:hover {
+            text-decoration: none;
+        }
     }
 }
 
-@keyframes bounce-dialog {
-    0% {
-        transform: translate(-50%, -50%) scale(1);
+.divider {
+    background-color: var(--color-border);
+
+    &--vertical {
+        width: 1px;
     }
-    50% {
-        transform: translate(-50%, -50%) scale(1.03);
-    }
-    100% {
-        transform: translate(-50%, -50%) scale(1);
+
+    &:not(&--vertical) {
+        width: 100%;
+        height: 1px;
     }
 }
 </style>

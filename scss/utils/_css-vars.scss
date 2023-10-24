@@ -16,6 +16,7 @@ body {
         --color-box-shadow: #{map-deep-get($theme, 'dark', 'box-shadow')};
         --color-box-shadow-alpha: #{rgba(map-deep-get($theme, 'dark', 'box-shadow'), 0.16)};
         --color-control--secondary: #{map-deep-get($theme, 'dark', 'control--secondary')};
+        --color-border: #{map-deep-get($theme, 'dark', 'border')};
     }
     --color-background: #{map-deep-get($theme, 'light', 'background')};
     --color-background--light: #{map-deep-get($theme, 'light', 'background--light')};
@@ -30,4 +31,5 @@ body {
     --color-box-shadow: #{map-deep-get($theme, 'light', 'box-shadow')};
     --color-box-shadow-alpha: #{rgba(map-deep-get($theme, 'light', 'box-shadow'), 0.16)};
     --color-control--secondary: #{map-deep-get($theme, 'light', 'control--secondary')};
+    --color-border: #{map-deep-get($theme, 'light', 'border')};
 }

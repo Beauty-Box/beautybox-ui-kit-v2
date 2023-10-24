@@ -1,11 +1,11 @@
-import BAlert from './index.vue';
+import BDialog from './index.vue';
 import BButton from '../../buttons/BButton/index.vue';
 
 import type { Meta, StoryObj } from '@storybook/vue3';
 
 const meta = {
-    title: 'modals/alert',
-    component: BAlert,
+    title: 'modals/dialog',
+    component: BDialog,
     argTypes: {
         width: {
             name: 'width',
@@ -22,35 +22,21 @@ const meta = {
             },
             options: [false, true],
         },
-        successText: {
-            name: 'successText',
-            control: {
-                type: 'text',
-            },
-        },
-        cancelText: {
-            name: 'cancelText',
-            control: {
-                type: 'text',
-            },
-        },
     },
-} satisfies Meta<typeof BAlert>;
+} satisfies Meta<typeof BDialog>;
 
 export default meta;
 
 type Story = StoryObj<typeof meta>;
 
 export const Primary: Story = {
-    name: 'BAlert',
+    name: 'BDialog',
     render: (args, { argTypes }) => ({
-        components: { BAlert, BButton },
-        // props: Object.keys(argTypes),
+        components: { BDialog, BButton },
+        props: Object.keys(argTypes),
         data() {
             return {
                 isOpen: false,
-                title: 'Удаление карты',
-                text: 'Эта карта используется для автоматических списаний за подписку на модуль «Ручная отправка сообщений». После удаления карты, автоплатеж будет отключен.',
             };
         },
         methods: {
@@ -66,9 +52,9 @@ export const Primary: Story = {
         template: `
             <div>
                 <BButton @click="onOpenModal">open</BButton>
-                <BAlert v-bind="args" v-model="isOpen" :title="title" :text="text">
-                    
-                </BAlert>
+                <BDialog v-bind="args" v-model="isOpen">
+                    test
+                </BDialog>
             </div>
         `,
     }),
@@ -76,7 +62,5 @@ export const Primary: Story = {
         modelValue: false,
         persistent: false,
         width: 320,
-        successText: 'Удалить',
-        cancelText: 'Оставить',
     },
 };

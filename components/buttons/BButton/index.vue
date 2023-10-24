@@ -220,7 +220,7 @@ const isBlockWrapper = computed(() => {
             white-space: normal;
         }
         &#{$self}--white {
-            color: map-get($colors, 'primary');
+            color: map-get($colors, 'white');
         }
     }
     &#{$self}--plain {
