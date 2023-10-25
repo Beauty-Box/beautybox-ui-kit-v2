@@ -392,3 +392,11 @@ $line-height: (
 //     border: 0;
 //     white-space: nowrap;
 // }
+
+.hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+} //.hide-scrollbar
