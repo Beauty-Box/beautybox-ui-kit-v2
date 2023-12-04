@@ -1,0 +1,2 @@
+@beautybox:registry=https://git.beautybox-stage.ru/api/v4/projects/23/packages/npm/
+//git.beautybox-stage.ru/api/v4/projects/23/packages/npm/:_authToken=${CI_JOB_TOKEN}

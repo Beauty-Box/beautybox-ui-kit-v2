@@ -63,3 +63,5 @@ lerna-*
 .DS_Store*
 ehthumbs.db
 Thumbs.db
+
+.npmrc

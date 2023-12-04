@@ -1,0 +1,39 @@
+stages:
+    - test
+    - deploy
+
+
+lint:
+    stage: test
+    image: node:18-alpine
+    script:
+        - apk update && apk add --no-cache make
+        - mv .npmrc.ci .npmrc
+        - make setup
+        - make lint
+    rules:
+        - if: $CI_PIPELINE_SOURCE == "merge_request_event" && ($CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "stage" || $CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "master")
+    tags:
+        - docker
+
+deploy-stage:
+    stage: deploy
+    image: node:18-alpine
+    script:
+        - mv .npmrc.ci .npmrc
+        - npm publish
+    rules:
+        - if: $CI_COMMIT_BRANCH == "stage"
+    tags:
+        - docker
+
+deploy-master:
+    stage: deploy
+    image: node:18-alpine
+    script:
+        - mv .npmrc.ci .npmrc
+        - npm publish
+    rules:
+        - if: $CI_COMMIT_BRANCH == "master"
+    tags:
+        - docker
